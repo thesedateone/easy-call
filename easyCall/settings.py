@@ -17,6 +17,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.7/howto/deployment/checklist/
+# TODO:  fix this
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'hpkq)t)+&c5tpp^y67y5pt=q#6%q10%cy$x4l@nodog#k@h4ig'
@@ -56,12 +57,13 @@ WSGI_APPLICATION = 'easyCall.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases
+#   Parse database configuration from $DATABASE_URL on Heroku
+#   but use a sqlite database locally.
 
+_dev_db_url = os.path.join(BASE_DIR, 'db.sqlite3')
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
+    'default': dj_database_url.config(
+        default='sqlite:///{}'.format(_dev_db_url))
 }
 
 # Internationalization
@@ -76,9 +78,6 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
-
-# Parse database configuration from $DATABASE_URL
-DATABASES['default'] = dj_database_url.config()
 
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
