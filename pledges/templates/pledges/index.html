@@ -1,3 +1,12 @@
-<h2>Hello Pledges!</h2>
+{% extends "base.html" %}
+{% load staticfiles %}
 
-<li><a href="{% url 'logout' %}?next={% url 'index' %}">Log out</a></li>
+{% block title %}Easy Call{% endblock %}
+
+{% block content %}
+
+<h2>Hello World!</h2>
+
+<a href="{% url 'logout' %}?next={% url 'index' %}">Log out</a>
+
+{% endblock %}
