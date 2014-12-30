@@ -31,6 +31,10 @@
     "dev": "npm run open:dev -s & parallelshell 'npm run serve -s' 'npm run watch -s'",
     "stage": "npm run deploy:stage -s & npm run open:stage -s",
 
-    "migrate": "venv/bin/python manage.py migrate"
+    "db:migrate:dev": "venv/bin/python manage.py migrate",
+    "db:migrate:stage": "heroku run python manage.py migrate",
+
+    "db:reset:dev": "rm -rf db.sqlite3",
+    "db:reset:stage": "heroku pg:reset DATABASE_URL --confirm"
   }
 }
