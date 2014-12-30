@@ -1,0 +1,36 @@
+{
+  "name": "easy-call",
+  "version": "1.0.0",
+  "description": "Very simple call centre workflow app.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/thesedateone/easy-call.git"
+  },
+  "author": "Jacques Beukes",
+  "license": "MIT",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "parallelshell": "^1.0.3",
+    "opener": "^1.4.0"
+  },
+  "scripts": {
+    "clean": "rm -rf dist/*",
+
+    "prebuild": "npm run clean -s",
+
+    "watch": "",
+
+    "open:stage": "heroku open",
+    "open:dev": "opener http://localhost:5000",
+
+    "deploy:stage": "git push heroku master",
+
+    "serve": "foreman start web",
+
+    "dev": "npm run open:dev -s & parallelshell 'npm run serve -s' 'npm run watch -s'",
+    "stage": "npm run deploy:stage -s & npm run open:stage -s",
+
+    "migrate": "venv/bin/python manage.py migrate"
+  }
+}
