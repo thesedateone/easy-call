@@ -15,11 +15,13 @@
     "opener": "^1.4.0"
   },
   "scripts": {
-    "clean": "rm -rf dist/*",
+    "clean": "rm -rf dist/* & rm -rf staticfiles/",
 
     "prebuild": "npm run clean -s",
 
     "watch": "",
+
+    "static": "venv/bin/python manage.py collectstatic",
 
     "open:stage": "heroku open",
     "open:dev": "opener http://localhost:5000",
