@@ -2,5 +2,6 @@
 /venv
 /node_modules
 /staticfiles
+.sass-cache/
 db.sqlite3
 npm-debug.log

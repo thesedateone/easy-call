@@ -16,22 +16,30 @@
     "jquery": "^2.1.3",
     "parallelshell": "^1.0.3",
     "opener": "^1.4.0",
-    "rimraf": "^2.2.8"
+    "rimraf": "^2.2.8",
+    "cssmin": "^0.4.2",
+    "autoprefixer": "^4.0.0",
+    "nodemon": "^1.2.1"
   },
   "scripts": {
-    "clean": "rimraf dist/* & rimraf staticfiles/ & rimraf static/vendor/",
+    "clean": "rimraf staticfiles/* & rimraf static/vendor/* & rimraf static/app/*",
     
-    "prebuild": "npm run clean -s",
+    "prebuild": "npm run build:setup -s",
     "build:collect": "node scripts/collect.js",
-    
-    "watch": "",
+    "build:setup": "node scripts/setup.js",
+    "build": "npm run build:fast -s & npm run build:collect -s",
+    "build:fast": "npm run build:styles -s & npm run static -s",
+    "build:styles": "sass ./assets/styles/main.sass | autoprefixer -b 'last 2 versions' | cssmin > static/app/css/main.min.css",
+
+    "watch": "parallelshell 'npm run watch:build -s'",
+    "watch:build": "nodemon -q -w assets/ --ext '.' --exec 'npm run build:fast'",
 
     "static": "venv/bin/python manage.py collectstatic --noinput",
     
     "open:stage": "heroku open",
     "open:dev": "opener http://localhost:5000",
 
-    "deploy:stage": "git push heroku master",
+    "deploy:stage": "git push heroku login:master",
 
     "dev": "npm run open:dev -s & parallelshell 'npm run serve -s' 'npm run watch -s'",
     "stage": "npm run deploy:stage -s & npm run open:stage -s",

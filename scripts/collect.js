@@ -1,16 +1,9 @@
 var fs = require('fs-extra');
 
-var staticDir = './static/vendor';
-var vendorJS = staticDir + '/js';
-var vendorCSS = staticDir + '/css';
-var vendorFonts = staticDir + '/fonts';
-
-/*
-	Ensure target directories do not exist
- */
-
-fs.removeSync(staticDir);
-console.log("Deleted directory: " + staticDir);
+var vendorDir = './static/vendor';
+var vendorJS = vendorDir + '/js';
+var vendorCSS = vendorDir + '/css';
+var vendorFonts = vendorDir + '/fonts';
 
 
 /*
@@ -39,4 +32,5 @@ console.log("Copied files from " + bootstrapJS);
 var jqueryDir = './node_modules/jquery/dist';
 
 fs.copySync(jqueryDir + '/jquery.min.js', vendorJS + '/jquery.min.js');
+fs.copySync(jqueryDir + '/jquery.min.map', vendorJS + '/jquery.min.map');
 console.log("Copied files from " + jqueryDir);
