@@ -7,6 +7,8 @@ var vendorFonts = vendorDir + '/fonts';
 
 var appDir = './static/app';
 var appImages = appDir + '/images';
+var appPartials = appDir + '/partials';
+var appJS = appDir + '/js';
 
 /*
 	Collect bootstrap dist files
@@ -39,6 +41,22 @@ console.log("Copied files from " + jqueryDir);
 
 
 /*
+	Collect angular dist files
+ */
+
+
+var angularDir = './node_modules/angular';
+fs.copySync(angularDir + '/angular.min.js', vendorJS + '/angular.min.js');
+fs.copySync(angularDir + '/angular.min.js.map', vendorJS + '/angular.min.js.map');
+console.log("Copied files from " + angularDir + " to " +  vendorJS);
+
+var angularRouteDir = './node_modules/angular-route';
+fs.copySync(angularRouteDir + '/angular-route.min.js', vendorJS + '/angular-route.min.js');
+fs.copySync(angularRouteDir + '/angular-route.min.js.map', vendorJS + '/angular-route.min.js.map');
+console.log("Copied files from " + angularRouteDir + " to " +  vendorJS);
+
+
+/*
 	Collect app image files
  */
 
@@ -46,3 +64,19 @@ var assetDir = './assets';
 fs.copySync(assetDir + '/images/', appImages);
 console.log("Copied files from " + assetDir + '/images/');
 
+
+/*
+	Collect app partials
+ */
+
+var assetDir = './assets';
+fs.copySync(assetDir + '/partials/', appPartials);
+console.log("Copied files from " + assetDir + '/partials/');
+
+
+/*
+	TEMPORARY:  Collect app js files
+ */
+
+fs.copySync(assetDir + '/js/', appJS);
+console.log("Copied files from " + assetDir + '/js/');
