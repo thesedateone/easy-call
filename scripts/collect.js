@@ -5,6 +5,8 @@ var vendorJS = vendorDir + '/js';
 var vendorCSS = vendorDir + '/css';
 var vendorFonts = vendorDir + '/fonts';
 
+var appDir = './static/app';
+var appImages = appDir + '/images';
 
 /*
 	Collect bootstrap dist files
@@ -34,3 +36,13 @@ var jqueryDir = './node_modules/jquery/dist';
 fs.copySync(jqueryDir + '/jquery.min.js', vendorJS + '/jquery.min.js');
 fs.copySync(jqueryDir + '/jquery.min.map', vendorJS + '/jquery.min.map');
 console.log("Copied files from " + jqueryDir);
+
+
+/*
+	Collect app image files
+ */
+
+var assetDir = './assets';
+fs.copySync(assetDir + '/images/', appImages);
+console.log("Copied files from " + assetDir + '/images/');
+
