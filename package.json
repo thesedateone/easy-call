@@ -39,7 +39,7 @@
     "open:stage": "heroku open",
     "open:dev": "opener http://localhost:5000",
 
-    "deploy:stage": "git push heroku login:master",
+    "deploy:stage": "git push heroku ready:master",
 
     "dev": "npm run open:dev -s & parallelshell 'npm run serve -s' 'npm run watch -s'",
     "stage": "npm run deploy:stage -s & npm run open:stage -s",
