@@ -12,6 +12,11 @@
     <!-- App style includes -->
     <link href="{% static "app/css/main.min.css" %}" rel="stylesheet">
 
+    <!-- Define nasty globals to integrate AngularJS and Django -->
+    <script type="text/javascript">
+      var djangoStatic = '{% static "app/" %}';
+    </script>
+
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -25,5 +30,8 @@
     <!-- Vendor script includes -->
     <script src="{% static "vendor/js/jquery.min.js" %}"></script>
     <script src="{% static "vendor/js/bootstrap.min.js" %}"></script>
+    <script src="{% static "vendor/js/angular.min.js" %}"></script>
+    <script src="{% static "vendor/js/angular-route.min.js" %}"></script>
+    {% block extrajs %}{% endblock %}
   </body>
 </html>
