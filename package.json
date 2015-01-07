@@ -47,6 +47,7 @@
     "stage": "npm run deploy:stage -s & npm run open:stage -s",
     "serve": "foreman start web",
 
+    "db:migrate:make": "venv/bin/python manage.py makemigrations",
     "db:migrate:dev": "venv/bin/python manage.py migrate",
     "db:migrate:stage": "heroku run python manage.py migrate",
 

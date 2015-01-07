@@ -31,13 +31,18 @@ TEMPLATE_DEBUG = True
 # Application definition
 
 INSTALLED_APPS = (
+    # django builtin
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # external dependencies
+    'rest_framework',
+    # project apps
     'easyCall.apps.pledges',
+    'easyCall.apps.lists',
 )
 
 MIDDLEWARE_CLASSES = (
