@@ -22,7 +22,7 @@ class CallResult(models.Model):
     The list of possible outcomes is customizable per type of list.
     """
 
-    list_type = models.ForeignKey(ListType)
+    list_type = models.ForeignKey(ListType, related_name='results')
     display_name = models.CharField(max_length=50)
     deactivated = models.BooleanField(default=False)
 

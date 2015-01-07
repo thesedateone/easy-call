@@ -1,23 +1,24 @@
 /* Controllers */
 
-var ecAppControllers = angular.module('ecAppControllers', []);
+var ecAppControllers = angular.module('ecAppControllers', ['restangular']);
 
-ecAppControllers.controller('readyCtrl', ['$scope',
-  function($scope) {
+ecAppControllers.controller('readyCtrl', 
+  ['$scope', 'Restangular',
+  function($scope, Restangular) {
     'use strict';
-    $scope.types = [
-      {'name': 'boo',
-       'category': 'boo'},
-      {'name': 'foo',
-       'category': 'foo'},
-      {'name': 'bar',
-       'category': 'bar'}
-    ];
+
+    Restangular.all('list_types/').getList().then(function(types) {
+      $scope.types = types;
+    });
   }]);
 
-ecAppControllers.controller('callCtrl', ['$scope', '$routeParams',
-  function($scope, $routeParams) {
+ecAppControllers.controller('callCtrl', 
+  ['$scope', '$routeParams', 'Restangular',
+  function($scope, $routeParams, Restangular) {
     'use strict';
-    $scope.message = "Call some people!";
-    $scope.calltype = $routeParams.callCat;
+
+    Restangular.one('list_types/' + $routeParams.callCat + '/').get().then(
+      function(callType) {
+        $scope.callType = callType;
+    });
   }]);

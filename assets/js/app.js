@@ -1,5 +1,6 @@
 var ecApp = angular.module('ecApp', [
   'ngRoute',
+  'restangular',
   'ecAppControllers'
 ]);
 

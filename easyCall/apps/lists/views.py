@@ -3,9 +3,8 @@ from rest_framework.response import Response
 from rest_framework import permissions
 from django.http import Http404
 
-from easyCall.apps.lists.models import ListType, CallResult
+from easyCall.apps.lists.models import ListType
 from easyCall.apps.lists.serializers import ListTypeSerializer
-from easyCall.apps.lists.serializers import CallResultSerializer
 
 
 class ListTypeList(APIView):
@@ -28,16 +27,15 @@ class CallResultList(APIView):
     Retrieve details of a list type.
     """
 
-    permission_classes = (permissions.IsAuthenticated)
+    permission_classes = (permissions.IsAuthenticated,)
 
     def get_object(self, slug):
         try:
-            list_type = ListType.objects.get(slug=slug)
-            return CallResult.objects.filter(list_type=list_type)
+            return ListType.objects.get(slug=slug)
         except ListType.DoesNotExist:
             raise Http404
 
     def get(self, request, slug, format=None):
-        call_results = self.get_object(slug)
-        serializer = CallResultSerializer(call_results, many=True)
+        list_type = self.get_object(slug)
+        serializer = ListTypeSerializer(list_type)
         return Response(serializer.data)

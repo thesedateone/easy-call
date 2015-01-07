@@ -55,6 +55,13 @@ fs.copySync(angularRouteDir + '/angular-route.min.js', vendorJS + '/angular-rout
 fs.copySync(angularRouteDir + '/angular-route.min.js.map', vendorJS + '/angular-route.min.js.map');
 console.log("Copied files from " + angularRouteDir + " to " +  vendorJS);
 
+var restangularDir = './node_modules/restangular/dist';
+fs.copySync(restangularDir + '/restangular.min.js', vendorJS + '/restangular.min.js');
+console.log("Copied files from " + restangularDir + " to " +  vendorJS);
+
+var lodashDir = './node_modules/lodash/dist';
+fs.copySync(lodashDir + '/lodash.min.js', vendorJS + '/lodash.min.js');
+console.log("Copied files from " + lodashDir + " to " +  vendorJS);
 
 /*
 	Collect app image files
