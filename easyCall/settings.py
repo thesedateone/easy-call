@@ -43,6 +43,7 @@ INSTALLED_APPS = (
     # project apps
     'easyCall.apps.pledges',
     'easyCall.apps.lists',
+    'easyCall.apps.call_records',
 )
 
 MIDDLEWARE_CLASSES = (
