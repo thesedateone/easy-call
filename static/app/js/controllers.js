@@ -21,4 +21,15 @@ ecAppControllers.controller('callCtrl',
       function(callType) {
         $scope.callType = callType;
     });
+
+    $scope.getNextRecord = function() {
+      Restangular.one('call_records/' + $routeParams.callCat + '/next/')
+        .get().then(
+          function(demographics) {
+            $scope.demographics = demographics;
+      });
+    };
+
+    $scope.getNextRecord();
+
   }]);
