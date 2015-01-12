@@ -46,3 +46,13 @@ class CallRecord(models.Model):
     def __unicode__(self):
         """CallRecord to_string method."""
         return self.serial_number
+
+
+class QueueEntry(models.Model):
+    list_type = models.ForeignKey(ListType)
+    call_record = models.ForeignKey(CallRecord)
+    date_added = models.DateTimeField(auto_now_add=True)
+
+    def __unicode__(self):
+        """CallRecord to_string method."""
+        return "{} ({})".format(self.call_record.id, self.list_type.slug)
