@@ -1,9 +1,12 @@
-"""Models for the call_records app"""
+"""Models for the call_records app."""
 
 from django.db import models
 
+from easyCall.apps.lists.models import ListType
+
 
 class CallRecord(models.Model):
+    list_type = models.ForeignKey(ListType, related_name='records')
     serial_number = models.CharField(max_length=20)
 
     name_prefix = models.CharField(max_length=20)
@@ -39,3 +42,7 @@ class CallRecord(models.Model):
     status = models.CharField(max_length=2,
                               choices=STATUS_CHOICES,
                               default=NEW)
+
+    def __unicode__(self):
+        """CallRecord to_string method."""
+        return self.serial_number
