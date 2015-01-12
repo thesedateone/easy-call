@@ -7,6 +7,7 @@ urlpatterns = patterns(
     (r'^$', IndexView.as_view()),
 
     url(r'^', include('easyCall.apps.lists.urls')),
+    url(r'^', include('easyCall.apps.call_records.urls')),
 
     url(r'^accounts/login/$', 'django.contrib.auth.views.login',
         {'template_name': 'login.html'},
