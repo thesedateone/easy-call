@@ -1,3 +1,9 @@
 from django.contrib import admin
+from easyCall.apps.call_records.models import CallRecord
 
-# Register your models here.
+
+class CallRecordAdmin(admin.ModelAdmin):
+    pass
+
+
+admin.site.register(CallRecord, CallRecordAdmin)
