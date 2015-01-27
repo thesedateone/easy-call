@@ -41,14 +41,21 @@ def import_csv(file_name):
 
 
 def populate_queue():
-    # Figure out the earliest time we can repopulate
-    timezone.activate(pytz.timezone(settings.TIME_ZONE))
-    last_update = QueueEntry.objects.last().date_added
-    delta = timedelta(minutes=10)
-    now = timezone.now()
+    # TODO:  things will get hairy if the queue is completely empty
+    queue_size = QueueEntry.objects.count()
 
-    if now < (last_update + delta):
-        return False
+    if queue_size > 0:
+        print("there is something in the queue")
+        # Figure out the earliest time we can repopulate
+        timezone.activate(pytz.timezone(settings.TIME_ZONE))
+        last_update = QueueEntry.objects.last().date_added
+        print(last_update)  
+        delta = timedelta(minutes=2)
+        now = timezone.now()
+
+        if now < (last_update + delta):
+            print("too soon, can't repopulate")
+            return False
 
     # repopulate queue
     _do_queue_repopulation()
