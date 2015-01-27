@@ -2,6 +2,7 @@ from rest_framework import serializers
 
 from easyCall.apps.call_records.models import CallRecord
 from easyCall.apps.call_records.models import UserNote
+from easyCall.apps.call_records.models import ExtraInformation
 
 
 class CallRecordSerializer(serializers.ModelSerializer):
@@ -28,6 +29,32 @@ class CallRecordSerializer(serializers.ModelSerializer):
             'do_not_mail_reason',
             'date_of_birth',
             'age',)
+
+
+class CallRecordExtraSerializer(serializers.ModelSerializer):
+    field1_display = serializers.CharField(allow_null=True, read_only=True)
+    field2_display = serializers.CharField(allow_null=True, read_only=True)
+    field3_display = serializers.CharField(allow_null=True, read_only=True)
+    field4_display = serializers.CharField(allow_null=True, read_only=True)
+    field5_display = serializers.CharField(allow_null=True, read_only=True)
+    field6_display = serializers.CharField(allow_null=True, read_only=True)
+    field7_display = serializers.CharField(allow_null=True, read_only=True)
+    field8_display = serializers.CharField(allow_null=True, read_only=True)
+    field9_display = serializers.CharField(allow_null=True, read_only=True)
+    field10_display = serializers.CharField(allow_null=True, read_only=True)
+    field11_display = serializers.CharField(allow_null=True, read_only=True)
+    field12_display = serializers.CharField(allow_null=True, read_only=True)
+    field13_display = serializers.CharField(allow_null=True, read_only=True)
+    field14_display = serializers.CharField(allow_null=True, read_only=True)
+    field15_display = serializers.CharField(allow_null=True, read_only=True)
+    field16_display = serializers.CharField(allow_null=True, read_only=True)
+    field17_display = serializers.CharField(allow_null=True, read_only=True)
+    field18_display = serializers.CharField(allow_null=True, read_only=True)
+    field19_display = serializers.CharField(allow_null=True, read_only=True)
+    field20_display = serializers.CharField(allow_null=True, read_only=True)
+
+    class Meta:
+        model = ExtraInformation
 
 
 class UserNoteSerializer(serializers.ModelSerializer):

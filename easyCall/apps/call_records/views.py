@@ -9,9 +9,11 @@ from django.db import OperationalError
 from easyCall.apps.call_records.models import CallRecord
 from easyCall.apps.call_records.models import QueueEntry
 from easyCall.apps.call_records.models import UserNote
+from easyCall.apps.call_records.models import ExtraInformation
 from easyCall.apps.call_records.importer import populate_queue
 from easyCall.apps.call_records.serializers import CallRecordSerializer
 from easyCall.apps.call_records.serializers import UserNoteSerializer
+from easyCall.apps.call_records.serializers import CallRecordExtraSerializer
 
 
 class UserNoteList(APIView):
@@ -90,6 +92,24 @@ class CallRecordDetail(APIView):
     def _get_object(self, pk):
         try:
             return CallRecord.objects.get(pk=pk)
+        except CallRecord.DoesNotExist:
+            raise Http404
+
+
+class CallRecordExtraDetail(APIView):
+
+    """Retrieve details of a CallRecord. """
+
+    permission_classes = (permissions.IsAuthenticated,)
+
+    def get(self, request, call_pk, format=None):
+        extra = self._get_object(call_pk)
+        serializer = CallRecordExtraSerializer(extra)
+        return Response(serializer.data)
+
+    def _get_object(self, pk):
+        try:
+            return CallRecord.objects.get(pk=pk).extrainformation
         except CallRecord.DoesNotExist:
             raise Http404
 
