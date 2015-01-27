@@ -8,29 +8,29 @@ from easyCall.apps.lists.models import ListType
 
 class CallRecord(models.Model):
     list_type = models.ForeignKey(ListType, related_name='records')
-    serial_number = models.CharField(max_length=20)
+    serial_number = models.CharField(max_length=20)  # TODO: should not be required
 
-    name_prefix = models.CharField(max_length=20)
-    name_first = models.CharField(max_length=255)
-    name_middle = models.CharField(max_length=255)
-    name_family = models.CharField(max_length=255)
-    name_suffix = models.CharField(max_length=60)
+    name_prefix = models.CharField(max_length=20, blank=True)
+    name_first = models.CharField(max_length=255, blank=True)
+    name_middle = models.CharField(max_length=255, blank=True)
+    name_family = models.CharField(max_length=255, blank=True)
+    name_suffix = models.CharField(max_length=60, blank=True)
 
-    tel_day = models.CharField(max_length=20)
-    tel_evening = models.CharField(max_length=20)
-    tel_work = models.CharField(max_length=20)
-    tel_mobile = models.CharField(max_length=20)
+    tel_day = models.CharField(max_length=20, blank=True)
+    tel_evening = models.CharField(max_length=20, blank=True)
+    tel_work = models.CharField(max_length=20, blank=True)
+    tel_mobile = models.CharField(max_length=20, blank=True)
 
-    address_1 = models.CharField(max_length=255)
-    address_2 = models.CharField(max_length=255)
-    address_3 = models.CharField(max_length=255)
-    suburb = models.CharField(max_length=255)
-    city = models.CharField(max_length=255)
-    postcode = models.CharField(max_length=20)
-    do_not_mail_reason = models.CharField(max_length=255)
+    address_1 = models.CharField(max_length=255, blank=True)
+    address_2 = models.CharField(max_length=255, blank=True)
+    address_3 = models.CharField(max_length=255, blank=True)
+    suburb = models.CharField(max_length=255, blank=True)
+    city = models.CharField(max_length=255, blank=True)
+    postcode = models.CharField(max_length=20, blank=True)
+    do_not_mail_reason = models.CharField(max_length=255, blank=True)
 
-    date_of_birth = models.DateField()
-    age = models.CharField(max_length=20)
+    date_of_birth = models.DateField(blank=True)
+    age = models.CharField(max_length=20, blank=True)
 
     NEW = 'nw'
     IN_PROGRESS = 'ip'
