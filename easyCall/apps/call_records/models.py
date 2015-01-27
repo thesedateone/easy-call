@@ -70,3 +70,87 @@ class UserNote(models.Model):
 
     def get_pretty_date_time(self):
         return self.date_added.strftime("%a %d %b %Y %I:%M %p")
+
+
+class ExtraInformation(models.Model):
+    call_record = models.OneToOneField(CallRecord, primary_key=True)
+    field1 = models.CharField(max_length=255, blank=True)
+    field2 = models.CharField(max_length=255, blank=True)
+    field3 = models.CharField(max_length=255, blank=True)
+    field4 = models.CharField(max_length=255, blank=True)
+    field5 = models.CharField(max_length=255, blank=True)
+    field6 = models.CharField(max_length=255, blank=True)
+    field7 = models.CharField(max_length=255, blank=True)
+    field8 = models.CharField(max_length=255, blank=True)
+    field9 = models.CharField(max_length=255, blank=True)
+    field10 = models.CharField(max_length=255, blank=True)
+    field11 = models.CharField(max_length=255, blank=True)
+    field12 = models.CharField(max_length=255, blank=True)
+    field13 = models.CharField(max_length=255, blank=True)
+    field14 = models.CharField(max_length=255, blank=True)
+    field15 = models.CharField(max_length=255, blank=True)
+    field16 = models.CharField(max_length=255, blank=True)
+    field17 = models.CharField(max_length=255, blank=True)
+    field18 = models.CharField(max_length=255, blank=True)
+    field19 = models.CharField(max_length=255, blank=True)
+    field20 = models.CharField(max_length=255, blank=True)
+
+    def field1_display(self):
+        return self.call_record.list_type.extramapping.field1_display
+
+    def field2_display(self):
+        return self.call_record.list_type.extramapping.field2_display
+
+    def field3_display(self):
+        return self.call_record.list_type.extramapping.field3_display
+
+    def field4_display(self):
+        return self.call_record.list_type.extramapping.field4_display
+
+    def field5_display(self):
+        return self.call_record.list_type.extramapping.field5_display
+
+    def field6_display(self):
+        return self.call_record.list_type.extramapping.field6_display
+
+    def field7_display(self):
+        return self.call_record.list_type.extramapping.field7_display
+
+    def field8_display(self):
+        return self.call_record.list_type.extramapping.field8_display
+
+    def field9_display(self):
+        return self.call_record.list_type.extramapping.field9_display
+
+    def field10_display(self):
+        return self.call_record.list_type.extramapping.field10_display
+
+    def field11_display(self):
+        return self.call_record.list_type.extramapping.field11_display
+
+    def field12_display(self):
+        return self.call_record.list_type.extramapping.field12_display
+
+    def field13_display(self):
+        return self.call_record.list_type.extramapping.field13_display
+
+    def field14_display(self):
+        return self.call_record.list_type.extramapping.field14_display
+
+    def field15_display(self):
+        return self.call_record.list_type.extramapping.field15_display
+
+    def field16_display(self):
+        return self.call_record.list_type.extramapping.field16_display
+
+    def field17_display(self):
+        return self.call_record.list_type.extramapping.field17_display
+
+    def field18_display(self):
+        return self.call_record.list_type.extramapping.field18_display
+
+    def field19_display(self):
+        return self.call_record.list_type.extramapping.field19_display
+
+    def field20_display(self):
+        return self.call_record.list_type.extramapping.field20_display

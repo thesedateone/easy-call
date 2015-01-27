@@ -15,6 +15,33 @@ class ListType(models.Model):
         return self.slug
 
 
+class ExtraMapping(models.Model):
+
+    """Display names and csv field mappings for the extra fields per list_type."""
+
+    list_type = models.OneToOneField(ListType, primary_key=True)
+    field1_display = models.CharField(max_length=255, blank=True)
+    field2_display = models.CharField(max_length=255, blank=True)
+    field3_display = models.CharField(max_length=255, blank=True)
+    field4_display = models.CharField(max_length=255, blank=True)
+    field5_display = models.CharField(max_length=255, blank=True)
+    field6_display = models.CharField(max_length=255, blank=True)
+    field7_display = models.CharField(max_length=255, blank=True)
+    field8_display = models.CharField(max_length=255, blank=True)
+    field9_display = models.CharField(max_length=255, blank=True)
+    field10_display = models.CharField(max_length=255, blank=True)
+    field11_display = models.CharField(max_length=255, blank=True)
+    field12_display = models.CharField(max_length=255, blank=True)
+    field13_display = models.CharField(max_length=255, blank=True)
+    field14_display = models.CharField(max_length=255, blank=True)
+    field15_display = models.CharField(max_length=255, blank=True)
+    field16_display = models.CharField(max_length=255, blank=True)
+    field17_display = models.CharField(max_length=255, blank=True)
+    field18_display = models.CharField(max_length=255, blank=True)
+    field19_display = models.CharField(max_length=255, blank=True)
+    field20_display = models.CharField(max_length=255, blank=True)
+
+
 class CallResult(models.Model):
 
     """Model to represent the outcome of a call.
