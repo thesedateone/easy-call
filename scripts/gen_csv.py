@@ -46,8 +46,25 @@ def gen_row():
         'Postcode': gen_post_code(),
         'Do Not Mail Reason': fake.sentence(),
         'Date of Birth': date_info['dob'],
-        'Age': date_info['age']
+        'Age': date_info['age'],
+        'Frequency': fake.sentence(),
+        'Start Date': fake.sentence(),
+        'Instalment Due': fake.sentence(),
+        'Instalment': fake.sentence(),
+        'Pledge ID': fake.sentence(),
+        'Card Type': fake.sentence(),
+        'Card Name': fake.sentence(),
+        '#Missed-Sept-Dec': fake.sentence(),
+        '$Missed-Sept-Dec': fake.sentence(),
+        '#Missed-2014': fake.sentence(),
+        '$Missed-2014': fake.sentence(),
+        'Status': fake.sentence(),
+        'On List From': fake.sentence(),
+        'Other Group': fake.sentence(),
+        'Last Called': fake.sentence(),
+        'Number of Times Called': fake.sentence()
     }
+
 
 fake = Factory.create()
 with open('import.csv', 'w') as csvfile:
@@ -56,8 +73,12 @@ with open('import.csv', 'w') as csvfile:
         'Title', 'First Name', 'Last Name',
         'Tel (day)', 'Tel (eve)', 'Mobile',
         'Address 1', 'Suburb', 'Town/City', 'Postcode',
-        'Do Not Mail Reason',
-        'Date of Birth', 'Age']
+        'Do Not Mail Reason', 'Date of Birth', 'Age',
+        'Frequency', 'Start Date', 'Instalment Due',
+        'Instalment', 'Pledge ID', 'Card Type', 'Card Name',
+        '#Missed-Sept-Dec', '$Missed-Sept-Dec', '#Missed-2014',
+        '$Missed-2014', 'Status', 'On List From', 'Other Group',
+        'Last Called', 'Number of Times Called']
     writer = csv.DictWriter(csvfile, dialect='excel',
                             fieldnames=fieldnames,
                             delimiter=',', quotechar='"',

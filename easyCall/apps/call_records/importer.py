@@ -9,9 +9,10 @@ from django.conf import settings
 from easyCall.apps.call_records.models import CallRecord
 from easyCall.apps.lists.models import ListType
 from easyCall.apps.call_records.models import QueueEntry
+from easyCall.apps.call_records.models import ExtraInformation
 
 
-list_type = ListType.objects.get(slug='street')
+list_type = ListType.objects.get(slug='badcc')
 
 
 def import_csv(file_name):
@@ -37,6 +38,26 @@ def import_csv(file_name):
                 status=CallRecord.NEW,
             )
             record.save()
+            record_extras = ExtraInformation(
+                call_record=record,
+                field1=row['Frequency'],
+                field2=row['Start Date'],
+                field3=row['Instalment Due'],
+                field4=row['Instalment'],
+                field5=row['Pledge ID'],
+                field6=row['Card Type'],
+                field7=row['Card Name'],
+                field8=row['#Missed-Sept-Dec'],
+                field9=row['$Missed-Sept-Dec'],
+                field10=row['#Missed-2014'],
+                field11=row['$Missed-2014'],
+                field12=row['Status'],
+                field13=row['On List From'],
+                field14=row['Other Group'],
+                field15=row['Last Called'],
+                field16=row['Number of Times Called'],
+                )
+            record_extras.save()
     _do_queue_repopulation()
 
 
