@@ -6,37 +6,84 @@
 
   <div class="row call-body">
 
-    <div class="col-xs-7 pane-left">
-      
-      <div ec-demographics data="demographics"></div>
-      <div ec-telephone data="demographics"></div>
-      <div ec-address data="demographics"></div>
-    
-      <div class="panel panel-default">
-        <div class="panel-body">
-          Notes go here
+    <div class="col-xs-6 pane-left">
 
+      <div ec-demographics data="demographics"></div>
+
+      <div class=".container-fluid">      
+        <div ec-telephone data="demographics" class="telephone-data"></div>
+        <div ec-address data="demographics" class="address-data"></div>
+      </div>
+    
+      <div class="outcome-inputs">
+        <div class="input-group">
+          <span class="input-group-addon" id="basic-addon1">#</span>
+          <input type="text" class="form-control" placeholder="New Token"
+                 aria-describedby="basic-addon1">
+        </div>
+
+        <div class="input-group">
+          <span class="input-group-addon" id="basic-addon1">dd/mm</span>
+          <input type="text" class="form-control" placeholder="New Expiry" aria-describedby="basic-addon1">
+        </div>
+
+        <div class="input-group">
+          <span class="input-group-addon" id="basic-addon1">A</span>
+          <input type="text" class="form-control" placeholder="New Card Name"
+                 aria-describedby="basic-addon1">
+        </div>       
+
+        <div class="input-group">
+          <span class="input-group-addon" id="basic-addon1">$</span>
+          <input type="text" class="form-control" placeholder="Make Up Amount" aria-describedby="basic-addon1">
+        </div>
+
+        <div class="input-group">
+          <span class="input-group-addon" id="basic-addon1">dd/mm/yyyy</span>
+          <input type="text" class="form-control" placeholder="Make Up Date" aria-describedby="basic-addon1">
         </div>
       </div>
 
+      <div class="call-results">
+        <ul>
+          <li ng-repeat="result in callType.results">
+            <a ec-action-button data="next()" label="{{result}}"></a>
+          </li> 
+        </ul>
+      </div>
+  
+    </div>
+
+    <div class="col-xs-1 pane-right">
     </div>
    
     <div class="col-xs-5 pane-right">
-      <div class="panel panel-default">
-        <div class="panel-body">
-          Extra Info goes here
-        </div>
-      </div>
-    </div>
-  
-  </div>
 
-  <div class="row call-results">
-  <ul>
-    <li ng-repeat="result in callType.results">
-      <a ec-action-button data="getNextRecord()" label="{{result}}"></a>
-    </li> 
-  </ul>
+
+      <ul class="list-group">
+        <li class="list-group-item">
+          <span class="badge">CRM</span>
+          <h4 class="list-group-item-heading">Rapport</h4>
+          <p class="list-group-item-text">Cras sit amet nibh libero. Cras sit amet nibh libero.</p>
+        </li>
+        <li class="list-group-item">
+          <span class="badge">CRM</span>
+          <h4 class="list-group-item-heading">Procedural</h4>
+          <p class="list-group-item-text">Cras sit amet nibh libero. Cras sit amet nibh libero.</p>
+        </li>
+        <li class="list-group-item" ng-repeat="note in usernotes"
+            ec-user-note data="note" deletefunc="deleteNote(id)" updatefunc="updateNote(id, text)">
+        </li>
+        <li class="list-group-item">
+          <div ec-add-note savefunc="createNote(text)"></div>
+        </li>
+      </ul>
+
+      <div class="extra-block well">
+        <div ec-extras data="extra"></div>
+      </div>
+
+    </div>
   
   </div>
 

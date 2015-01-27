@@ -2,7 +2,8 @@ var ecApp = angular.module('ecApp', [
   'ngRoute',
   'restangular',
   'ecAppControllers',
-  'ecAppDirectives'
+  'ecAppDirectives',
+  'ecAppFilters'
 ]);
 
 ecApp.config(['$routeProvider',
