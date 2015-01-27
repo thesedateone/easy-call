@@ -10,3 +10,8 @@ class IndexView(TemplateView):
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
         return super(IndexView, self).dispatch(*args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = super(IndexView, self).get_context_data(**kwargs)
+        context['user'] = self.request.user.get_username()
+        return context

@@ -15,6 +15,8 @@
     <!-- Define nasty globals to integrate AngularJS and Django -->
     <script type="text/javascript">
       var djangoStatic = '{% static "app/" %}';
+      var csrf_token = '{{ csrf_token }}';
+      {% block globals %}{% endblock %}
     </script>
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
