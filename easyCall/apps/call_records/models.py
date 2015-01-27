@@ -1,6 +1,7 @@
 """Models for the call_records app."""
 
 from django.db import models
+from django.contrib.auth.models import User
 
 from easyCall.apps.lists.models import ListType
 
@@ -56,3 +57,16 @@ class QueueEntry(models.Model):
     def __unicode__(self):
         """CallRecord to_string method."""
         return "{} ({})".format(self.call_record.id, self.list_type.slug)
+
+
+class UserNote(models.Model):
+    creator = models.ForeignKey(User)
+    call_record = models.ForeignKey(CallRecord)
+    date_added = models.DateTimeField(auto_now_add=True)
+    text = models.TextField()
+
+    def get_user_name(self):
+        return self.creator.username
+
+    def get_pretty_date_time(self):
+        return self.date_added.strftime("%a %d %b %Y %I:%M %p")
