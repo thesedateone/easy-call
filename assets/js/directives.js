@@ -92,36 +92,48 @@ ecAppDirectives.directive('ecActionButton', function() {
   };
 });
 
-ecAppDirectives.directive('ecExtras', function() {
+
+ecAppDirectives.directive('ecExtraList', function() {
   return {
     restrict: "A",
     scope: {
       data: "=",
     },
-    template: '<ul>' +
-      '<li ng-if="data.extra_01"><em>Extra 01</em> {{data.extra_01}}</li>' +
-      '<li ng-if="data.extra_02"><em>Extra 02</em> {{data.extra_02}}</li>' +
-      '<li ng-if="data.extra_03"><em>Extra 03</em> {{data.extra_03}}</li>' +
-      '<li ng-if="data.extra_04"><em>Extra 04</em> {{data.extra_04}}</li>' +
-      '<li ng-if="data.extra_05"><em>Extra 05</em> {{data.extra_05}}</li>' +
-      '<li ng-if="data.extra_06"><em>Extra 06</em> {{data.extra_06}}</li>' +
-      '<li ng-if="data.extra_07"><em>Extra 07</em> {{data.extra_07}}</li>' +
-      '<li ng-if="data.extra_08"><em>Extra 08</em> {{data.extra_08}}</li>' +
-      '<li ng-if="data.extra_09"><em>Extra 09</em> {{data.extra_09}}</li>' +
-      '<li ng-if="data.extra_10"><em>Extra 10</em> {{data.extra_10}}</li>' +
-      '<li ng-if="data.extra_11"><em>Extra 11</em> {{data.extra_11}}</li>' +
-      '<li ng-if="data.extra_12"><em>Extra 12</em> {{data.extra_12}}</li>' +
-      '<li ng-if="data.extra_13"><em>Extra 13</em> {{data.extra_13}}</li>' +
-      '<li ng-if="data.extra_14"><em>Extra 14</em> {{data.extra_14}}</li>' +
-      '<li ng-if="data.extra_15"><em>Extra 15</em> {{data.extra_15}}</li>' +
-      '<li ng-if="data.extra_16"><em>Extra 16</em> {{data.extra_16}}</li>' +
-      '<li ng-if="data.extra_17"><em>Extra 17</em> {{data.extra_17}}</li>' +
-      '<li ng-if="data.extra_18"><em>Extra 18</em> {{data.extra_18}}</li>' +
-      '<li ng-if="data.extra_19"><em>Extra 19</em> {{data.extra_19}}</li>' +
-      '<li ng-if="data.extra_20"><em>Extra 20</em> {{data.extra_20}}</li>' +
-      '</ul>'
+    template: '<div ng-if="data.field1_display" ec-extra heading="data.field1_display" text="data.field1" class="row"></div>' +
+      '<div ng-if="data.field2_display" ec-extra heading="data.field2_display" text="data.field2" class="row"></div>' +
+      '<div ng-if="data.field3_display" ec-extra heading="data.field3_display" text="data.field3" class="row"></div>' +
+      '<div ng-if="data.field4_display" ec-extra heading="data.field4_display" text="data.field4" class="row"></div>' +
+      '<div ng-if="data.field5_display" ec-extra heading="data.field5_display" text="data.field5" class="row"></div>' +
+      '<div ng-if="data.field6_display" ec-extra heading="data.field6_display" text="data.field6" class="row"></div>' +
+      '<div ng-if="data.field7_display" ec-extra heading="data.field7_display" text="data.field7" class="row"></div>' +
+      '<div ng-if="data.field8_display" ec-extra heading="data.field8_display" text="data.field8" class="row"></div>' +
+      '<div ng-if="data.field9_display" ec-extra heading="data.field9_display" text="data.field9" class="row"></div>' +
+      '<div ng-if="data.field10_display" ec-extra heading="data.field10_display" text="data.field10" class="row"></div>' +
+      '<div ng-if="data.field11_display" ec-extra heading="data.field11_display" text="data.field11" class="row"></div>' +
+      '<div ng-if="data.field12_display" ec-extra heading="data.field12_display" text="data.field12" class="row"></div>' +
+      '<div ng-if="data.field13_display" ec-extra heading="data.field13_display" text="data.field13" class="row"></div>' +
+      '<div ng-if="data.field14_display" ec-extra heading="data.field14_display" text="data.field14" class="row"></div>' +
+      '<div ng-if="data.field15_display" ec-extra heading="data.field15_display" text="data.field15" class="row"></div>' +
+      '<div ng-if="data.field16_display" ec-extra heading="data.field16_display" text="data.field16" class="row"></div>' +
+      '<div ng-if="data.field17_display" ec-extra heading="data.field17_display" text="data.field17" class="row"></div>' +
+      '<div ng-if="data.field18_display" ec-extra heading="data.field18_display" text="data.field18" class="row"></div>' +
+      '<div ng-if="data.field19_display" ec-extra heading="data.field19_display" text="data.field19" class="row"></div>' +
+      '<div ng-if="data.field20_display" ec-extra heading="data.field20_display" text="data.field20" class="row"></div>'
   };
 });
+
+
+ecAppDirectives.directive('ecExtra', function() {
+  return {
+    restrict: "A",
+    scope: {
+      heading: "=",
+      text: "=",
+    },
+    template: '<em class="col-xs-3 item-heading">{{heading}}</em><span class="col-xs-9">{{text}}</span>'
+  };
+});
+
 
 
 ecAppDirectives.directive('ecAddNote', function () {

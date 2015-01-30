@@ -48,6 +48,14 @@ ecAppControllers.controller('callCtrl',
       });
     };
 
+    $scope.getExtraInfo = function() {
+      Restangular.one('call_records/' + $scope.demographics.pk + '/extra/')
+        .get().then(
+          function(extra) {
+            $scope.extra = extra;
+      });
+    };
+
     $scope.createNote = function(text) {
       var recordId = $scope.demographics.pk;
       var notes = Restangular.one('call_records', recordId).all('notes/');
@@ -89,34 +97,11 @@ ecAppControllers.controller('callCtrl',
         });
     };
 
-
-    $scope.extra = {
-      "extra_01": "Consequatur tenetur eaque rem sed in ad consequatur.",
-      "extra_02": "Consequatur tenetur eaque rem sed in ad consequatur.",
-      "extra_03": "Consequatur tenetur eaque rem sed in ad consequatur.",
-      "extra_04": "Consequatur tenetur eaque rem sed in ad consequatur.",
-      "extra_05": "Consequatur tenetur eaque rem sed in ad consequatur.",
-      "extra_06": "Consequatur tenetur eaque rem sed in ad consequatur.",
-      "extra_07": "Consequatur tenetur eaque rem sed in ad consequatur.",
-      "extra_08": "Consequatur tenetur eaque rem sed in ad consequatur.",
-      "extra_09": "Consequatur tenetur eaque rem sed in ad consequatur.",
-      "extra_10": "Consequatur tenetur eaque rem sed in ad consequatur.",
-      "extra_11": "Consequatur tenetur eaque rem sed in ad consequatur.",
-      "extra_12": "Consequatur tenetur eaque rem sed in ad consequatur.",
-      "extra_13": "Consequatur tenetur eaque rem sed in ad consequatur.",
-      "extra_14": "Consequatur tenetur eaque rem sed in ad consequatur.",
-      "extra_15": "Consequatur tenetur eaque rem sed in ad consequatur.",
-      "extra_16": "Consequatur tenetur eaque rem sed in ad consequatur.",
-      "extra_17": "Consequatur tenetur eaque rem sed in ad consequatur.",
-      "extra_18": "Consequatur tenetur eaque rem sed in ad consequatur.",
-      "extra_19": "Consequatur tenetur eaque rem sed in ad consequatur.",
-      "extra_20": "Consequatur tenetur eaque rem sed in ad consequatur.",
-    };
-
     $scope.next = function() {
       $scope.getNextRecord()
         .then( function() {
           $scope.getUserNotes();
+          $scope.getExtraInfo();
         });
     };
     $scope.next();
