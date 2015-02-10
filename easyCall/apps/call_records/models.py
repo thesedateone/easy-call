@@ -154,3 +154,20 @@ class ExtraInformation(models.Model):
 
     def field20_display(self):
         return self.call_record.list_type.extramapping.field20_display
+
+
+class SystemNotes(models.Model):
+    call_record = models.OneToOneField(CallRecord, primary_key=True)
+    note1 = models.CharField(max_length=255, blank=True)
+    note2 = models.CharField(max_length=255, blank=True)
+    note3 = models.CharField(max_length=255, blank=True)
+
+    def note1_display(self):
+        return self.call_record.list_type.notemapping.note1_display
+
+    def note2_display(self):
+        return self.call_record.list_type.notemapping.note2_display
+
+    def note3_display(self):
+        return self.call_record.list_type.notemapping.note3_display
+
