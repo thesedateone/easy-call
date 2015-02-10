@@ -15,6 +15,8 @@ urlpatterns = [
         views.CallRecordExtraDetail.as_view()),
     url(r'^user_notes/(?P<pk>[0-9]+)/$',
         views.UserNoteDetail.as_view()),
+    url(r'^call/(?P<pk>[0-9]+)/$',
+        views.CallDetail.as_view()),
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)

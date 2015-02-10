@@ -4,9 +4,13 @@ from easyCall.apps.call_records.models import CallRecord
 from easyCall.apps.call_records.models import UserNote
 from easyCall.apps.call_records.models import SystemNotes
 from easyCall.apps.call_records.models import ExtraInformation
+from easyCall.apps.call_records.models import Call
 
 
 class CallRecordSerializer(serializers.ModelSerializer):
+    call = serializers.CharField(source='get_current_call',
+                                 allow_null=True, read_only=True)
+
     class Meta:
         model = CallRecord
         fields = (
@@ -29,7 +33,8 @@ class CallRecordSerializer(serializers.ModelSerializer):
             'postcode',
             'do_not_mail_reason',
             'date_of_birth',
-            'age',)
+            'age',
+            'call',)
 
 
 class CallRecordExtraSerializer(serializers.ModelSerializer):
@@ -83,3 +88,55 @@ class UserNoteSerializer(serializers.ModelSerializer):
             'call_record',
             'pretty_date',
             'text',)
+
+
+class CallSerializer(serializers.ModelSerializer):
+    data1_display = serializers.CharField(allow_null=True, read_only=True)
+    data1_addon = serializers.CharField(allow_null=True, read_only=True)
+    data2_display = serializers.CharField(allow_null=True, read_only=True)
+    data2_addon = serializers.CharField(allow_null=True, read_only=True)
+    data3_display = serializers.CharField(allow_null=True, read_only=True)
+    data3_addon = serializers.CharField(allow_null=True, read_only=True)
+    data4_display = serializers.CharField(allow_null=True, read_only=True)
+    data4_addon = serializers.CharField(allow_null=True, read_only=True)
+    data5_display = serializers.CharField(allow_null=True, read_only=True)
+    data5_addon = serializers.CharField(allow_null=True, read_only=True)
+    data6_display = serializers.CharField(allow_null=True, read_only=True)
+    data6_addon = serializers.CharField(allow_null=True, read_only=True)
+    data7_display = serializers.CharField(allow_null=True, read_only=True)
+    data7_addon = serializers.CharField(allow_null=True, read_only=True)
+    data8_display = serializers.CharField(allow_null=True, read_only=True)
+    data8_addon = serializers.CharField(allow_null=True, read_only=True)
+
+    class Meta:
+        model = Call
+        fields = (
+            'pk',
+            'caller',
+            'result',
+            'start_time',
+            'end_time',
+            'data1',
+            'data1_display',
+            'data1_addon',
+            'data2',
+            'data2_display',
+            'data2_addon',
+            'data3',
+            'data3_display',
+            'data3_addon',
+            'data4',
+            'data4_display',
+            'data4_addon',
+            'data5',
+            'data5_display',
+            'data5_addon',
+            'data6',
+            'data6_display',
+            'data6_addon',
+            'data7',
+            'data7_display',
+            'data7_addon',
+            'data8',
+            'data8_display',
+            'data8_addon',)

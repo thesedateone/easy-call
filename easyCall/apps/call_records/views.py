@@ -5,21 +5,23 @@ from rest_framework import status
 from django.http import Http404
 from django.db import transaction
 from django.db import OperationalError
+from django.contrib.auth.models import User
 
 from easyCall.apps.call_records.models import CallRecord
 from easyCall.apps.call_records.models import QueueEntry
 from easyCall.apps.call_records.models import UserNote
-from easyCall.apps.call_records.models import ExtraInformation
+from easyCall.apps.call_records.models import Call
 from easyCall.apps.call_records.importer import populate_queue
 from easyCall.apps.call_records.serializers import CallRecordSerializer
 from easyCall.apps.call_records.serializers import UserNoteSerializer
 from easyCall.apps.call_records.serializers import SystemNoteSerializer
 from easyCall.apps.call_records.serializers import CallRecordExtraSerializer
+from easyCall.apps.call_records.serializers import CallSerializer
 
 
 class UserNoteList(APIView):
 
-    """Retrieve all the notes for a CallRecord. """
+    """Retrieve all the user created notes for a CallRecord. """
 
     permission_classes = (permissions.IsAuthenticated,)
 
@@ -142,6 +144,24 @@ class CallRecordExtraDetail(APIView):
             raise Http404
 
 
+class CallDetail(APIView):
+
+    """Retrieve details of Call. """
+
+    permission_classes = (permissions.IsAuthenticated,)
+
+    def get(self, request, pk, format=None):
+        extra = self._get_object(pk)
+        serializer = CallSerializer(extra)
+        return Response(serializer.data)
+
+    def _get_object(self, pk):
+        try:
+            return Call.objects.get(pk=pk)
+        except Call.DoesNotExist:
+            raise Http404
+
+
 class NextCallRecord(APIView):
 
     """Retrieve the next record of the specified type."""
@@ -150,6 +170,10 @@ class NextCallRecord(APIView):
 
     def get(self, request, list_type, format=None):
         record = self._get_object(list_type)
+        caller = User.objects.get(id=request.user.id)
+        call = Call(call_record=record, caller=caller)
+        call.save()
+        print(call.id)
         serializer = CallRecordSerializer(record)
         return Response(serializer.data)
 
