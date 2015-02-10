@@ -7,15 +7,12 @@ from django.utils import timezone
 
 from django.conf import settings
 from easyCall.apps.call_records.models import CallRecord
-from easyCall.apps.lists.models import ListType
 from easyCall.apps.call_records.models import QueueEntry
 from easyCall.apps.call_records.models import ExtraInformation
+from easyCall.apps.call_records.models import SystemNotes
 
 
-list_type = ListType.objects.get(slug='badcc')
-
-
-def import_csv(file_name):
+def import_csv(file_name, list_type):
     with open(file_name, 'rb') as csvfile:
         recordreader = csv.DictReader(csvfile, delimiter=',', quotechar='"')
         for row in recordreader:
@@ -38,26 +35,58 @@ def import_csv(file_name):
                 status=CallRecord.NEW,
             )
             record.save()
-            record_extras = ExtraInformation(
-                call_record=record,
-                field1=row['Frequency'],
-                field2=row['Start Date'],
-                field3=row['Instalment Due'],
-                field4=row['Instalment'],
-                field5=row['Pledge ID'],
-                field6=row['Card Type'],
-                field7=row['Card Name'],
-                field8=row['#Missed-Sept-Dec'],
-                field9=row['$Missed-Sept-Dec'],
-                field10=row['#Missed-2014'],
-                field11=row['$Missed-2014'],
-                field12=row['Status'],
-                field13=row['On List From'],
-                field14=row['Other Group'],
-                field15=row['Last Called'],
-                field16=row['Number of Times Called'],
+
+            if (list_type.slug == 'badcc'):
+                record_extras = ExtraInformation(
+                    call_record=record,
+                    field1=row['Frequency'],
+                    field2=row['Start Date'],
+                    field3=row['Instalment Due'],
+                    field4=row['Instalment'],
+                    field5=row['Pledge ID'],
+                    field6=row['Card Type'],
+                    field7=row['Card Name'],
+                    field8=row['#Missed-Sept-Dec'],
+                    field9=row['$Missed-Sept-Dec'],
+                    field10=row['#Missed-2014'],
+                    field11=row['$Missed-2014'],
+                    field12=row['Status'],
+                    field13=row['On List From'],
+                    field14=row['Other Group'],
+                    field15=row['Last Called'],
+                    field16=row['Number of Times Called'],
+                )
+                record_notes = SystemNotes(
+                    call_record=record,
+                    note1=row['Note - Rapport'],
+                    note2=row['Note - Procedural'],
+                )
+            elif (list_type.slug == 'nice'):
+                record_extras = ExtraInformation(
+                    call_record=record,
+                    field1=row['Foo'],
+                    field2=row['Bar'],
+                    field3=row['Baz'],
+                )
+                record_notes = SystemNotes(
+                    call_record=record,
+                    note1=row['Note - Rapport'],
+                    note2=row['Note - Procedural'],
+                    note3=row['Note - Approach'],
+                )
+            elif (list_type.slug == 'street'):
+                record_extras = ExtraInformation(
+                    call_record=record,
+                    field1=row['Foo'],
+                    field2=row['Bar'],
+                    field3=row['Baz'],
+                )
+                record_notes = SystemNotes(
+                    call_record=record,
+                    note1=row['Note - Procedural'],
                 )
             record_extras.save()
+            record_notes.save()
     _do_queue_repopulation()
 
 
@@ -70,7 +99,7 @@ def populate_queue():
         # Figure out the earliest time we can repopulate
         timezone.activate(pytz.timezone(settings.TIME_ZONE))
         last_update = QueueEntry.objects.last().date_added
-        print(last_update)  
+        print(last_update)
         delta = timedelta(minutes=2)
         now = timezone.now()
 
