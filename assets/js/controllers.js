@@ -48,6 +48,14 @@ ecAppControllers.controller('callCtrl',
       });
     };
 
+    $scope.getSystemNotes = function() {
+      Restangular.one('call_records/' + $scope.demographics.pk + '/sysnotes/')
+        .get().then(
+          function(systemnotes) {
+            $scope.systemnotes = systemnotes;
+      });
+    };
+
     $scope.getExtraInfo = function() {
       Restangular.one('call_records/' + $scope.demographics.pk + '/extra/')
         .get().then(
@@ -91,6 +99,24 @@ ecAppControllers.controller('callCtrl',
             function (response) {
               console.log("Note updated.");
               $scope.getUserNotes();
+            }, function (response) {
+              console.log("Error with status code", response.status);
+            });
+        });
+    };
+
+    $scope.updateSysNotes = function(data) {
+      var id = data.call_record;
+      var notes = Restangular.one('call_records/' + id + '/sysnotes/');
+      notes.get().then(
+        function(recnotes) {
+          recnotes.note1 = data.note1;
+          recnotes.note2 = data.note2;
+          recnotes.note3 = data.note3;
+          recnotes.put({}, {"X-CSRFToken": csrf_token}).then(
+            function (response) {
+              console.log("System Notes updated.");
+              $scope.getSystemNotes();
             }, function (response) {
               console.log("Error with status code", response.status);
             });
