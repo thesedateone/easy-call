@@ -2,6 +2,7 @@ from rest_framework import serializers
 
 from easyCall.apps.call_records.models import CallRecord
 from easyCall.apps.call_records.models import UserNote
+from easyCall.apps.call_records.models import SystemNotes
 from easyCall.apps.call_records.models import ExtraInformation
 
 
@@ -55,6 +56,16 @@ class CallRecordExtraSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = ExtraInformation
+
+
+class SystemNoteSerializer(serializers.ModelSerializer):
+    note1_display = serializers.CharField(allow_null=True, read_only=True)
+    note2_display = serializers.CharField(allow_null=True, read_only=True)
+    note3_display = serializers.CharField(allow_null=True, read_only=True)
+
+    class Meta:
+        model = SystemNotes
+        read_only_fields = ('call_record',)
 
 
 class UserNoteSerializer(serializers.ModelSerializer):

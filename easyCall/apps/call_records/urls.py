@@ -9,6 +9,8 @@ urlpatterns = [
         views.NextCallRecord.as_view()),
     url(r'^call_records/(?P<call_pk>[0-9]+)/notes/$',
         views.UserNoteList.as_view()),
+    url(r'^call_records/(?P<call_pk>[0-9]+)/sysnotes/$',
+        views.SystemNoteDetail.as_view()),
     url(r'^call_records/(?P<call_pk>[0-9]+)/extra/$',
         views.CallRecordExtraDetail.as_view()),
     url(r'^user_notes/(?P<pk>[0-9]+)/$',

@@ -13,6 +13,7 @@ from easyCall.apps.call_records.models import ExtraInformation
 from easyCall.apps.call_records.importer import populate_queue
 from easyCall.apps.call_records.serializers import CallRecordSerializer
 from easyCall.apps.call_records.serializers import UserNoteSerializer
+from easyCall.apps.call_records.serializers import SystemNoteSerializer
 from easyCall.apps.call_records.serializers import CallRecordExtraSerializer
 
 
@@ -76,6 +77,33 @@ class UserNoteDetail(APIView):
         note = self._get_object(pk)
         note.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+class SystemNoteDetail(APIView):
+
+    """Get and update system notes for a CallRecord. """
+
+    permission_classes = (permissions.IsAuthenticated,)
+
+    def get(self, request, call_pk, format=None):
+        notes = self._get_object(call_pk)
+        serializer = SystemNoteSerializer(notes)
+        return Response(serializer.data)
+
+    def put(self, request, call_pk, format=None):
+        notes = self._get_object(call_pk)
+        data = request.data
+        serializer = SystemNoteSerializer(notes, data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def _get_object(self, call_pk):
+        try:
+            return CallRecord.objects.get(pk=call_pk).systemnotes
+        except CallRecord.DoesNotExist:
+            raise Http404
 
 
 class CallRecordDetail(APIView):
