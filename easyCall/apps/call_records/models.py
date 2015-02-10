@@ -3,7 +3,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-from easyCall.apps.lists.models import ListType
+from easyCall.apps.lists.models import ListType, CallResult
 
 
 class CallRecord(models.Model):
@@ -43,6 +43,10 @@ class CallRecord(models.Model):
     status = models.CharField(max_length=2,
                               choices=STATUS_CHOICES,
                               default=NEW)
+
+    def get_current_call(self):
+        call = self.results.first()
+        return call.id
 
     def __unicode__(self):
         """CallRecord to_string method."""
@@ -171,3 +175,66 @@ class SystemNotes(models.Model):
     def note3_display(self):
         return self.call_record.list_type.notemapping.note3_display
 
+
+class Call(models.Model):
+    call_record = models.ForeignKey(CallRecord, related_name='results')
+    caller = models.ForeignKey(User, related_name='calls')
+    result = models.ForeignKey(CallResult, blank=True, null=True)
+    start_time = models.DateTimeField(auto_now_add=True)
+    end_time = models.DateTimeField(blank=True, null=True)
+    data1 = models.CharField(max_length=255, blank=True)
+    data2 = models.CharField(max_length=255, blank=True)
+    data3 = models.CharField(max_length=255, blank=True)
+    data4 = models.CharField(max_length=255, blank=True)
+    data5 = models.CharField(max_length=255, blank=True)
+    data6 = models.CharField(max_length=255, blank=True)
+    data7 = models.CharField(max_length=255, blank=True)
+    data8 = models.CharField(max_length=255, blank=True)
+
+    def data1_display(self):
+        return self.call_record.list_type.callmapping.data1_display
+
+    def data1_addon(self):
+        return self.call_record.list_type.callmapping.data1_addon
+
+    def data2_display(self):
+        return self.call_record.list_type.callmapping.data2_display
+
+    def data2_addon(self):
+        return self.call_record.list_type.callmapping.data2_addon
+
+    def data3_display(self):
+        return self.call_record.list_type.callmapping.data3_display
+
+    def data3_addon(self):
+        return self.call_record.list_type.callmapping.data3_addon
+
+    def data4_display(self):
+        return self.call_record.list_type.callmapping.data4_display
+
+    def data4_addon(self):
+        return self.call_record.list_type.callmapping.data4_addon
+
+    def data5_display(self):
+        return self.call_record.list_type.callmapping.data5_display
+
+    def data5_addon(self):
+        return self.call_record.list_type.callmapping.data5_addon
+
+    def data6_display(self):
+        return self.call_record.list_type.callmapping.data6_display
+
+    def data6_addon(self):
+        return self.call_record.list_type.callmapping.data6_addon
+
+    def data7_display(self):
+        return self.call_record.list_type.callmapping.data7_display
+
+    def data7_addon(self):
+        return self.call_record.list_type.callmapping.data7_addon
+
+    def data8_display(self):
+        return self.call_record.list_type.callmapping.data8_display
+
+    def data8_addon(self):
+        return self.call_record.list_type.callmapping.data8_addon

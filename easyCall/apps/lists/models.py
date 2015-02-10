@@ -42,6 +42,39 @@ class ExtraMapping(models.Model):
     field20_display = models.CharField(max_length=255, blank=True)
 
 
+class NoteMapping(models.Model):
+
+    """Display names and field mappings for the system notes per list_type."""
+
+    list_type = models.OneToOneField(ListType, primary_key=True)
+    note1_display = models.CharField(max_length=255, blank=True)
+    note2_display = models.CharField(max_length=255, blank=True)
+    note3_display = models.CharField(max_length=255, blank=True)
+
+
+class CallMapping(models.Model):
+
+    """Display names and field mappings for the system notes per list_type."""
+
+    list_type = models.OneToOneField(ListType, primary_key=True)
+    data1_display = models.CharField(max_length=255, blank=True)
+    data1_addon = models.CharField(max_length=20, blank=True)
+    data2_display = models.CharField(max_length=255, blank=True)
+    data2_addon = models.CharField(max_length=20, blank=True)
+    data3_display = models.CharField(max_length=255, blank=True)
+    data3_addon = models.CharField(max_length=20, blank=True)
+    data4_display = models.CharField(max_length=255, blank=True)
+    data4_addon = models.CharField(max_length=20, blank=True)
+    data5_display = models.CharField(max_length=255, blank=True)
+    data5_addon = models.CharField(max_length=20, blank=True)
+    data6_display = models.CharField(max_length=255, blank=True)
+    data6_addon = models.CharField(max_length=20, blank=True)
+    data7_display = models.CharField(max_length=255, blank=True)
+    data7_addon = models.CharField(max_length=20, blank=True)
+    data8_display = models.CharField(max_length=255, blank=True)
+    data8_addon = models.CharField(max_length=20, blank=True)
+
+
 class CallResult(models.Model):
 
     """Model to represent the outcome of a call.
