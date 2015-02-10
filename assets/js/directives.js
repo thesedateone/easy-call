@@ -8,19 +8,20 @@ ecAppDirectives.directive('ecDemographics', function() {
     scope: {
       data: "=",
     },
-    template: '<ul>' +
-      '<li>' +
+    template: '<div class="name">' +
+      '<p>' +
       '<span ng-if="data.name_prefix"> {{data.name_prefix}}</span>' +
       '<span ng-if="data.name_first"> {{data.name_first}}</span>' +
       '<span ng-if="data.name_middle"> {{data.name_middle}}</span>' +
       '<span ng-if="data.name_family"> {{data.name_family}}</span>' +
       '<span ng-if="data.name_suffix"> - {{data.name_suffix}}</span>' +
-      '<span> ({{data.serial_number}})</span>' +
-      '</li>' +
-      '<li>' +
-      '{{data.date_of_birth}} ({{data.age}}) ' +
-      '</li>' +
-      '</ul>'
+      // '<span> ({{data.serial_number}})</span>' +
+      '</p>' +
+      '</div>' +
+      '<div class="row">' +
+      '<em class="col-xs-3 item-heading">DOB (age)</em>' +
+      '<span class="col-xs-9">{{data.date_of_birth}} ({{data.age}})</span>' +
+      '</div>'
   };
 });
 
@@ -74,21 +75,6 @@ ecAppDirectives.directive('ecAddress', function() {
       '<div class="row" ng-if="data.do_not_mail_reason">' +
       '<em class="col-xs-3 item-heading">Do Not Mail Reason</em><span class="col-xs-9">{{data.do_not_mail_reason}}</span>' +
       '</div>'
-  };
-});
-
-
-ecAppDirectives.directive('ecActionButton', function() {
-  return {
-    restrict: "A",
-    scope: {
-      data: "&",
-      label: "@",
-    },
-    template: '<a ' +
-      'class="btn btn-md btn-default" role="button" ng-click="data()">' +
-      '{{label}}' +
-      '</a>'
   };
 });
 
@@ -236,5 +222,185 @@ ecAppDirectives.directive('ecUserNote', function() {
             }
           };
       }
+  };
+});
+
+
+ecAppDirectives.directive('sysnotes', function () {
+    return {
+        restrict: 'E',
+        scope: {
+            data: '=',
+            updatefunc: '&'
+        },
+        template: '<div class="panel panel-default">' +
+            '  <!-- Default panel contents -->' +
+            '  <div class="panel-heading">' +
+            '    <button type="button" class="btn btn-default"' +
+            '            ng-click="edit()">Edit</button>' +
+            '    <h4>System Notes</h4>' +
+            '    <div style="clear: both;"></div>' +
+            '  </div>' +
+            '  <!-- List group -->' +
+            '  <div class="list-group">' +
+            '    <sysnote class="list-group-item" editing="editing"' +
+            '             header="data.note1_display" text="data.note1"'+
+            '             badge="CRM" ng-if="data.note1_display"></sysnote>' +
+            '    <sysnote class="list-group-item" editing="editing"' +
+            '             header="data.note2_display" text="data.note2"'+
+            '             badge="CRM" ng-if="data.note2_display"></sysnote>' +
+            '    <sysnote class="list-group-item" editing="editing"' +
+            '             header="data.note3_display" text="data.note3"'+
+            '             badge="CRM" ng-if="data.note3_display"></sysnote>' +
+            '  </div>' +    
+            '</div>',
+        link: function (scope, element, attrs) {
+            scope.editing = false;
+            var button = angular.element(element.find('button'));
+            scope.edit = function () {
+                if (scope.editing) {
+                    scope.editing = false;
+                    button.prop("innerText", "Edit");
+                    scope.updatefunc({'data': scope.data});
+                } else {
+                    scope.editing = true;
+                    button.prop("innerText", "Save");
+                }
+            };
+        }
+    };
+});
+
+
+ecAppDirectives.directive('sysnote', function () {
+    return {
+        restrict: 'E',
+        scope: {
+            editing: '=',
+            header: '=',
+            text: '=',
+            badge: '@'
+        },
+        template: '  <span class="badge">{{badge}}</span>' +
+            '  <h4 class="list-group-item-heading">{{header}}</h4>' +
+            '  <span ng-hide="editing">{{text}}</span>' +
+            '  <textarea ng-show="editing" rows="4" ng-model="text"' +
+            '            class="form-control" ></textarea>',
+            
+    };
+});
+
+
+/**************************************
+ *  Results Input Fields and Buttons
+ **************************************/
+
+
+ecAppDirectives.directive('ecResultSection', function() {
+  return {
+    restrict: "E",
+    scope: {
+      call: "=",
+      buttons: "=",
+      updatefunc: "&"
+    },
+    template:
+      '<ec-result-input-list call="call"></ec-result-input-list>' +
+      '<ul>' +
+      '  <li ng-repeat="button in buttons">' +
+      '    <a ec-action-button data="submit(button)" label="{{button}}"></a>' +
+      '  </li> ' +
+      '</ul>',
+
+    link: function (scope, element, attrs) {
+      scope.submit = function(button) {
+        scope.updatefunc({'button': button, 'data': scope.call});
+      };
+    }
+  };
+});
+
+
+ecAppDirectives.directive('ecActionButton', function() {
+  return {
+    restrict: "A",
+    scope: {
+      data: "&",
+      label: "@",
+    },
+    template: '<a ' +
+      'class="btn btn-md btn-default" role="button" ng-click="data()">' +
+      '{{label}}' +
+      '</a>'
+  };
+});
+
+
+ecAppDirectives.directive('ecResultInputList', function() {
+  return {
+    restrict: "E",
+    scope: {
+      call: "="
+    },
+    template: 
+      '<ec-result-input ng-if="call.data1_display"' +
+      '    addon="call.data1_addon" ' +
+      '    value="call.data1"' +
+      '    text="call.data1_display">' +
+      '</ec-result-input>' +
+      '<ec-result-input ng-if="call.data2_display"' +
+      '    addon="call.data2_addon" ' +
+      '    value="call.data2"' +
+      '    text="call.data2_display">' +
+      '</ec-result-input>' +
+      '<ec-result-input ng-if="call.data3_display"' +
+      '    addon="call.data3_addon" ' +
+      '    value="call.data3"' +
+      '    text="call.data3_display">' +
+      '</ec-result-input>' +
+      '<ec-result-input ng-if="call.data4_display"' +
+      '    addon="call.data4_addon" ' +
+      '    value="call.data4"' +
+      '    text="call.data4_display">' +
+      '</ec-result-input>' +
+      '<ec-result-input ng-if="call.data5_display"' +
+      '    addon="call.data5_addon" ' +
+      '    value="call.data5"' +
+      '    text="call.data5_display">' +
+      '</ec-result-input>' +
+      '<ec-result-input ng-if="call.data6_display"' +
+      '    addon="call.data6_addon" ' +
+      '    value="call.data6"' +
+      '    text="call.data6_display">' +
+      '</ec-result-input>' +
+      '<ec-result-input ng-if="call.data7_display"' +
+      '    addon="call.data7_addon" ' +
+      '    value="call.data7"' +
+      '    text="call.data7_display">' +
+      '</ec-result-input>' +
+      '<ec-result-input ng-if="call.data8_display"' +
+      '    addon="call.data8_addon" ' +
+      '    value="call.data8"' +
+      '    text="call.data8_display">' +
+      '</ec-result-input>'
+  };
+});
+
+
+ecAppDirectives.directive('ecResultInput', function() {
+  return {
+    restrict: "E",
+    scope: {
+      addon: "=",
+      value: "=",
+      text: "="
+    },
+    template: 
+    '<div class="input-group">' +
+    '  <span class="input-group-addon" id="basic-addon1">{{addon}}</span>' +
+    '  <input type="text" class="form-control" placeholder="{{text}}"' +
+    '         aria-describedby="basic-addon1" ng-model="value">' +
+    '  </input>' +
+    '</div>'
   };
 });
