@@ -1,0 +1,266 @@
+[
+{
+    "fields": {
+        "display_name": "Credit Card Errors"
+    },
+    "model": "lists.listtype",
+    "pk": "badcc"
+},
+{
+    "fields": {
+        "display_name": "Long Term Donors to upsell"
+    },
+    "model": "lists.listtype",
+    "pk": "nice"
+},
+{
+    "fields": {
+        "display_name": "Signed up on Street"
+    },
+    "model": "lists.listtype",
+    "pk": "street"
+},
+{
+    "fields": {
+        "field17_display": "",
+        "field16_display": "Number of Times Called",
+        "field3_display": "Instalment Due",
+        "field9_display": "$Missed-Sept-Dec",
+        "field8_display": "#Missed-Sept-Dec",
+        "field15_display": "Last Called",
+        "field14_display": "Other Group",
+        "field5_display": "Pledge ID",
+        "field4_display": "Instalment",
+        "field11_display": "$Missed-2014",
+        "field19_display": "",
+        "field7_display": "Card Name",
+        "field6_display": "Card Type",
+        "field2_display": "Start Date",
+        "field13_display": "On List From",
+        "field12_display": "Status",
+        "field18_display": "",
+        "field10_display": "#Missed-2014",
+        "field1_display": "Frequency",
+        "field20_display": ""
+    },
+    "model": "lists.extramapping",
+    "pk": "badcc"
+},
+{
+    "fields": {
+        "field17_display": "",
+        "field16_display": "",
+        "field3_display": "Baz",
+        "field9_display": "",
+        "field8_display": "",
+        "field15_display": "",
+        "field14_display": "",
+        "field5_display": "",
+        "field4_display": "",
+        "field11_display": "",
+        "field19_display": "",
+        "field7_display": "",
+        "field6_display": "",
+        "field2_display": "Bar",
+        "field13_display": "",
+        "field12_display": "",
+        "field18_display": "",
+        "field10_display": "",
+        "field1_display": "Foo",
+        "field20_display": ""
+    },
+    "model": "lists.extramapping",
+    "pk": "nice"
+},
+{
+    "fields": {
+        "field17_display": "",
+        "field16_display": "",
+        "field3_display": "Baz",
+        "field9_display": "",
+        "field8_display": "",
+        "field15_display": "",
+        "field14_display": "",
+        "field5_display": "",
+        "field4_display": "",
+        "field11_display": "",
+        "field19_display": "",
+        "field7_display": "",
+        "field6_display": "",
+        "field2_display": "Bar",
+        "field13_display": "",
+        "field12_display": "",
+        "field18_display": "",
+        "field10_display": "",
+        "field1_display": "Foo",
+        "field20_display": ""
+    },
+    "model": "lists.extramapping",
+    "pk": "street"
+},
+{
+    "fields": {
+        "note2_display": "Procedural",
+        "note3_display": "",
+        "note1_display": "Rapport"
+    },
+    "model": "lists.notemapping",
+    "pk": "badcc"
+},
+{
+    "fields": {
+        "note2_display": "Procedural",
+        "note3_display": "Approach",
+        "note1_display": "Rapport"
+    },
+    "model": "lists.notemapping",
+    "pk": "nice"
+},
+{
+    "fields": {
+        "note2_display": "",
+        "note3_display": "",
+        "note1_display": "Procedural"
+    },
+    "model": "lists.notemapping",
+    "pk": "street"
+},
+{
+    "fields": {
+        "data4_addon": "$",
+        "data6_display": "",
+        "data8_display": "",
+        "data7_addon": "",
+        "data6_addon": "",
+        "data8_addon": "",
+        "data1_addon": "#",
+        "data2_addon": "dd/mm",
+        "data3_addon": "A",
+        "data7_display": "",
+        "data4_display": "Make Up Amount",
+        "data5_addon": "dd/mm/yyyy",
+        "data5_display": "Make Up Date",
+        "data1_display": "New Token",
+        "data2_display": "New Expiry",
+        "data3_display": "New Card Name"
+    },
+    "model": "lists.callmapping",
+    "pk": "badcc"
+},
+{
+    "fields": {
+        "data4_addon": "$",
+        "data6_display": "",
+        "data8_display": "",
+        "data7_addon": "",
+        "data6_addon": "",
+        "data8_addon": "",
+        "data1_addon": "#",
+        "data2_addon": "dd/mm",
+        "data3_addon": "A",
+        "data7_display": "",
+        "data4_display": "Make Up Amount",
+        "data5_addon": "dd/mm/yyyy",
+        "data5_display": "Make Up Date",
+        "data1_display": "New Token",
+        "data2_display": "New Expiry",
+        "data3_display": "New Card Name"
+    },
+    "model": "lists.callmapping",
+    "pk": "nice"
+},
+{
+    "fields": {
+        "data4_addon": "$",
+        "data6_display": "",
+        "data8_display": "",
+        "data7_addon": "",
+        "data6_addon": "",
+        "data8_addon": "",
+        "data1_addon": "#",
+        "data2_addon": "dd/mm",
+        "data3_addon": "A",
+        "data7_display": "",
+        "data4_display": "Make Up Amount",
+        "data5_addon": "dd/mm/yyyy",
+        "data5_display": "Make Up Date",
+        "data1_display": "New Token",
+        "data2_display": "New Expiry",
+        "data3_display": "New Card Name"
+    },
+    "model": "lists.callmapping",
+    "pk": "street"
+},
+{
+    "fields": {
+        "deactivated": false,
+        "display_name": "Success",
+        "list_type": "badcc"
+    },
+    "model": "lists.callresult",
+    "pk": 7
+},
+{
+    "fields": {
+        "deactivated": false,
+        "display_name": "No Answer",
+        "list_type": "badcc"
+    },
+    "model": "lists.callresult",
+    "pk": 8
+},
+{
+    "fields": {
+        "deactivated": false,
+        "display_name": "Don't call again",
+        "list_type": "badcc"
+    },
+    "model": "lists.callresult",
+    "pk": 9
+},
+{
+    "fields": {
+        "deactivated": false,
+        "display_name": "Success",
+        "list_type": "nice"
+    },
+    "model": "lists.callresult",
+    "pk": 10
+},
+{
+    "fields": {
+        "deactivated": false,
+        "display_name": "No Answer",
+        "list_type": "nice"
+    },
+    "model": "lists.callresult",
+    "pk": 11
+},
+{
+    "fields": {
+        "deactivated": false,
+        "display_name": "Success",
+        "list_type": "street"
+    },
+    "model": "lists.callresult",
+    "pk": 12
+},
+{
+    "fields": {
+        "deactivated": false,
+        "display_name": "No Answer",
+        "list_type": "street"
+    },
+    "model": "lists.callresult",
+    "pk": 13
+},
+{
+    "fields": {
+        "deactivated": false,
+        "display_name": "Left Message",
+        "list_type": "street"
+    },
+    "model": "lists.callresult",
+    "pk": 14
+}
+]
