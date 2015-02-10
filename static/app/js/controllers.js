@@ -48,11 +48,27 @@ ecAppControllers.controller('callCtrl',
       });
     };
 
+    $scope.getSystemNotes = function() {
+      Restangular.one('call_records/' + $scope.demographics.pk + '/sysnotes/')
+        .get().then(
+          function(systemnotes) {
+            $scope.systemnotes = systemnotes;
+      });
+    };
+
     $scope.getExtraInfo = function() {
       Restangular.one('call_records/' + $scope.demographics.pk + '/extra/')
         .get().then(
           function(extra) {
             $scope.extra = extra;
+      });
+    };
+
+    $scope.getCall = function() {
+      Restangular.one('call/' + $scope.demographics.call + '/')
+        .get().then(
+          function(call) {
+            $scope.call = call;
       });
     };
 
@@ -97,11 +113,58 @@ ecAppControllers.controller('callCtrl',
         });
     };
 
+    $scope.updateSysNotes = function(data) {
+      var id = data.call_record;
+      var notes = Restangular.one('call_records/' + id + '/sysnotes/');
+      notes.get().then(
+        function(recnotes) {
+          recnotes.note1 = data.note1;
+          recnotes.note2 = data.note2;
+          recnotes.note3 = data.note3;
+          recnotes.put({}, {"X-CSRFToken": csrf_token}).then(
+            function (response) {
+              console.log("System Notes updated.");
+              $scope.getSystemNotes();
+            }, function (response) {
+              console.log("Error with status code", response.status);
+            });
+        });
+    };
+
+    $scope.updateCall = function(data, button) {
+      var id = data.pk;
+      var call = Restangular.one('call/' + id + '/');
+      call.get().then(
+        function(callinfo) {
+          callinfo.data1 = data.data1;
+          callinfo.data2 = data.data2;
+          callinfo.data3 = data.data3;
+          callinfo.data4 = data.data4;
+          callinfo.data5 = data.data5;
+          callinfo.data6 = data.data6;
+          callinfo.data7 = data.data7;
+          callinfo.data8 = data.data8;
+          // callinfo.???? = button;
+
+          // FIXME:  the API does not support PUT yet
+          
+          // callinfo.put({}, {"X-CSRFToken": csrf_token}).then(
+          //   function (response) {
+          //     console.log("Call updated.");
+          //     $scope.getSystemNotes();
+          //   }, function (response) {
+          //     console.log("Error with status code", response.status);
+          //   });
+        });
+    };
+
     $scope.next = function() {
       $scope.getNextRecord()
         .then( function() {
           $scope.getUserNotes();
           $scope.getExtraInfo();
+          $scope.getSystemNotes();
+          $scope.getCall();
         });
     };
     $scope.next();
