@@ -64,6 +64,14 @@ ecAppControllers.controller('callCtrl',
       });
     };
 
+    $scope.getCall = function() {
+      Restangular.one('call/' + $scope.demographics.call + '/')
+        .get().then(
+          function(call) {
+            $scope.call = call;
+      });
+    };
+
     $scope.createNote = function(text) {
       var recordId = $scope.demographics.pk;
       var notes = Restangular.one('call_records', recordId).all('notes/');
@@ -123,11 +131,40 @@ ecAppControllers.controller('callCtrl',
         });
     };
 
+    $scope.updateCall = function(data, button) {
+      var id = data.pk;
+      var call = Restangular.one('call/' + id + '/');
+      call.get().then(
+        function(callinfo) {
+          callinfo.data1 = data.data1;
+          callinfo.data2 = data.data2;
+          callinfo.data3 = data.data3;
+          callinfo.data4 = data.data4;
+          callinfo.data5 = data.data5;
+          callinfo.data6 = data.data6;
+          callinfo.data7 = data.data7;
+          callinfo.data8 = data.data8;
+          // callinfo.???? = button;
+
+          // FIXME:  the API does not support PUT yet
+          
+          // callinfo.put({}, {"X-CSRFToken": csrf_token}).then(
+          //   function (response) {
+          //     console.log("Call updated.");
+          //     $scope.getSystemNotes();
+          //   }, function (response) {
+          //     console.log("Error with status code", response.status);
+          //   });
+        });
+    };
+
     $scope.next = function() {
       $scope.getNextRecord()
         .then( function() {
           $scope.getUserNotes();
           $scope.getExtraInfo();
+          $scope.getSystemNotes();
+          $scope.getCall();
         });
     };
     $scope.next();
