@@ -32,17 +32,22 @@ ecAppDirectives.directive('ecTelephone', function() {
     scope: {
       data: "=",
     },
-    template: '<div class="row" ng-if="data.tel_day">' +
-      '<em class="col-xs-3 item-heading">Tel (day)</em><span class="col-xs-9">{{data.tel_day}}</span>' +
+    template: 
+      '<div class="row" ng-if="data.tel_day">' +
+      '<em class="col-xs-3 item-heading">Tel (day)</em>' +
+      '<a href="callto:{{data.tel_day}}" class="col-xs-9">{{data.tel_day}}</a>' +
       '</div>' +
       '<div class="row" ng-if="data.tel_evening">' +
-      '<em class="col-xs-3 item-heading">Tel (evening)</em><span class="col-xs-9">{{data.tel_evening}}</span>' +
+      '<em class="col-xs-3 item-heading">Tel (evening)</em>' +
+      '<a href="callto:{{data.tel_evening}}" class="col-xs-9">{{data.tel_evening}}</a>' +
       '</div>' +
       '<div class="row" ng-if="data.tel_work">' +
-      '<em class="col-xs-3 item-heading">Tel (work)</em><span class="col-xs-9">{{data.tel_work}}</span>' +
+      '<em class="col-xs-3 item-heading">Tel (work)</em>' +
+      '<a href="callto:{{data.tel_work}}" class="col-xs-9">{{data.tel_work}}</a>' +
       '</div>' +
       '<div class="row" ng-if="data.tel_mobile">' +
-      '<em class="col-xs-3 item-heading">Tel (mobile)</em><span class="col-xs-9">{{data.tel_mobile}}</span>' +
+      '<em class="col-xs-3 item-heading">Tel (mobile)</em>' +
+      '<a href="callto:{{data.tel_mobile}}" class="col-xs-9">{{data.tel_mobile}}</a>' +
       '</div>'
   };
 });
