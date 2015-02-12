@@ -1,3 +1,5 @@
+import pytz
+
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import permissions
@@ -6,11 +8,14 @@ from django.http import Http404
 from django.db import transaction
 from django.db import OperationalError
 from django.contrib.auth.models import User
+from django.utils import timezone
+from django.conf import settings
 
 from easyCall.apps.call_records.models import CallRecord
 from easyCall.apps.call_records.models import QueueEntry
 from easyCall.apps.call_records.models import UserNote
 from easyCall.apps.call_records.models import Call
+from easyCall.apps.lists.models import CallResult
 from easyCall.apps.call_records.importer import populate_queue
 from easyCall.apps.call_records.serializers import CallRecordSerializer
 from easyCall.apps.call_records.serializers import UserNoteSerializer
@@ -151,9 +156,32 @@ class CallDetail(APIView):
     permission_classes = (permissions.IsAuthenticated,)
 
     def get(self, request, pk, format=None):
-        extra = self._get_object(pk)
-        serializer = CallSerializer(extra)
+        call = self._get_object(pk)
+        serializer = CallSerializer(call)
         return Response(serializer.data)
+
+    def put(self, request, pk, format=None):
+        timezone.activate(pytz.timezone(settings.TIME_ZONE))
+        call = self._get_object(pk)
+        data = request.data
+        result = self._get_result(data, call)
+        data['result'] = result.pk
+        data['end_time'] = timezone.now()
+        serializer = CallSerializer(call, data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def _get_result(self, data, call):
+        try:
+            result_in = data['result']
+            list_type = call.call_record.list_type
+            result = CallResult.objects.get(display_name=result_in,
+                                            list_type=list_type)
+            return result
+        except CallResult.DoesNotExist:
+            raise Http404
 
     def _get_object(self, pk):
         try:

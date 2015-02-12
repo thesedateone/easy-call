@@ -144,17 +144,15 @@ ecAppControllers.controller('callCtrl',
           callinfo.data6 = data.data6;
           callinfo.data7 = data.data7;
           callinfo.data8 = data.data8;
-          // callinfo.???? = button;
+          callinfo.result = button;
 
-          // FIXME:  the API does not support PUT yet
-          
-          // callinfo.put({}, {"X-CSRFToken": csrf_token}).then(
-          //   function (response) {
-          //     console.log("Call updated.");
-          //     $scope.getSystemNotes();
-          //   }, function (response) {
-          //     console.log("Error with status code", response.status);
-          //   });
+          callinfo.put({}, {"X-CSRFToken": csrf_token}).then(
+            function (response) {
+              console.log("Call updated.");
+              $scope.next();
+            }, function (response) {
+              console.log("Error with status code", response.status);
+            });
         });
     };
 
