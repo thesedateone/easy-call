@@ -124,6 +124,15 @@ class CallRecordDetail(APIView):
         serializer = CallRecordSerializer(record)
         return Response(serializer.data)
 
+    def put(self, request, pk, format=None):
+        record = self._get_object(pk)
+        data = request.data
+        serializer = CallRecordSerializer(record, data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
     def _get_object(self, pk):
         try:
             return CallRecord.objects.get(pk=pk)

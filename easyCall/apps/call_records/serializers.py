@@ -13,28 +13,7 @@ class CallRecordSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = CallRecord
-        fields = (
-            'pk',
-            'serial_number',
-            'name_prefix',
-            'name_first',
-            'name_middle',
-            'name_family',
-            'name_suffix',
-            'tel_day',
-            'tel_evening',
-            'tel_work',
-            'tel_mobile',
-            'address_1',
-            'address_2',
-            'address_3',
-            'suburb',
-            'city',
-            'postcode',
-            'do_not_mail_reason',
-            'date_of_birth',
-            'age',
-            'call',)
+        read_only_fields = ('list_type', 'serial_number', 'status')
 
 
 class CallRecordExtraSerializer(serializers.ModelSerializer):
