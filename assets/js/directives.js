@@ -2,87 +2,6 @@
 
 var ecAppDirectives = angular.module('ecAppDirectives', []);
 
-ecAppDirectives.directive('ecDemographics', function() {
-  return {
-    restrict: "A",
-    scope: {
-      data: "=",
-    },
-    template: '<div class="name">' +
-      '<p>' +
-      '<span ng-if="data.name_prefix"> {{data.name_prefix}}</span>' +
-      '<span ng-if="data.name_first"> {{data.name_first}}</span>' +
-      '<span ng-if="data.name_middle"> {{data.name_middle}}</span>' +
-      '<span ng-if="data.name_family"> {{data.name_family}}</span>' +
-      '<span ng-if="data.name_suffix"> - {{data.name_suffix}}</span>' +
-      // '<span> ({{data.serial_number}})</span>' +
-      '</p>' +
-      '</div>' +
-      '<div class="row">' +
-      '<em class="col-xs-3 item-heading">DOB (age)</em>' +
-      '<span class="col-xs-9">{{data.date_of_birth}} ({{data.age}})</span>' +
-      '</div>'
-  };
-});
-
-
-ecAppDirectives.directive('ecTelephone', function() {
-  return {
-    restrict: "A",
-    scope: {
-      data: "=",
-    },
-    template: 
-      '<div class="row" ng-if="data.tel_day">' +
-      '<em class="col-xs-3 item-heading">Tel (day)</em>' +
-      '<a href="callto:{{data.tel_day}}" class="col-xs-9">{{data.tel_day}}</a>' +
-      '</div>' +
-      '<div class="row" ng-if="data.tel_evening">' +
-      '<em class="col-xs-3 item-heading">Tel (evening)</em>' +
-      '<a href="callto:{{data.tel_evening}}" class="col-xs-9">{{data.tel_evening}}</a>' +
-      '</div>' +
-      '<div class="row" ng-if="data.tel_work">' +
-      '<em class="col-xs-3 item-heading">Tel (work)</em>' +
-      '<a href="callto:{{data.tel_work}}" class="col-xs-9">{{data.tel_work}}</a>' +
-      '</div>' +
-      '<div class="row" ng-if="data.tel_mobile">' +
-      '<em class="col-xs-3 item-heading">Tel (mobile)</em>' +
-      '<a href="callto:{{data.tel_mobile}}" class="col-xs-9">{{data.tel_mobile}}</a>' +
-      '</div>'
-  };
-});
-
-
-ecAppDirectives.directive('ecAddress', function() {
-  return {
-    restrict: "A",
-    scope: {
-      data: "=",
-    },
-    template: '<div class="row" ng-if="data.address_1">' +
-      '<em class="col-xs-3 item-heading">Address 1</em><span class="col-xs-9">{{data.address_1}}</span>' +
-      '</div>' +
-      '<div class="row" ng-if="data.address_2">' +
-      '<em class="col-xs-3 item-heading">Address 2</em><span class="col-xs-9">{{data.address_2}}</span>' +
-      '</div>' +
-      '<div class="row" ng-if="data.address_3">' +
-      '<em class="col-xs-3 item-heading">Address 3</em><span class="col-xs-9">{{data.address_3}}</span>' +
-      '</div>' +
-      '<div class="row" ng-if="data.suburb">' +
-      '<em class="col-xs-3 item-heading">Suburb</em><span class="col-xs-9">{{data.suburb}}</span>' +
-      '</div>' +
-      '<div class="row" ng-if="data.city">' +
-      '<em class="col-xs-3 item-heading">Town/City</em><span class="col-xs-9">{{data.city}}</span>' +
-      '</div>' +
-      '<div class="row" ng-if="data.postcode">' +
-      '<em class="col-xs-3 item-heading">Postcode</em><span class="col-xs-9">{{data.postcode}}</span>' +
-      '</div>' +
-      '<div class="row" ng-if="data.do_not_mail_reason">' +
-      '<em class="col-xs-3 item-heading">Do Not Mail Reason</em><span class="col-xs-9">{{data.do_not_mail_reason}}</span>' +
-      '</div>'
-  };
-});
-
 
 ecAppDirectives.directive('ecExtraList', function() {
   return {
@@ -288,7 +207,7 @@ ecAppDirectives.directive('sysnote', function () {
         },
         template: '  <span class="badge">{{badge}}</span>' +
             '  <h4 class="list-group-item-heading">{{header}}</h4>' +
-            '  <span ng-hide="editing">{{text}}</span>' +
+            '  <span class="note-text" ng-hide="editing">{{text}}</span>' +
             '  <textarea ng-show="editing" rows="4" ng-model="text"' +
             '            class="form-control" ></textarea>',
             
@@ -409,3 +328,245 @@ ecAppDirectives.directive('ecResultInput', function() {
     '</div>'
   };
 });
+
+
+/**************************************
+ *  Results Demographics Section
+ **************************************/
+
+
+ecAppDirectives.directive('ecDemographicsSection', function() {
+  return {
+    restrict: "E",
+    scope: {
+      data: "=",
+      updatefunc: "&",
+    },
+    template:
+      '<div class=row>' +
+      '  <div class="name col-xs-10">' +
+      '    <span>{{data.name_prefix}}</span>' +
+      '    <span>{{data.name_first}}</span>' +
+      '    <span>{{data.name_middle}}</span>' +
+      '    <span>{{data.name_family}}</span>' +
+      '    <span>{{data.name_suffix}}</span>' +
+      '  </div>' +
+      '  <button type="button" ng-click="edit()"' +
+      '          class="btn btn-default btn-sm pull-right edit">' +
+      '    <span ng-class="glyphclass"></span>' +
+      '  </button>' +
+      '</div>' +
+      '<div class="edit-mode" ng-show="editing">' +
+      ' <ec-name-edit data="data"></ec-name-edit>' +
+      ' <ec-demo-edit data="data"></ec-demo-edit>' +
+      '</div>' +
+      '<div class="view-mode" ng-hide="editing">' +
+      ' <ec-demo-view data="data"></ec-demo-edit>' +
+      '</div>',
+    link: function (scope, element, attrs) {
+      scope.editing = false;
+      scope.glyphclass = 'glyphicon glyphicon-edit';
+      scope.edit = function () {
+        if (scope.editing) {
+          scope.editing = false;
+          scope.glyphclass = 'glyphicon glyphicon-edit';
+          scope.updatefunc({'data': scope.data});
+        } else {
+          scope.editing = true;
+          scope.glyphclass = 'glyphicon glyphicon-save';
+        }
+      };
+    }
+  };
+});
+
+
+ecAppDirectives.directive('ecDemoView', function() {
+  return {
+    restrict: "E",
+    scope: {
+      data: "=",
+    },
+    template: 
+      '<div class="demo-set">' +
+      '  <ec-pair label="Serial Number"' +
+      '           data="data.serial_number"></ec-pair>' +
+      '  <ec-pair label="DOB"' +
+      '           data="data.date_of_birth"></ec-pair>' +
+      '  <ec-pair label="Age"' +
+      '           data="data.age"></ec-pair>' +
+      '</div>' +
+      '<div class="demo-set">' +
+      '  <ec-tel-pair label="Tel (day)" ng-if="data.tel_day"' +
+      '               data="data.tel_day"></ec-tel-pair>' +
+      '  <ec-tel-pair label="Tel (evening)" ng-if="data.tel_evening"' +
+      '               data="data.tel_evening"></ec-tel-pair>' +
+      '  <ec-tel-pair label="Tel (work)" ng-if="data.tel_work"' +
+      '               data="data.tel_work"></ec-tel-pair>' +
+      '  <ec-tel-pair label="Tel (mob)" ng-if="data.tel_mobile"' +
+      '               data="data.tel_mobile"></ec-tel-pair>' +
+      '</div>' +
+      '<div class="demo-set">' +
+      '  <ec-pair label="Address" ng-if="data.address_1"' +
+      '           data="data.address_1"></ec-pair>' +
+      '  <ec-pair label="Address(2)" ng-if="data.address_2"' +
+      '           data="data.address_2"></ec-pair>' +
+      '  <ec-pair label="Address(3)" ng-if="data.address_3"' +
+      '           data="data.address_3"></ec-pair>' +
+      '  <ec-pair label="Suburb" ng-if="data.suburb"' +
+      '           data="data.suburb"></ec-pair>' +
+      '  <ec-pair label="City" ng-if="data.city"' +
+      '           data="data.city"></ec-pair>' +
+      '  <ec-pair label="Postcode" ng-if="data.postcode"' +
+      '           data="data.postcode"></ec-pair>' +
+      '  <ec-pair label="Do Not Mail Reason" ng-if="data.do_not_mail_reason"' +
+      '           data="data.do_not_mail_reason"></ec-pair>' +
+      '</div>'
+  };
+});
+
+
+ecAppDirectives.directive('ecDemoEdit', function() {
+  return {
+    restrict: "E",
+    scope: {
+      data: "=",
+    },
+    template: 
+      '<ec-textfield id="id_serial_number" label="Serial Number"' +
+      '              data="data.serial_number" readonly="true">' +
+      '</ec-textfield>' +
+      '<ec-textfield id="id_date_of_birth" label="DOB"' +
+      '              data="data.date_of_birth"></ec-textfield>' +
+      '<ec-textfield id="id_age" label="Age"' +
+      '              data="data.age"></ec-textfield>' +
+      '<ec-textfield id="id_tel_day" label="Tel (day)"' +
+      '              data="data.tel_day"></ec-textfield>' +
+      '<ec-textfield id="id_tel_evening" label="Tel (evening)"' +
+      '              data="data.tel_evening"></ec-textfield>' +
+      '<ec-textfield id="id_tel_work" label="Tel (work)"' +
+      '              data="data.tel_work"></ec-textfield>' +
+      '<ec-textfield id="id_tel_mobile" label="Tel (mob)"' +
+      '              data="data.tel_mobile"></ec-textfield>' +
+
+      '<ec-textfield id="id_address_1" label="Address"' +
+      '              data="data.address_1"></ec-textfield>' +
+      '<ec-textfield id="id_address_2" label="Address(2)"' +
+      '              data="data.address_2"></ec-textfield>' +
+      '<ec-textfield id="id_address_3" label="Address(3)"' +
+      '              data="data.address_3"></ec-textfield>' +
+      '<ec-textfield id="id_suburb" label="Suburb"' +
+      '              data="data.suburb"></ec-textfield>' +
+      '<ec-textfield id="id_city" label="City"' +
+      '              data="data.city"></ec-textfield>' +
+      '<ec-textfield id="id_postcode" label="Postcode"' +
+      '              data="data.postcode"></ec-textfield>' +
+      '<ec-textarea id="id_do_not_mail_reason" label="Do Not Mail Reason"' +
+      '             data="data.do_not_mail_reason"></ec-textarea>'
+  };
+});
+
+
+ecAppDirectives.directive('ecNameEdit', function() {
+  return {
+    restrict: "E",
+    scope: {
+      data: "=",
+    },
+    template: 
+      '<ec-textfield id="id_name_prefix" label="Name Prefix"' +
+      '           data="data.name_prefix"></ec-textfield>' +
+      '<ec-textfield id="id_name_first" label="First Name"' +
+      '           data="data.name_first"></ec-textfield>' +
+      '<ec-textfield id="id_name_middle" label="Middle Name or Initials"' +
+      '           data="data.name_middle"></ec-textfield>' +
+      '<ec-textfield id="id_name_family" label="Family Name"' +
+      '           data="data.name_family"></ec-textfield>' +
+      '<ec-textfield id="id_name_suffix" label="Name Suffix"' +
+      '           data="data.name_suffix"></ec-textfield>'
+  };
+});
+
+
+ecAppDirectives.directive('ecPair', function() {
+  return {
+    restrict: "E",
+    scope: {
+      label: "@",
+      data: "=",
+    },
+    template: 
+      '<div class="row pair">' +
+      '  <span class="col-xs-4 title">{{label}}</span>' +
+      '  <span class="col-xs-8 data">{{data}}</span>' +
+      '</div>'
+  };
+});
+
+
+ecAppDirectives.directive('ecTelPair', function() {
+  return {
+    restrict: "E",
+    scope: {
+      label: "@",
+      data: "=",
+    },
+    template: 
+      '<div class="row pair">' +
+      '  <span class="col-xs-4 title">{{label}}</span>' +
+      '  <a href="callto:{{data}}" class="col-xs-8 data">{{data}}</a>' +
+      '</div>'
+  };
+});
+
+
+ecAppDirectives.directive('ecTextfield', function() {
+  return {
+    restrict: "E",
+    scope: {
+      id: "@",
+      label: "@",
+      data: "=",
+      readonly: "@"
+    },
+    template: 
+      '<div class="form-group">' +
+      '  <label for="{{id}}" class="title">{{label}}</label>' +
+      '  <input type="text" class="form-control" id="{{id}}"' +
+      '         ng-model="data">' +
+      '</div>',
+    link: function (scope, element, attrs) {
+      var input = angular.element(element.find('input'));
+      if (scope.readonly === 'true') {
+        input.attr('readonly', 'readonly');
+      };
+    }
+  };
+});
+
+
+ecAppDirectives.directive('ecTextarea', function() {
+  return {
+    restrict: "E",
+    scope: {
+      id: "@",
+      label: "@",
+      data: "=",
+      readonly: "@"
+    },
+    template: 
+      '<div class="form-group">' +
+      '  <label for="{{id}}" class="title">{{label}}</label>' +
+      '  <textarea rows="3" class="form-control" id="{{id}}"' +
+      '         ng-model="data"></textarea>' +
+      '</div>',
+    link: function (scope, element, attrs) {
+      var input = angular.element(element.find('input'));
+      if (scope.readonly === 'true') {
+        input.attr('readonly', 'readonly');
+      };
+    }
+  };
+});
+
+

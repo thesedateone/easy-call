@@ -8,10 +8,10 @@
 
     <div class="col-xs-5 pane-left">
 
-      <div class="container-fluid">      
-        <div ec-demographics data="demographics"></div>
-        <div ec-telephone data="demographics" class="telephone-data"></div>
-        <div ec-address data="demographics" class="address-data"></div>
+      <div class="call-demographics">
+        <ec-demographics-section data="demographics"
+                                 updatefunc="updateRecord(data)">
+        </ec-demographics-section>
       </div>
 
       <div class="call-results">
@@ -22,8 +22,10 @@
   
     </div>
 
+
     <div class="col-xs-1">
     </div>
+   
    
     <div class="col-xs-6 pane-right">
 

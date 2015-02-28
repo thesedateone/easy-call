@@ -41,7 +41,7 @@ ecAppControllers.controller('callCtrl',
     };
 
     $scope.getUserNotes = function() {
-      Restangular.one('call_records/' + $scope.demographics.pk + '/notes/')
+      Restangular.one('call_records/' + $scope.demographics.id + '/notes/')
         .get().then(
           function(usernotes) {
             $scope.usernotes = usernotes;
@@ -49,7 +49,7 @@ ecAppControllers.controller('callCtrl',
     };
 
     $scope.getSystemNotes = function() {
-      Restangular.one('call_records/' + $scope.demographics.pk + '/sysnotes/')
+      Restangular.one('call_records/' + $scope.demographics.id + '/sysnotes/')
         .get().then(
           function(systemnotes) {
             $scope.systemnotes = systemnotes;
@@ -57,7 +57,7 @@ ecAppControllers.controller('callCtrl',
     };
 
     $scope.getExtraInfo = function() {
-      Restangular.one('call_records/' + $scope.demographics.pk + '/extra/')
+      Restangular.one('call_records/' + $scope.demographics.id + '/extra/')
         .get().then(
           function(extra) {
             $scope.extra = extra;
@@ -73,7 +73,7 @@ ecAppControllers.controller('callCtrl',
     };
 
     $scope.createNote = function(text) {
-      var recordId = $scope.demographics.pk;
+      var recordId = $scope.demographics.id;
       var notes = Restangular.one('call_records', recordId).all('notes/');
       
       var newNote = {text: text};
@@ -155,6 +155,39 @@ ecAppControllers.controller('callCtrl',
             });
         });
     };
+
+    $scope.updateRecord = function(data) {
+
+      var record = Restangular.one('call_records');
+      record.id = data.id;
+      record.get().then(
+        function(recordinfo) {
+          recordinfo.name_prefix = data.name_prefix
+          recordinfo.name_middle = data.name_middle
+          recordinfo.name_family = data.name_family
+          recordinfo.name_suffix = data.name_suffix
+          recordinfo.tel_day = data.tel_day
+          recordinfo.tel_evening = data.tel_evening
+          recordinfo.tel_work = data.tel_work
+          recordinfo.tel_mobile = data.tel_mobile
+          recordinfo.address_1 = data.address_1
+          recordinfo.address_2 = data.address_2
+          recordinfo.address_3 = data.address_3
+          recordinfo.suburb = data.suburb
+          recordinfo.city = data.city
+          recordinfo.postcode = data.postcode
+          recordinfo.do_not_mail_reason = data.do_not_mail_reason
+          recordinfo.date_of_birth = data.date_of_birth
+          recordinfo.age = data.age
+          recordinfo.put({}, {"X-CSRFToken": csrf_token}).then(
+            function (response) {
+              console.log("Note updated.");
+            }, function (response) {
+              console.log("Error with status code", response.status);
+            });
+        });
+    };
+
 
     $scope.next = function() {
       $scope.getNextRecord()
