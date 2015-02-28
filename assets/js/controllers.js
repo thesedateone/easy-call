@@ -41,7 +41,7 @@ ecAppControllers.controller('callCtrl',
     };
 
     $scope.getUserNotes = function() {
-      Restangular.one('call_records/' + $scope.demographics.pk + '/notes/')
+      Restangular.one('call_records/' + $scope.demographics.id + '/notes/')
         .get().then(
           function(usernotes) {
             $scope.usernotes = usernotes;
@@ -49,7 +49,7 @@ ecAppControllers.controller('callCtrl',
     };
 
     $scope.getSystemNotes = function() {
-      Restangular.one('call_records/' + $scope.demographics.pk + '/sysnotes/')
+      Restangular.one('call_records/' + $scope.demographics.id + '/sysnotes/')
         .get().then(
           function(systemnotes) {
             $scope.systemnotes = systemnotes;
@@ -57,7 +57,7 @@ ecAppControllers.controller('callCtrl',
     };
 
     $scope.getExtraInfo = function() {
-      Restangular.one('call_records/' + $scope.demographics.pk + '/extra/')
+      Restangular.one('call_records/' + $scope.demographics.id + '/extra/')
         .get().then(
           function(extra) {
             $scope.extra = extra;
@@ -73,7 +73,7 @@ ecAppControllers.controller('callCtrl',
     };
 
     $scope.createNote = function(text) {
-      var recordId = $scope.demographics.pk;
+      var recordId = $scope.demographics.id;
       var notes = Restangular.one('call_records', recordId).all('notes/');
       
       var newNote = {text: text};
