@@ -40,6 +40,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     # external dependencies
     'rest_framework',
+    'widget_tweaks',
     # project apps
     'easyCall.apps.lists',
     'easyCall.apps.call_records',
