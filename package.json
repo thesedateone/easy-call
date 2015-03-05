@@ -56,6 +56,7 @@
     "db:reset:dev": "rm -rf db.sqlite3",
     "db:reset:stage": "heroku pg:reset DATABASE_URL --confirm intense-island-9839",
     "db:dumpdata:dev": "venv/bin/python manage.py dumpdata lists --indent=4 --natural-foreign > dump.json",
-    "db:loaddata:dev": "venv/bin/python manage.py loaddata dump.json"
+    "db:loaddata:dev": "venv/bin/python manage.py loaddata dump.json",
+    "db:loadgroups:dev": "venv/bin/python manage.py loaddata groups.json"
   }
 }
