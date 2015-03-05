@@ -11,7 +11,6 @@ from easyCall.apps.call_records.models import QueueEntry
 from easyCall.apps.call_records.models import ExtraInformation
 from easyCall.apps.call_records.models import SystemNotes
 
-# TODO:  this needs to be made atomic
 def import_csv(file_name, list_type):
     with open(file_name, 'rb') as csvfile:
         recordreader = csv.DictReader(csvfile, delimiter=',', quotechar='"')

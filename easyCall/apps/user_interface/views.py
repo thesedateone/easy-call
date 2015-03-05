@@ -2,6 +2,7 @@ import os
 
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
+from django.db import transaction
 
 from easyCall.apps.user_interface.forms import UploadFileForm
 from easyCall.apps.lists.models import ListType
@@ -80,7 +81,8 @@ def handle_uploaded_file(the_file, list_type):
     error = ''
 
     try:
-        import_csv('/tmp/file.csv', listtype)
+        with transaction.atomic():
+            import_csv('/tmp/file.csv', listtype)
     except KeyError as e:
             error = "Missing key: {}".format(e)
 
