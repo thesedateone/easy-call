@@ -41,9 +41,9 @@ INSTALLED_APPS = (
     # external dependencies
     'rest_framework',
     # project apps
-    'easyCall.apps.pledges',
     'easyCall.apps.lists',
     'easyCall.apps.call_records',
+    'easyCall.apps.user_interface',
 )
 
 MIDDLEWARE_CLASSES = (

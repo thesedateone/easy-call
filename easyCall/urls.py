@@ -1,11 +1,10 @@
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
-from easyCall.views import IndexView
 
 urlpatterns = patterns(
     '',
-    (r'^$', IndexView.as_view()),
-
+    url(r'^', include('easyCall.apps.user_interface.urls',
+                      namespace='ui')),
     url(r'^', include('easyCall.apps.lists.urls')),
     url(r'^', include('easyCall.apps.call_records.urls')),
 
