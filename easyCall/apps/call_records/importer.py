@@ -10,6 +10,20 @@ from easyCall.apps.call_records.models import CallRecord
 from easyCall.apps.call_records.models import QueueEntry
 from easyCall.apps.call_records.models import ExtraInformation
 from easyCall.apps.call_records.models import SystemNotes
+from easyCall.apps.lists.models import CsvColumn
+
+
+def import_headings(file_name, list_type):
+    CsvColumn.objects.filter(list_type=list_type).delete()
+    with open(file_name, 'rb') as csvfile:
+        recordreader = csv.DictReader(csvfile, delimiter=',', quotechar='"')
+        for field in recordreader.fieldnames:
+            col = CsvColumn(
+                list_type=list_type,
+                column_name=field
+            )
+            col.save()
+
 
 def import_csv(file_name, list_type):
     with open(file_name, 'rb') as csvfile:

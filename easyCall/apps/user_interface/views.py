@@ -3,10 +3,11 @@ import os
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.db import transaction
+from django.db.models import ProtectedError
 
 from easyCall.apps.user_interface.forms import UploadFileForm
 from easyCall.apps.lists.models import ListType
-from easyCall.apps.call_records.importer import import_csv
+from easyCall.apps.call_records.importer import import_csv, import_headings
 
 @login_required
 def index(request):
@@ -55,7 +56,11 @@ def admin(request):
         if form.is_valid():
             list_type = request.POST['list_type']
             infile = request.FILES['file']
-            error = handle_uploaded_file(infile, list_type)
+            just_headings = False
+            if 'import_only_headings' in request.POST:
+                just_headings = True
+            error = handle_uploaded_file(infile, list_type, just_headings)
+
             if error:
                 form.add_error(field=None, error=error)
             else:
@@ -72,7 +77,7 @@ def admin(request):
     return render(request, 'user_interface/admin.html', context)
 
 
-def handle_uploaded_file(the_file, list_type):
+def handle_uploaded_file(the_file, list_type, just_headings):
     with open('/tmp/file.csv', 'w+b') as destination:
         for chunk in the_file.chunks():
             destination.write(chunk)
@@ -82,12 +87,14 @@ def handle_uploaded_file(the_file, list_type):
 
     try:
         with transaction.atomic():
-            import_csv('/tmp/file.csv', listtype)
+            if just_headings:
+                import_headings('/tmp/file.csv', listtype)
+            else:
+                import_csv('/tmp/file.csv', listtype)
     except KeyError as e:
-            error = "Missing key: {}".format(e)
-
-    print("the_file: {}".format(the_file.name))
-    print("list: {}".format(listtype))
+        error = "Missing key: {}".format(e)
+    except ProtectedError as e:
+        error = "You cannot update the column headings for a type while the current ones are in use"
 
     os.unlink('/tmp/file.csv')
     return error
