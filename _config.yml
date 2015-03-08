@@ -1,12 +1,14 @@
 # Site settings
 title: Easy Call
 description: > # this means to ignore newlines until "baseurl:"
-  Write an awesome description for your new site here. You can edit this
-  line in _config.yml. It will appear in your document head meta (for
-  Google search results) and in your feed.xml site description.
-baseurl: "/easy-call/"
+  Easy Call is a simple web based app for streamlining your outbound call centre.
+  This is the place where you can get updates, read documentation and find contact information
+  if you use or administer an install of Easy Call.  The Github repository is the place to
+  contribute to the project directly.
+baseurl: "/easy-call"
 url: "http://thesedateone.github.io"
-github_username:  thesedateone
+github_username:  thesedateone/easy-call
+twitter_username: "@jacquesbeukes"
 
 # Build settings
 markdown: kramdown

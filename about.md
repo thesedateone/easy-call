@@ -4,8 +4,9 @@ title: About
 permalink: /about/
 ---
 
-This is the base Jekyll theme. You can find out more info about customizing your Jekyll theme, as well as basic Jekyll usage documentation at [jekyllrb.com](http://jekyllrb.com/)
+Thanks for your interest in the project!
 
-You can find the source code for the Jekyll new theme at: [github.com/jglovier/jekyll-new](https://github.com/jglovier/jekyll-new)
+Head on over to the [Github repo][repo] and it's [wiki][wiki] if you need information beyond what this site has to offer.
 
-You can find the source code for Jekyll at [github.com/jekyll/jekyll](https://github.com/jekyll/jekyll)
+[repo]:   https://github.com/thesedateone/easy-call
+[wiki]:   https://github.com/thesedateone/easy-call/wiki

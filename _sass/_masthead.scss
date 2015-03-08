@@ -1,0 +1,22 @@
+.main-masthead {
+  background-color: $masthead-background;
+  -webkit-box-shadow: inset 0 -2px 5px rgba(0,0,0,.1);
+          box-shadow: inset 0 -2px 5px rgba(0,0,0,.1);
+}
+
+/* Nav links */
+.main-nav-item {
+  position: relative;
+  display: inline-block;
+  padding: 10px;
+  font-weight: 500;
+  color: $masthead-color;
+}
+.main-nav-item:visited {
+  color: $masthead-color;
+}
+.main-nav-item:hover,
+.main-nav-item:focus {
+  color: $masthead-color-hover;
+  text-decoration: none;
+}

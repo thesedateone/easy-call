@@ -1,0 +1,21 @@
+---
+layout: blog
+title: Easy Call Blog
+permalink: /blog/
+---
+
+{% for post in site.posts offset:0 limit:5 %}
+  <div class="blog-post">
+    <h2 class="blog-post-title">
+      <a href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
+    </h2>
+    <p class="blog-post-meta">
+    	{{ post.date | date: "%d %b %Y" }}
+    	{% if post.author %} • {{ post.author }}{% endif %}
+    </p>
+    {{ post.excerpt }}
+  </div>
+{% endfor %}
+
+
+

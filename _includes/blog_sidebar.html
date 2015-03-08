@@ -1,0 +1,15 @@
+<div class="sidebar-module sidebar-module-inset">
+  <h4>About</h4>
+  <p>This should be quite a low volume blog.  Subscribe if you are using the software and want to be notified when a new version is released.</p>
+  <p><a href="{{ "/feed.xml" | prepend: site.baseurl }}">RSS feed</a></p>
+</div>
+<div class="sidebar-module">
+</div>
+<div class="sidebar-module">
+  <h4>Archives</h4>
+  <ol class="list-unstyled">
+    {% for post in site.posts %}
+    <li><a href="{{ post.url | prepend: site.baseurl }}">{{ post.date | date: "%d %b %Y" }} - {{ post.title }}</a></li>
+    {% endfor %}
+  </ol>
+</div>

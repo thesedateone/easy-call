@@ -1,0 +1,13 @@
+---
+layout: post
+title:  "Welcome!"
+date:   2015-03-08 15:16:00
+author: Jacques
+---
+
+Welcome to the brand new documentation site the Easy Call.  There is not a lot of content at the moment, but having the framework in place should make that easy to address in the near future.
+
+If you found this page you probably know about, or want to know about, the [Github repo][repo] and it's [wiki][wiki].
+
+[repo]:   https://github.com/thesedateone/easy-call
+[wiki]:   https://github.com/thesedateone/easy-call/wiki
