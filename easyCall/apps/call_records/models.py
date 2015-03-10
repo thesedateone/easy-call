@@ -43,6 +43,7 @@ class CallRecord(models.Model):
     status = models.CharField(max_length=2,
                               choices=STATUS_CHOICES,
                               default=NEW)
+    added = models.DateTimeField(auto_now_add=True)
 
     def get_current_call(self):
         call = self.results.first()
