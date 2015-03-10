@@ -87,7 +87,7 @@ def create_main_record(list_type, row):
     do_not_mail_reason = ''
     if list_type.demographicsmapping.do_not_mail_reason_source:
         do_not_mail_reason = row.get(list_type.demographicsmapping.do_not_mail_reason_source.column_name, '')
-    date_of_birth = ''
+    date_of_birth = None
     if list_type.demographicsmapping.date_of_birth_source:
         date_of_birth = row.get(list_type.demographicsmapping.date_of_birth_source.column_name, '')
     age = ''
@@ -99,11 +99,16 @@ def create_main_record(list_type, row):
         serial_number=serial_number,
         name_prefix=name_prefix,
         name_first=name_first,
+        name_middle=name_middle,
         name_family=name_family,
+        name_suffix=name_suffix,
         tel_day=tel_day,
         tel_evening=tel_evening,
+        tel_work=tel_work,
         tel_mobile=tel_mobile,
         address_1=address_1,
+        address_2=address_2,
+        address_3=address_3,
         suburb=suburb,
         city=city,
         postcode=postcode,

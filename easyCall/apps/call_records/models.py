@@ -29,7 +29,7 @@ class CallRecord(models.Model):
     postcode = models.CharField(max_length=20, blank=True)
     do_not_mail_reason = models.CharField(max_length=255, blank=True)
 
-    date_of_birth = models.DateField(blank=True)
+    date_of_birth = models.DateField(blank=True, null=True)
     age = models.CharField(max_length=20, blank=True)
 
     NEW = 'nw'
