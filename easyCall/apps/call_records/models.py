@@ -8,7 +8,7 @@ from easyCall.apps.lists.models import ListType, CallResult
 
 class CallRecord(models.Model):
     list_type = models.ForeignKey(ListType, related_name='records')
-    serial_number = models.CharField(max_length=20)  # TODO: should not be required
+    serial_number = models.CharField(max_length=20)
 
     name_prefix = models.CharField(max_length=20, blank=True)
     name_first = models.CharField(max_length=255, blank=True)
@@ -29,7 +29,7 @@ class CallRecord(models.Model):
     postcode = models.CharField(max_length=20, blank=True)
     do_not_mail_reason = models.CharField(max_length=255, blank=True)
 
-    date_of_birth = models.DateField(blank=True)
+    date_of_birth = models.DateField(blank=True, null=True)
     age = models.CharField(max_length=20, blank=True)
 
     NEW = 'nw'
@@ -43,6 +43,7 @@ class CallRecord(models.Model):
     status = models.CharField(max_length=2,
                               choices=STATUS_CHOICES,
                               default=NEW)
+    added = models.DateTimeField(auto_now_add=True)
 
     def get_current_call(self):
         call = self.results.first()

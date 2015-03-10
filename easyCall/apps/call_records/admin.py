@@ -9,6 +9,8 @@ class UserInline(admin.TabularInline):
 
 class CallRecordAdmin(admin.ModelAdmin):
     inlines = [UserInline]
+    list_display = ('serial_number', 'list_type', 'status', 'added')
+    list_filter = ('list_type', 'status', 'added')
 
 
 admin.site.register(CallRecord, CallRecordAdmin)

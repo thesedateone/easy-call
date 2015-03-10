@@ -40,10 +40,11 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     # external dependencies
     'rest_framework',
+    'widget_tweaks',
     # project apps
-    'easyCall.apps.pledges',
     'easyCall.apps.lists',
     'easyCall.apps.call_records',
+    'easyCall.apps.user_interface',
 )
 
 MIDDLEWARE_CLASSES = (

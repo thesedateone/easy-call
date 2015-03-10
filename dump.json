@@ -1,266 +1,727 @@
 [
 {
     "fields": {
-        "display_name": "Credit Card Errors"
+        "display_name": "Has all the fields"
     },
     "model": "lists.listtype",
-    "pk": "badcc"
+    "pk": "allthings"
 },
 {
     "fields": {
-        "display_name": "Long Term Donors to upsell"
+        "postcode_source": 29,
+        "name_prefix_source": 15,
+        "name_suffix_source": 19,
+        "address_1_source": 24,
+        "tel_mobile_source": 23,
+        "serial_number_source": 14,
+        "address_2_source": 25,
+        "suburb_source": 27,
+        "do_not_mail_reason_source": 30,
+        "name_middle_source": 17,
+        "tel_evening_source": 21,
+        "tel_day_source": 20,
+        "tel_work_source": 22,
+        "address_3_source": 26,
+        "city_source": 28,
+        "age_source": 32,
+        "date_of_birth_source": 31,
+        "name_first_source": 16,
+        "name_family_source": 18
     },
-    "model": "lists.listtype",
-    "pk": "nice"
+    "model": "lists.demographicsmapping",
+    "pk": "allthings"
 },
 {
     "fields": {
-        "display_name": "Signed up on Street"
-    },
-    "model": "lists.listtype",
-    "pk": "street"
-},
-{
-    "fields": {
-        "field17_display": "",
-        "field16_display": "Number of Times Called",
-        "field3_display": "Instalment Due",
-        "field9_display": "$Missed-Sept-Dec",
-        "field8_display": "#Missed-Sept-Dec",
-        "field15_display": "Last Called",
-        "field14_display": "Other Group",
-        "field5_display": "Pledge ID",
-        "field4_display": "Instalment",
-        "field11_display": "$Missed-2014",
-        "field19_display": "",
-        "field7_display": "Card Name",
-        "field6_display": "Card Type",
-        "field2_display": "Start Date",
-        "field13_display": "On List From",
-        "field12_display": "Status",
-        "field18_display": "",
-        "field10_display": "#Missed-2014",
-        "field1_display": "Frequency",
-        "field20_display": ""
-    },
-    "model": "lists.extramapping",
-    "pk": "badcc"
-},
-{
-    "fields": {
-        "field17_display": "",
-        "field16_display": "",
-        "field3_display": "Baz",
-        "field9_display": "",
-        "field8_display": "",
-        "field15_display": "",
-        "field14_display": "",
-        "field5_display": "",
-        "field4_display": "",
-        "field11_display": "",
-        "field19_display": "",
-        "field7_display": "",
-        "field6_display": "",
-        "field2_display": "Bar",
-        "field13_display": "",
-        "field12_display": "",
-        "field18_display": "",
-        "field10_display": "",
-        "field1_display": "Foo",
-        "field20_display": ""
-    },
-    "model": "lists.extramapping",
-    "pk": "nice"
-},
-{
-    "fields": {
-        "field17_display": "",
-        "field16_display": "",
-        "field3_display": "Baz",
-        "field9_display": "",
-        "field8_display": "",
-        "field15_display": "",
-        "field14_display": "",
-        "field5_display": "",
-        "field4_display": "",
-        "field11_display": "",
-        "field19_display": "",
-        "field7_display": "",
-        "field6_display": "",
-        "field2_display": "Bar",
-        "field13_display": "",
-        "field12_display": "",
-        "field18_display": "",
-        "field10_display": "",
-        "field1_display": "Foo",
-        "field20_display": ""
-    },
-    "model": "lists.extramapping",
-    "pk": "street"
-},
-{
-    "fields": {
-        "note2_display": "Procedural",
-        "note3_display": "",
-        "note1_display": "Rapport"
-    },
-    "model": "lists.notemapping",
-    "pk": "badcc"
-},
-{
-    "fields": {
-        "note2_display": "Procedural",
         "note3_display": "Approach",
+        "note3_source": 55,
+        "note2_display": "Procedural",
+        "note2_source": 54,
+        "note1_source": 53,
         "note1_display": "Rapport"
     },
     "model": "lists.notemapping",
-    "pk": "nice"
+    "pk": "allthings"
 },
 {
     "fields": {
-        "note2_display": "",
-        "note3_display": "",
-        "note1_display": "Procedural"
+        "field9_source": 41,
+        "field14_source": 46,
+        "field20_source": 52,
+        "field2_display": "Field2",
+        "field4_source": 36,
+        "field11_source": 43,
+        "field20_display": "Field20",
+        "field6_source": 38,
+        "field17_display": "Field17",
+        "field19_display": "Field19",
+        "field10_display": "Field10",
+        "field3_source": 35,
+        "field8_display": "Field8",
+        "field4_display": "Field4",
+        "field11_display": "Field11",
+        "field15_source": 47,
+        "field1_source": 33,
+        "field2_source": 34,
+        "field13_display": "Field13",
+        "field12_display": "Field12",
+        "field1_display": "Field1",
+        "field5_source": 37,
+        "field19_source": 51,
+        "field3_display": "Field3",
+        "field15_display": "Field15",
+        "field16_display": "Field16",
+        "field7_display": "Field7",
+        "field10_source": 42,
+        "field13_source": 45,
+        "field18_display": "Field18",
+        "field18_source": 50,
+        "field9_display": "Field9",
+        "field6_display": "Field6",
+        "field7_source": 39,
+        "field8_source": 40,
+        "field16_source": 48,
+        "field14_display": "Field14",
+        "field5_display": "Field5",
+        "field12_source": 44,
+        "field17_source": 49
     },
-    "model": "lists.notemapping",
-    "pk": "street"
+    "model": "lists.extramapping",
+    "pk": "allthings"
 },
 {
     "fields": {
-        "data4_addon": "$",
-        "data6_display": "",
-        "data8_display": "",
-        "data7_addon": "",
-        "data6_addon": "",
-        "data8_addon": "",
-        "data1_addon": "#",
-        "data2_addon": "dd/mm",
-        "data3_addon": "A",
-        "data7_display": "",
-        "data4_display": "Make Up Amount",
-        "data5_addon": "dd/mm/yyyy",
-        "data5_display": "Make Up Date",
-        "data1_display": "New Token",
-        "data2_display": "New Expiry",
-        "data3_display": "New Card Name"
+        "data2_source": null,
+        "data7_display": "Text",
+        "data7_source": null,
+        "data2_display": "Amount",
+        "data4_display": "Number",
+        "data1_source": null,
+        "data1_display": "Text",
+        "data8_source": null,
+        "data6_display": "Text",
+        "data1_addon": "AZ",
+        "data3_addon": "YYYY-MM-DD",
+        "data3_source": null,
+        "data2_addon": "$999.99",
+        "data5_addon": "AZ",
+        "data5_display": "Text",
+        "data3_display": "Date",
+        "data4_addon": "99999",
+        "data6_source": null,
+        "data5_source": null,
+        "data6_addon": "AZ",
+        "data8_addon": "HH:MM",
+        "data8_display": "Time",
+        "data4_source": null,
+        "data7_addon": "AZ"
     },
     "model": "lists.callmapping",
-    "pk": "badcc"
-},
-{
-    "fields": {
-        "data4_addon": "$",
-        "data6_display": "",
-        "data8_display": "",
-        "data7_addon": "",
-        "data6_addon": "",
-        "data8_addon": "",
-        "data1_addon": "#",
-        "data2_addon": "dd/mm",
-        "data3_addon": "A",
-        "data7_display": "",
-        "data4_display": "Make Up Amount",
-        "data5_addon": "dd/mm/yyyy",
-        "data5_display": "Make Up Date",
-        "data1_display": "New Token",
-        "data2_display": "New Expiry",
-        "data3_display": "New Card Name"
-    },
-    "model": "lists.callmapping",
-    "pk": "nice"
-},
-{
-    "fields": {
-        "data4_addon": "$",
-        "data6_display": "",
-        "data8_display": "",
-        "data7_addon": "",
-        "data6_addon": "",
-        "data8_addon": "",
-        "data1_addon": "#",
-        "data2_addon": "dd/mm",
-        "data3_addon": "A",
-        "data7_display": "",
-        "data4_display": "Make Up Amount",
-        "data5_addon": "dd/mm/yyyy",
-        "data5_display": "Make Up Date",
-        "data1_display": "New Token",
-        "data2_display": "New Expiry",
-        "data3_display": "New Card Name"
-    },
-    "model": "lists.callmapping",
-    "pk": "street"
+    "pk": "allthings"
 },
 {
     "fields": {
         "deactivated": false,
         "display_name": "Success",
-        "list_type": "badcc"
+        "list_type": "allthings"
     },
     "model": "lists.callresult",
+    "pk": 4
+},
+{
+    "fields": {
+        "deactivated": false,
+        "display_name": "Left a Message",
+        "list_type": "allthings"
+    },
+    "model": "lists.callresult",
+    "pk": 5
+},
+{
+    "fields": {
+        "list_type": "allthings",
+        "column_name": "Serial No"
+    },
+    "model": "lists.csvcolumn",
+    "pk": 14
+},
+{
+    "fields": {
+        "list_type": "allthings",
+        "column_name": "Title"
+    },
+    "model": "lists.csvcolumn",
+    "pk": 15
+},
+{
+    "fields": {
+        "list_type": "allthings",
+        "column_name": "First Name"
+    },
+    "model": "lists.csvcolumn",
+    "pk": 16
+},
+{
+    "fields": {
+        "list_type": "allthings",
+        "column_name": "Middle Name"
+    },
+    "model": "lists.csvcolumn",
+    "pk": 17
+},
+{
+    "fields": {
+        "list_type": "allthings",
+        "column_name": "Last Name"
+    },
+    "model": "lists.csvcolumn",
+    "pk": 18
+},
+{
+    "fields": {
+        "list_type": "allthings",
+        "column_name": "Suffix"
+    },
+    "model": "lists.csvcolumn",
+    "pk": 19
+},
+{
+    "fields": {
+        "list_type": "allthings",
+        "column_name": "Tel (day)"
+    },
+    "model": "lists.csvcolumn",
+    "pk": 20
+},
+{
+    "fields": {
+        "list_type": "allthings",
+        "column_name": "Tel (eve)"
+    },
+    "model": "lists.csvcolumn",
+    "pk": 21
+},
+{
+    "fields": {
+        "list_type": "allthings",
+        "column_name": "Tel (work)"
+    },
+    "model": "lists.csvcolumn",
+    "pk": 22
+},
+{
+    "fields": {
+        "list_type": "allthings",
+        "column_name": "Mobile"
+    },
+    "model": "lists.csvcolumn",
+    "pk": 23
+},
+{
+    "fields": {
+        "list_type": "allthings",
+        "column_name": "Address 1"
+    },
+    "model": "lists.csvcolumn",
+    "pk": 24
+},
+{
+    "fields": {
+        "list_type": "allthings",
+        "column_name": "Address 2"
+    },
+    "model": "lists.csvcolumn",
+    "pk": 25
+},
+{
+    "fields": {
+        "list_type": "allthings",
+        "column_name": "Address 3"
+    },
+    "model": "lists.csvcolumn",
+    "pk": 26
+},
+{
+    "fields": {
+        "list_type": "allthings",
+        "column_name": "Suburb"
+    },
+    "model": "lists.csvcolumn",
+    "pk": 27
+},
+{
+    "fields": {
+        "list_type": "allthings",
+        "column_name": "Town/City"
+    },
+    "model": "lists.csvcolumn",
+    "pk": 28
+},
+{
+    "fields": {
+        "list_type": "allthings",
+        "column_name": "Postcode"
+    },
+    "model": "lists.csvcolumn",
+    "pk": 29
+},
+{
+    "fields": {
+        "list_type": "allthings",
+        "column_name": "Do Not Mail Reason"
+    },
+    "model": "lists.csvcolumn",
+    "pk": 30
+},
+{
+    "fields": {
+        "list_type": "allthings",
+        "column_name": "Date of Birth"
+    },
+    "model": "lists.csvcolumn",
+    "pk": 31
+},
+{
+    "fields": {
+        "list_type": "allthings",
+        "column_name": "Age"
+    },
+    "model": "lists.csvcolumn",
+    "pk": 32
+},
+{
+    "fields": {
+        "list_type": "allthings",
+        "column_name": "Field1"
+    },
+    "model": "lists.csvcolumn",
+    "pk": 33
+},
+{
+    "fields": {
+        "list_type": "allthings",
+        "column_name": "Field2"
+    },
+    "model": "lists.csvcolumn",
+    "pk": 34
+},
+{
+    "fields": {
+        "list_type": "allthings",
+        "column_name": "Field3"
+    },
+    "model": "lists.csvcolumn",
+    "pk": 35
+},
+{
+    "fields": {
+        "list_type": "allthings",
+        "column_name": "Field4"
+    },
+    "model": "lists.csvcolumn",
+    "pk": 36
+},
+{
+    "fields": {
+        "list_type": "allthings",
+        "column_name": "Field5"
+    },
+    "model": "lists.csvcolumn",
+    "pk": 37
+},
+{
+    "fields": {
+        "list_type": "allthings",
+        "column_name": "Field6"
+    },
+    "model": "lists.csvcolumn",
+    "pk": 38
+},
+{
+    "fields": {
+        "list_type": "allthings",
+        "column_name": "Field7"
+    },
+    "model": "lists.csvcolumn",
+    "pk": 39
+},
+{
+    "fields": {
+        "list_type": "allthings",
+        "column_name": "Field8"
+    },
+    "model": "lists.csvcolumn",
+    "pk": 40
+},
+{
+    "fields": {
+        "list_type": "allthings",
+        "column_name": "Field9"
+    },
+    "model": "lists.csvcolumn",
+    "pk": 41
+},
+{
+    "fields": {
+        "list_type": "allthings",
+        "column_name": "Field10"
+    },
+    "model": "lists.csvcolumn",
+    "pk": 42
+},
+{
+    "fields": {
+        "list_type": "allthings",
+        "column_name": "Field11"
+    },
+    "model": "lists.csvcolumn",
+    "pk": 43
+},
+{
+    "fields": {
+        "list_type": "allthings",
+        "column_name": "Field12"
+    },
+    "model": "lists.csvcolumn",
+    "pk": 44
+},
+{
+    "fields": {
+        "list_type": "allthings",
+        "column_name": "Field13"
+    },
+    "model": "lists.csvcolumn",
+    "pk": 45
+},
+{
+    "fields": {
+        "list_type": "allthings",
+        "column_name": "Field14"
+    },
+    "model": "lists.csvcolumn",
+    "pk": 46
+},
+{
+    "fields": {
+        "list_type": "allthings",
+        "column_name": "Field15"
+    },
+    "model": "lists.csvcolumn",
+    "pk": 47
+},
+{
+    "fields": {
+        "list_type": "allthings",
+        "column_name": "Field16"
+    },
+    "model": "lists.csvcolumn",
+    "pk": 48
+},
+{
+    "fields": {
+        "list_type": "allthings",
+        "column_name": "Field17"
+    },
+    "model": "lists.csvcolumn",
+    "pk": 49
+},
+{
+    "fields": {
+        "list_type": "allthings",
+        "column_name": "Field18"
+    },
+    "model": "lists.csvcolumn",
+    "pk": 50
+},
+{
+    "fields": {
+        "list_type": "allthings",
+        "column_name": "Field19"
+    },
+    "model": "lists.csvcolumn",
+    "pk": 51
+},
+{
+    "fields": {
+        "list_type": "allthings",
+        "column_name": "Field20"
+    },
+    "model": "lists.csvcolumn",
+    "pk": 52
+},
+{
+    "fields": {
+        "list_type": "allthings",
+        "column_name": "Note - Rapport"
+    },
+    "model": "lists.csvcolumn",
+    "pk": 53
+},
+{
+    "fields": {
+        "list_type": "allthings",
+        "column_name": "Note - Procedural"
+    },
+    "model": "lists.csvcolumn",
+    "pk": 54
+},
+{
+    "fields": {
+        "list_type": "allthings",
+        "column_name": "Note - Approach"
+    },
+    "model": "lists.csvcolumn",
+    "pk": 55
+},
+{
+    "fields": {
+        "display_name": "My Little Pony"
+    },
+    "model": "lists.listtype",
+    "pk": "littlepony"
+},
+{
+    "fields": {
+        "postcode_source": 10,
+        "name_prefix_source": 2,
+        "name_suffix_source": null,
+        "address_1_source": 7,
+        "tel_mobile_source": 6,
+        "serial_number_source": 1,
+        "address_2_source": null,
+        "suburb_source": 8,
+        "do_not_mail_reason_source": null,
+        "name_middle_source": null,
+        "tel_evening_source": null,
+        "tel_day_source": 5,
+        "tel_work_source": null,
+        "address_3_source": null,
+        "city_source": 9,
+        "age_source": null,
+        "date_of_birth_source": null,
+        "name_first_source": 3,
+        "name_family_source": 4
+    },
+    "model": "lists.demographicsmapping",
+    "pk": "littlepony"
+},
+{
+    "fields": {
+        "note3_display": "",
+        "note3_source": null,
+        "note2_display": "",
+        "note2_source": null,
+        "note1_source": 13,
+        "note1_display": "Rapport"
+    },
+    "model": "lists.notemapping",
+    "pk": "littlepony"
+},
+{
+    "fields": {
+        "field9_source": null,
+        "field14_source": null,
+        "field20_source": null,
+        "field2_display": "Pony purchase history",
+        "field4_source": null,
+        "field11_source": null,
+        "field20_display": "",
+        "field6_source": null,
+        "field17_display": "",
+        "field19_display": "",
+        "field10_display": "",
+        "field3_source": null,
+        "field8_display": "",
+        "field4_display": "",
+        "field11_display": "",
+        "field15_source": null,
+        "field1_source": 11,
+        "field2_source": 12,
+        "field13_display": "",
+        "field12_display": "",
+        "field1_display": "Reason for call",
+        "field5_source": null,
+        "field19_source": null,
+        "field3_display": "",
+        "field15_display": "",
+        "field16_display": "",
+        "field7_display": "",
+        "field10_source": null,
+        "field13_source": null,
+        "field18_display": "",
+        "field18_source": null,
+        "field9_display": "",
+        "field6_display": "",
+        "field7_source": null,
+        "field8_source": null,
+        "field16_source": null,
+        "field14_display": "",
+        "field5_display": "",
+        "field12_source": null,
+        "field17_source": null
+    },
+    "model": "lists.extramapping",
+    "pk": "littlepony"
+},
+{
+    "fields": {
+        "data2_source": null,
+        "data7_display": "",
+        "data7_source": null,
+        "data2_display": "",
+        "data4_display": "",
+        "data1_source": null,
+        "data1_display": "Which is your favourite pony?",
+        "data8_source": null,
+        "data6_display": "",
+        "data1_addon": "AZ",
+        "data3_addon": "",
+        "data3_source": null,
+        "data2_addon": "",
+        "data5_addon": "",
+        "data5_display": "",
+        "data3_display": "",
+        "data4_addon": "",
+        "data6_source": null,
+        "data5_source": null,
+        "data6_addon": "",
+        "data8_addon": "",
+        "data8_display": "",
+        "data4_source": null,
+        "data7_addon": ""
+    },
+    "model": "lists.callmapping",
+    "pk": "littlepony"
+},
+{
+    "fields": {
+        "deactivated": false,
+        "display_name": "Success",
+        "list_type": "littlepony"
+    },
+    "model": "lists.callresult",
+    "pk": 1
+},
+{
+    "fields": {
+        "deactivated": false,
+        "display_name": "Never Call Again",
+        "list_type": "littlepony"
+    },
+    "model": "lists.callresult",
+    "pk": 2
+},
+{
+    "fields": {
+        "deactivated": false,
+        "display_name": "No Answer",
+        "list_type": "littlepony"
+    },
+    "model": "lists.callresult",
+    "pk": 3
+},
+{
+    "fields": {
+        "list_type": "littlepony",
+        "column_name": "Serial No"
+    },
+    "model": "lists.csvcolumn",
+    "pk": 1
+},
+{
+    "fields": {
+        "list_type": "littlepony",
+        "column_name": "Title"
+    },
+    "model": "lists.csvcolumn",
+    "pk": 2
+},
+{
+    "fields": {
+        "list_type": "littlepony",
+        "column_name": "First Name"
+    },
+    "model": "lists.csvcolumn",
+    "pk": 3
+},
+{
+    "fields": {
+        "list_type": "littlepony",
+        "column_name": "Last Name"
+    },
+    "model": "lists.csvcolumn",
+    "pk": 4
+},
+{
+    "fields": {
+        "list_type": "littlepony",
+        "column_name": "Tel (day)"
+    },
+    "model": "lists.csvcolumn",
+    "pk": 5
+},
+{
+    "fields": {
+        "list_type": "littlepony",
+        "column_name": "Mobile"
+    },
+    "model": "lists.csvcolumn",
+    "pk": 6
+},
+{
+    "fields": {
+        "list_type": "littlepony",
+        "column_name": "Address 1"
+    },
+    "model": "lists.csvcolumn",
     "pk": 7
 },
 {
     "fields": {
-        "deactivated": false,
-        "display_name": "No Answer",
-        "list_type": "badcc"
+        "list_type": "littlepony",
+        "column_name": "Suburb"
     },
-    "model": "lists.callresult",
+    "model": "lists.csvcolumn",
     "pk": 8
 },
 {
     "fields": {
-        "deactivated": false,
-        "display_name": "Don't call again",
-        "list_type": "badcc"
+        "list_type": "littlepony",
+        "column_name": "Town/City"
     },
-    "model": "lists.callresult",
+    "model": "lists.csvcolumn",
     "pk": 9
 },
 {
     "fields": {
-        "deactivated": false,
-        "display_name": "Success",
-        "list_type": "nice"
+        "list_type": "littlepony",
+        "column_name": "Postcode"
     },
-    "model": "lists.callresult",
+    "model": "lists.csvcolumn",
     "pk": 10
 },
 {
     "fields": {
-        "deactivated": false,
-        "display_name": "No Answer",
-        "list_type": "nice"
+        "list_type": "littlepony",
+        "column_name": "Foo"
     },
-    "model": "lists.callresult",
+    "model": "lists.csvcolumn",
     "pk": 11
 },
 {
     "fields": {
-        "deactivated": false,
-        "display_name": "Success",
-        "list_type": "street"
+        "list_type": "littlepony",
+        "column_name": "Bar"
     },
-    "model": "lists.callresult",
+    "model": "lists.csvcolumn",
     "pk": 12
 },
 {
     "fields": {
-        "deactivated": false,
-        "display_name": "No Answer",
-        "list_type": "street"
+        "list_type": "littlepony",
+        "column_name": "Note - Rapport"
     },
-    "model": "lists.callresult",
+    "model": "lists.csvcolumn",
     "pk": 13
-},
-{
-    "fields": {
-        "deactivated": false,
-        "display_name": "Left Message",
-        "list_type": "street"
-    },
-    "model": "lists.callresult",
-    "pk": 14
 }
 ]

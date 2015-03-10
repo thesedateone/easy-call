@@ -1,0 +1,26 @@
+[
+{
+    "fields": {
+        "name": "Admin",
+        "permissions": []
+    },
+    "model": "auth.group",
+    "pk": 1
+},
+{
+    "fields": {
+        "name": "Caller",
+        "permissions": []
+    },
+    "model": "auth.group",
+    "pk": 2
+},
+{
+    "fields": {
+        "name": "Inbound",
+        "permissions": []
+    },
+    "model": "auth.group",
+    "pk": 3
+}
+]

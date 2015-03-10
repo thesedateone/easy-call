@@ -59,6 +59,8 @@ class UserNoteDetail(APIView):
 
     """Retrieve, update or delete a UserNote instance. """
 
+    permission_classes = (permissions.IsAuthenticated,)
+
     def _get_object(self, pk):
         try:
             return UserNote.objects.get(pk=pk)
