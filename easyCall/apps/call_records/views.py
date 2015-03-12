@@ -175,22 +175,25 @@ class CallDetail(APIView):
         timezone.activate(pytz.timezone(settings.TIME_ZONE))
         call = self._get_object(pk)
         data = request.data
-        result = self._get_result(data, call)
-        data['result'] = result.pk
+        result, result_cat = self._get_result(data, call)
+        data['result'] = result
         data['end_time'] = timezone.now()
         serializer = CallSerializer(call, data=data)
         if serializer.is_valid():
             serializer.save()
+            call.call_record.update_status(result_cat)
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def _get_result(self, data, call):
+        result_in = data['result']
+        if result_in == "Next":
+            return ("Next", CallResult.INCOMPLETE)
         try:
-            result_in = data['result']
             list_type = call.call_record.list_type
             result = CallResult.objects.get(display_name=result_in,
                                             list_type=list_type)
-            return result
+            return (result.display_name, result.category)
         except CallResult.DoesNotExist:
             raise Http404
 

@@ -2,6 +2,7 @@
 
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils import timezone
 
 from easyCall.apps.lists.models import ListType, CallResult
 
@@ -44,10 +45,22 @@ class CallRecord(models.Model):
                               choices=STATUS_CHOICES,
                               default=NEW)
     added = models.DateTimeField(auto_now_add=True)
+    completed = models.DateTimeField(blank=True, null=True)
+
 
     def get_current_call(self):
         call = self.results.first()
         return call.id
+
+    def update_status(self, category):
+        if category in [CallResult.GOOD, CallResult.BAD, CallResult.DEQUEUED]:
+            self.status = self.COMPLETE
+            self.completed = timezone.now()
+        elif category in [CallResult.NEUTRAL]:
+            self.status = self.IN_PROGRESS
+        elif category in [CallResult.INCOMPLETE]:
+            pass
+        self.save()
 
     def __unicode__(self):
         """CallRecord to_string method."""
@@ -180,7 +193,7 @@ class SystemNotes(models.Model):
 class Call(models.Model):
     call_record = models.ForeignKey(CallRecord, related_name='results')
     caller = models.ForeignKey(User, related_name='calls')
-    result = models.ForeignKey(CallResult, blank=True, null=True)
+    result = models.CharField(max_length=255, blank=True, null=True)
     start_time = models.DateTimeField(auto_now_add=True)
     end_time = models.DateTimeField(blank=True, null=True)
     data1 = models.CharField(max_length=255, blank=True)
