@@ -230,22 +230,26 @@ ecAppDirectives.directive('ecResultSection', function() {
     },
     template:
       '<ec-result-input-list call="call"></ec-result-input-list>' +
-      '<ul>' +
-      '  <li ng-repeat="button in buttons">' +
-      '    <a ec-action-button data="submit(button)" label="{{button}}"></a>' +
-      '  </li> ' +
-      '</ul>',
       '<div class="row buttons">' +
       '  <div class="col-xs-4" ng-repeat="button in buttons">' +
       '    <a ec-action-button linkfunc="submit(button)" data="button"></a>' +
       '  </div> ' +
       '</div>' +
+      '<div class="row buttons">' +
+      '  <div class="col-xs-6">' +
+      '    <a class="btn btn-block btn-primary" ng-click="next()" role="button">Next</a>' +
+      '  </div>' +
+      '  <div class="col-xs-6">' +
+      '    <a class="btn btn-block btn-primary" href="#/ready" role="button">Break</a>' +
+      '  </div>' +
+      '</div>',
 
     link: function (scope, element, attrs) {
       scope.submit = function(button) {
-        scope.updatefunc({'button': button, 'data': scope.call});
         scope.updatefunc({'button': button.display_name, 'data': scope.call});
       };
+      scope.next = function() {
+        scope.updatefunc({'button': 'Next', 'data': scope.call});
       };
     }
   };
