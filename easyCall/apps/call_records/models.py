@@ -52,14 +52,13 @@ class CallRecord(models.Model):
         call = self.results.first()
         return call.id
 
-    def update_status(self, result):
-        cat = result.category
-        if cat in [CallResult.GOOD, CallResult.BAD, CallResult.DEQUEUED]:
+    def update_status(self, category):
+        if category in [CallResult.GOOD, CallResult.BAD, CallResult.DEQUEUED]:
             self.status = self.COMPLETE
             self.completed = timezone.now()
-        elif cat in [CallResult.NEUTRAL]:
+        elif category in [CallResult.NEUTRAL]:
             self.status = self.IN_PROGRESS
-        elif cat in [CallResult.INCOMPLETE]:
+        elif category in [CallResult.INCOMPLETE]:
             pass
         self.save()
 
@@ -194,7 +193,7 @@ class SystemNotes(models.Model):
 class Call(models.Model):
     call_record = models.ForeignKey(CallRecord, related_name='results')
     caller = models.ForeignKey(User, related_name='calls')
-    result = models.ForeignKey(CallResult, blank=True, null=True)
+    result = models.CharField(max_length=255, blank=True, null=True)
     start_time = models.DateTimeField(auto_now_add=True)
     end_time = models.DateTimeField(blank=True, null=True)
     data1 = models.CharField(max_length=255, blank=True)
