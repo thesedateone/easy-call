@@ -235,10 +235,17 @@ ecAppDirectives.directive('ecResultSection', function() {
       '    <a ec-action-button data="submit(button)" label="{{button}}"></a>' +
       '  </li> ' +
       '</ul>',
+      '<div class="row buttons">' +
+      '  <div class="col-xs-4" ng-repeat="button in buttons">' +
+      '    <a ec-action-button linkfunc="submit(button)" data="button"></a>' +
+      '  </div> ' +
+      '</div>' +
 
     link: function (scope, element, attrs) {
       scope.submit = function(button) {
         scope.updatefunc({'button': button, 'data': scope.call});
+        scope.updatefunc({'button': button.display_name, 'data': scope.call});
+      };
       };
     }
   };
@@ -249,13 +256,31 @@ ecAppDirectives.directive('ecActionButton', function() {
   return {
     restrict: "A",
     scope: {
-      data: "&",
-      label: "@",
+      linkfunc: "&",
+      data: "=",
     },
     template: '<a ' +
-      'class="btn btn-md btn-default" role="button" ng-click="data()">' +
-      '{{label}}' +
-      '</a>'
+      'ng-class="btnclass(data.category)" role="button" ng-click="linkfunc()">' +
+      '{{data.display_name}}' +
+      '</a>',
+
+    link: function (scope) {
+      scope.btnclass = function(cat) {
+        var base = "btn btn-block btn-md ";
+        if (cat === "gd") {
+          var result = base.concat("btn-success");
+        } else if (cat === "bd") {
+          var result = base.concat("btn-danger");
+        } else if (cat === "nt") {
+          var result = base.concat("btn-default");
+        } else if (cat === "ic") {
+          var result = base.concat("btn-primary");
+        } else {
+          var result = base;
+        };
+        return result;
+      };
+    }
   };
 });
 
