@@ -18,7 +18,19 @@ var userName = '{{user}}';
 {% endblock%}
 
 {% block content %}
-	<h2>Search</h2>
+  {% verbatim %}
+  <div class="container app-body" ng-app="ecSearch">
+  	<div ng-controller="searchCtrl">
+	  	<h2>{{ foo }}</h2>
+	  	<ec-foo></ec-foo>
+  	</div>
+  </div>
+  {% endverbatim %}
 {% endblock %}
 
-{% block extrajs %}{% endblock %}
+{% block extrajs %}
+<script src="{% static "app/js/search/app.js" %}"></script>
+<script src="{% static "app/js/search/controllers.js" %}"></script>
+<script src="{% static "app/js/search/directives.js" %}"></script>
+<script src="{% static "app/js/search/filters.js" %}"></script>
+{% endblock %}
