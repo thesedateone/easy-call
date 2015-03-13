@@ -19,11 +19,34 @@ var userName = '{{user}}';
 
 {% block content %}
   {% verbatim %}
-  <div class="container app-body" ng-app="ecSearch">
-  	<div ng-controller="searchCtrl">
-	  	<h2>{{ foo }}</h2>
-	  	<ec-foo></ec-foo>
-  	</div>
+  <div class="container search-body" ng-app="ecSearch">
+    <div ng-controller="searchCtrl">
+
+        <div class="row search-input">
+          <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+            <div class="input-group">
+              <input type="text" class="form-control" placeholder="Search by Serial Number" 
+                     ng-change="onChange()" ng-model="searchString" >
+              <span class="input-group-addon">
+                  <span class="glyphicon glyphicon-search"></span>
+              </span>
+            </div>
+          </div>
+        </div> <!-- /row -->
+
+        <div class="row results">
+          <div class="col-md-8 col-md-offset-2">
+            <div class="list-group">
+
+              <ec-search-result ng-repeat="row in data" data="row"
+                                class="list-group-item">
+              </ec-search-result>
+
+            </div>
+          </div>
+        </div> <!-- /row -->
+
+    </div>
   </div>
   {% endverbatim %}
 {% endblock %}
