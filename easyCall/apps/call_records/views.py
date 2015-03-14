@@ -115,6 +115,22 @@ class SystemNoteDetail(APIView):
             raise Http404
 
 
+class CallRecordList(APIView):
+
+    """Retrieve all CallRecords with optional queryparam. """
+
+    permission_classes = (permissions.IsAuthenticated,)
+
+    def get(self, request, format=None):
+        searchstring = self.request.QUERY_PARAMS.get('search', None)
+        call_records = CallRecord.objects.all()
+        if searchstring:
+            call_records = CallRecord.objects.filter(
+                serial_number__startswith=searchstring)
+        serializer = CallRecordSerializer(call_records, many=True)
+        return Response(serializer.data)
+
+
 class CallRecordDetail(APIView):
 
     """Retrieve details of a CallRecord. """
