@@ -49,8 +49,12 @@ class CallRecord(models.Model):
 
 
     def get_current_call(self):
-        call = self.results.first()
-        return call.id
+        calls = self.results.all()
+        if not calls:
+            return None
+        else:
+            call = calls.last()
+            return call.id
 
     def update_status(self, category):
         if category in [CallResult.GOOD, CallResult.BAD, CallResult.DEQUEUED]:
