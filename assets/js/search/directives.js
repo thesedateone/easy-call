@@ -13,12 +13,16 @@ ecSearchDirectives.directive('ecSearchResult', function() {
       '<div class="row">' +
       '  <h2 class="list-group-item-heading col-xs-8 col-md-7">SN: {{ data.serial_number }}</h2>' +
       '  <h4 class="list-group-item-sub-heading pull-right">' +
-      '    {{ data.call_type }} <span ng-class="label_class()">{{ data.status }}</span>' +
+      '    {{ data.list_type_display }} <span ng-class="label_class()">{{ data.status_display }}</span>' +
       '  </h4>' +
       '</div>' +
       '<h4>{{ full_name }}</h4>' +
-      '<ec-tel-compressed data="data.tel"></ec-tel-compressed>' +
-      '<ec-address-compressed data="data.address"></ec-address-compressed>' +
+      '<ec-tel-compressed day="data.tel_day" evening="data.tel_evening" work="data.tel_work"' +
+      '                   mobile="data.tel_mobile">' +
+      '</ec-tel-compressed>' +
+      '<ec-address-compressed addr1="data.address_1" addr2="data.address_3" addr3="data.address_3"' +
+      '                       suburb="data.suburb" city="data.city" postcode="data.postcode">' +
+      '</ec-address-compressed>' +
       '<button type="button" class="btn btn-default btn-md pull-right">' +
       '  <span class="glyphicon glyphicon-eject" aria-hidden="true"></span> Dequeue' +
       '</button>',
@@ -26,11 +30,11 @@ ecSearchDirectives.directive('ecSearchResult', function() {
       link: function (scope, element, attrs) {
 
         scope.label_class = function() {
-          if (scope.data.status === "New") {
+          if (scope.data.status_display === "New") {
             return "label label-success";
-          } else if (scope.data.status === "In Progress") {
+          } else if (scope.data.status_display === "In Progress") {
             return "label label-info";
-          } else if (scope.data.status === "Completed") {
+          } else if (scope.data.status_display === "Completed") {
             return "label label-primary";
           } else {
             return "label label-default";
@@ -39,11 +43,11 @@ ecSearchDirectives.directive('ecSearchResult', function() {
 
         function calcname() {
           var name  = '';
-          if (scope.data.nameprefix) name = name + scope.data.nameprefix + ' ';
-          if (scope.data.firstname) name = name + scope.data.firstname + ' ';
-          if (scope.data.middlename) name = name + scope.data.middlename + ' ';
-          if (scope.data.lastname) name = name + scope.data.lastname + ' ';
-          if (scope.data.suffix) name = name + scope.data.suffix;
+          if (scope.data.name_prefix) name = name + scope.data.name_prefix + ' ';
+          if (scope.data.name_first) name = name + scope.data.name_first + ' ';
+          if (scope.data.name_middle) name = name + scope.data.name_middle + ' ';
+          if (scope.data.name_family) name = name + scope.data.name_family + ' ';
+          if (scope.data.name_suffix) name = name + scope.data.name_suffix;
           return name;
         };
 
@@ -57,14 +61,17 @@ ecSearchDirectives.directive('ecTelCompressed', function() {
   return {
     restrict: "E",
     scope: {
-        'data': "=",
+        'day': "=",
+        'evening': "=",
+        'work': "=",
+        'mobile': "=",
     },
     template: 
       '<p class="list-group-item-text phone-numbers row">' +
-      '  <span ng-class="spanclass" ng-if="data.tel_mobile"><em>(MOB)</em>{{ data.tel_mobile }}</span>' +
-      '  <span ng-class="spanclass" ng-if="data.tel_home"><em>(HOME)</em>{{ data.tel_home }}</span>' +
-      '  <span ng-class="spanclass" ng-if="data.tel_evening"><em>(EVE)</em>{{ data.tel_evening }}</span>' +
-      '  <span ng-class="spanclass" ng-if="data.tel_work"><em>(WORK)</em>{{ data.tel_work }}</span>' +
+      '  <span ng-class="spanclass" ng-if="day"><em>(DAY)</em>{{ day }}</span>' +
+      '  <span ng-class="spanclass" ng-if="evening"><em>(EVE)</em>{{ evening }}</span>' +
+      '  <span ng-class="spanclass" ng-if="work"><em>(WORK)</em>{{ work }}</span>' +
+      '  <span ng-class="spanclass" ng-if="mobile"><em>(MOB)</em>{{ mobile }}</span>' +
       '</p>',
 
     link: function (scope, element, attrs) {
@@ -78,18 +85,23 @@ ecSearchDirectives.directive('ecAddressCompressed', function() {
   return {
     restrict: "E",
     scope: {
-      'data': "=",
+      'addr1': "=",
+      'addr2': "=",
+      'addr3': "=",
+      'suburb': "=",
+      'city': "=",
+      'postcode': "=",
     },
     template: 
       '<div class="row">' +
       '  <ul class="list-unstyled col-xs-10 col-sm-6 address">' +
-      '    <li ng-if="data.addr1">{{ data.addr1 }}</li>' +
-      '    <li ng-if="data.addr2">{{ data.addr2 }}</li>' +
-      '    <li ng-if="data.addr3">{{ data.addr3 }}</li>' +
-      '    <li ng-if="data.suburb">{{ data.suburb }}</li>' +
+      '    <li ng-if="addr1">{{ addr1 }}</li>' +
+      '    <li ng-if="addr2">{{ addr2 }}</li>' +
+      '    <li ng-if="addr3">{{ addr3 }}</li>' +
+      '    <li ng-if="suburb">{{ suburb }}</li>' +
       '    <li>' +
-      '      <span ng-if="data.city">{{ data.city }}</span>' +
-      '      <span ng-if="data.postcode">, {{ data.postcode }}</span>' +
+      '      <span ng-if="city">{{ city }}</span>' +
+      '      <span ng-if="postcode">, {{ postcode }}</span>' +
       '    </li>' +
       '  </ul>' +
       '</div>'

@@ -56,6 +56,9 @@ class CallRecord(models.Model):
             call = calls.last()
             return call.id
 
+    def list_type_display(self):
+        return self.list_type.display_name
+
     def update_status(self, category):
         if category in [CallResult.GOOD, CallResult.BAD, CallResult.DEQUEUED]:
             self.status = self.COMPLETE

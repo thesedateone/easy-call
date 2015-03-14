@@ -25,7 +25,8 @@ var userName = '{{user}}';
         <div class="row search-input">
           <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
             <div class="input-group">
-              <input type="text" class="form-control" placeholder="Search by Serial Number" 
+              <input type="text" class="form-control" autofocus="true"
+                     placeholder="Search by Serial Number" 
                      ng-change="onChange()" ng-model="searchString" >
               <span class="input-group-addon">
                   <span class="glyphicon glyphicon-search"></span>
@@ -35,15 +36,20 @@ var userName = '{{user}}';
         </div> <!-- /row -->
 
         <div class="row results">
-          <div class="col-md-8 col-md-offset-2">
-            <div class="list-group">
 
+          <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3"
+               ng-if="noresults">
+            <h2 class="text-center no-results">No Results Found</h2>
+          </div>
+
+          <div class="col-md-8 col-md-offset-2" ng-hide="noresults">
+            <div class="list-group">
               <ec-search-result ng-repeat="row in data" data="row"
                                 class="list-group-item">
               </ec-search-result>
-
             </div>
           </div>
+
         </div> <!-- /row -->
 
     </div>
@@ -55,5 +61,5 @@ var userName = '{{user}}';
 <script src="{% static "app/js/search/app.js" %}"></script>
 <script src="{% static "app/js/search/controllers.js" %}"></script>
 <script src="{% static "app/js/search/directives.js" %}"></script>
-<script src="{% static "app/js/search/filters.js" %}"></script>
+<script src="{% static "app/js/search/services.js" %}"></script>
 {% endblock %}

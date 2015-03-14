@@ -10,6 +10,9 @@ from easyCall.apps.call_records.models import Call
 class CallRecordSerializer(serializers.ModelSerializer):
     call = serializers.CharField(source='get_current_call',
                                  allow_null=True, read_only=True)
+    list_type_display = serializers.CharField(allow_null=True, read_only=True)
+    status_display = serializers.CharField(source='get_status_display',
+                                           allow_null=True, read_only=True)
 
     class Meta:
         model = CallRecord
