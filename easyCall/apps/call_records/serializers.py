@@ -16,7 +16,7 @@ class CallRecordSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = CallRecord
-        read_only_fields = ('list_type', 'serial_number', 'status')
+        read_only_fields = ('list_type', 'serial_number')
 
 
 class CallRecordExtraSerializer(serializers.ModelSerializer):

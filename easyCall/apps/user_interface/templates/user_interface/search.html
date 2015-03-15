@@ -45,7 +45,7 @@ var userName = '{{user}}';
           <div class="col-md-8 col-md-offset-2" ng-hide="noresults">
             <div class="list-group">
               <ec-search-result ng-repeat="row in data" data="row"
-                                class="list-group-item">
+                                class="list-group-item" dequeue="dequeue(id)">
               </ec-search-result>
             </div>
           </div>

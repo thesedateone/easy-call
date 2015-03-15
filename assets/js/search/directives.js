@@ -8,12 +8,13 @@ ecSearchDirectives.directive('ecSearchResult', function() {
     restrict: "E",
     scope: {
       data: "=",
+      dequeue: "&",
     },
     template: 
       '<div class="row">' +
       '  <h2 class="list-group-item-heading col-xs-8 col-md-7">SN: {{ data.serial_number }}</h2>' +
       '  <h4 class="list-group-item-sub-heading pull-right">' +
-      '    {{ data.list_type_display }} <span ng-class="label_class()">{{ data.status_display }}</span>' +
+      '    {{ data.list_type_display }} <span ng-class="labelClass()">{{ data.status_display }}</span>' +
       '  </h4>' +
       '</div>' +
       '<h4>{{ full_name }}</h4>' +
@@ -23,18 +24,29 @@ ecSearchDirectives.directive('ecSearchResult', function() {
       '<ec-address-compressed addr1="data.address_1" addr2="data.address_3" addr3="data.address_3"' +
       '                       suburb="data.suburb" city="data.city" postcode="data.postcode">' +
       '</ec-address-compressed>' +
-      '<button type="button" class="btn btn-default btn-md pull-right">' +
-      '  <span class="glyphicon glyphicon-eject" aria-hidden="true"></span> Dequeue' +
+      '<button type="button" class="btn btn-default btn-md pull-right"' +
+      '        ng-click="handleclick()">' +
+      '  <span class="glyphicon glyphicon-eject" aria-hidden="true">' +
+      '  </span> Dequeue' +
       '</button>',
 
       link: function (scope, element, attrs) {
 
-        scope.label_class = function() {
-          if (scope.data.status_display === "New") {
+        var button = angular.element(element.find('button'));
+        if (scope.data.status !== "nw" && scope.data.status !== "ip") {
+          button.attr( "disabled", "disabled" );
+        };
+
+        scope.handleclick = function() {
+          scope.dequeue({'id': scope.data.id});
+        };
+
+        scope.labelClass = function() {
+          if (scope.data.status === "nw") {
             return "label label-success";
-          } else if (scope.data.status_display === "In Progress") {
+          } else if (scope.data.status === "ip") {
             return "label label-info";
-          } else if (scope.data.status_display === "Completed") {
+          } else if (scope.data.status === "cp") {
             return "label label-primary";
           } else {
             return "label label-default";

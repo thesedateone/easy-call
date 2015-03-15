@@ -148,6 +148,7 @@ class CallRecordDetail(APIView):
         serializer = CallRecordSerializer(record, data=data)
         if serializer.is_valid():
             serializer.save()
+            record.handle_dequeue()
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 

@@ -14,6 +14,19 @@ ecSearchControllers.controller('searchCtrl',
         });
     };
 
+    $scope.dequeue = function(id) {
+      CallRecord.one(id).get().then(
+        function(rec) {
+          rec.status = 'dq';
+          rec.put({}, {"X-CSRFToken": csrf_token}).then(
+            function (response) {
+              doSearch($scope.searchString);
+            }, function (response) {
+              console.log("Error with status code", response.status);
+            });
+        });
+    };
+
     $scope.onChange = function() {
       if ($scope.searchString.length > 2) {
         doSearch($scope.searchString);
