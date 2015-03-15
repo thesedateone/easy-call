@@ -30,18 +30,19 @@ ecSearchControllers.controller('searchCtrl',
     $scope.onChange = function() {
       if ($scope.searchString.length > 2) {
         doSearch($scope.searchString);
-      } else {
-        $scope.data = {};
       };
     };
 
-    $scope.noresults = true;
-
     $scope.$watch('data', function(newVal, oldVal){
-      if (jQuery.isEmptyObject(newVal)) {
-        $scope.noresults = true;
+      if (newVal) {
+        if (newVal.length < 1) {
+          $scope.noresults = true;
+        } else {
+          $scope.noresults = false;
+        };
       } else {
-        $scope.noresults = false;
+        // First page load
+        $scope.noresults = true;
       };
     });
 
