@@ -225,7 +225,6 @@ ecAppDirectives.directive('ecResultSection', function() {
     restrict: "E",
     scope: {
       call: "=",
-      type: "@",
       buttons: "=",
       updatefunc: "&"
     },

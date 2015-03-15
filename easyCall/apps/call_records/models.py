@@ -36,10 +36,12 @@ class CallRecord(models.Model):
     NEW = 'nw'
     IN_PROGRESS = 'ip'
     COMPLETE = 'cp'
+    DEQUEUED = 'dq'
     STATUS_CHOICES = (
         (NEW, 'New'),
         (IN_PROGRESS, 'In Progress'),
         (COMPLETE, 'Completed'),
+        (DEQUEUED, 'Dequeued'),
     )
     status = models.CharField(max_length=2,
                               choices=STATUS_CHOICES,
@@ -49,8 +51,15 @@ class CallRecord(models.Model):
 
 
     def get_current_call(self):
-        call = self.results.first()
-        return call.id
+        calls = self.results.all()
+        if not calls:
+            return None
+        else:
+            call = calls.last()
+            return call.id
+
+    def list_type_display(self):
+        return self.list_type.display_name
 
     def update_status(self, category):
         if category in [CallResult.GOOD, CallResult.BAD, CallResult.DEQUEUED]:
@@ -61,6 +70,11 @@ class CallRecord(models.Model):
         elif category in [CallResult.INCOMPLETE]:
             pass
         self.save()
+
+    def handle_dequeue(self):
+        if self.status == self.DEQUEUED:
+            if self.queueentry_set.exists():
+                self.queueentry_set.all().delete()
 
     def __unicode__(self):
         """CallRecord to_string method."""

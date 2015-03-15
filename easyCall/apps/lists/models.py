@@ -157,13 +157,11 @@ class CallResult(models.Model):
     BAD = 'bd'
     NEUTRAL = 'nt'
     INCOMPLETE = 'ic'
-    DEQUEUED = 'dq'
     STATUS_CHOICES = (
         (GOOD, 'Good'),
         (BAD, 'Bad'),
         (NEUTRAL, 'Neutral'),
         (INCOMPLETE, 'Incomplete'),
-        (DEQUEUED, 'Dequeued'),
     )
     category = models.CharField(max_length=2,
                               choices=STATUS_CHOICES,
