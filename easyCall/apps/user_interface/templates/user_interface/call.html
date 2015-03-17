@@ -10,7 +10,7 @@ var userName = '{{user}}';
 {% block nav %}
 {% if 'Caller' in groups %}<li class="active"><a href="{% url 'ui:call' %}">Call</a></li>{% endif %}
 {% if 'Inbound' in groups %}<li><a href="{% url 'ui:search' %}">Search</a></li>{% endif %}
-{% if 'Admin' in groups %}<li><a href="{% url 'ui:admin' %}">Admin</a></li>{% endif %}
+{% if 'Admin' in groups %}<li><a href="{% url 'ui:upload' %}">Admin</a></li>{% endif %}
 {% endblock %}
 
 {% block nav-right %}
