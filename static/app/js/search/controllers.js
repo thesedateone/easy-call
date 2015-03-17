@@ -1,6 +1,6 @@
 /* Controllers */
 
-var ecSearchControllers = angular.module('ecSearchControllers', ['restangular']);
+var ecSearchControllers = angular.module('ecSearchControllers', []);
 
 
 ecSearchControllers.controller('searchCtrl', 
