@@ -62,7 +62,7 @@ class CallRecord(models.Model):
         return self.list_type.display_name
 
     def update_status(self, category):
-        if category in [CallResult.GOOD, CallResult.BAD, CallResult.DEQUEUED]:
+        if category in [CallResult.GOOD, CallResult.BAD]:
             self.status = self.COMPLETE
             self.completed = timezone.now()
         elif category in [CallResult.NEUTRAL]:
