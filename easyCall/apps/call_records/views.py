@@ -232,7 +232,6 @@ class NextCallRecord(APIView):
         caller = User.objects.get(id=request.user.id)
         call = Call(call_record=record, caller=caller)
         call.save()
-        print(call.id)
         serializer = CallRecordSerializer(record)
         return Response(serializer.data)
 
