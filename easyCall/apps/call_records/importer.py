@@ -32,7 +32,6 @@ def import_csv(file_name, list_type):
             record.save()
             save_notes(list_type, row, record)
             save_extras(list_type, row, record)
-    _do_queue_repopulation()
 
 
 def create_main_record(list_type, row):

@@ -16,7 +16,6 @@ from easyCall.apps.call_records.models import QueueEntry
 from easyCall.apps.call_records.models import UserNote
 from easyCall.apps.call_records.models import Call
 from easyCall.apps.lists.models import CallResult
-from easyCall.apps.call_records.importer import populate_queue
 from easyCall.apps.call_records.serializers import CallRecordSerializer
 from easyCall.apps.call_records.serializers import UserNoteSerializer
 from easyCall.apps.call_records.serializers import SystemNoteSerializer
@@ -250,6 +249,4 @@ class NextCallRecord(APIView):
                 # kind of expected, try again
                 pass
             except QueueEntry.DoesNotExist:
-                could_repopulate = populate_queue()
-                if not could_repopulate:
-                    raise Http404
+                raise Http404
