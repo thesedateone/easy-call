@@ -17,6 +17,10 @@ ecApp.config(['$routeProvider',
         templateUrl: djangoStatic + 'partials/call/call.html',
         controller: 'callCtrl'
       }).
+      when('/call/:callCat/empty', {
+        templateUrl: djangoStatic + 'partials/call/call_empty.html',
+        controller: 'callEmptyCtrl'
+      }).
       otherwise({
         redirectTo: '/ready'
       });
