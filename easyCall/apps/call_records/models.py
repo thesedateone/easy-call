@@ -2,6 +2,7 @@
 
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils import timezone
 
 from easyCall.apps.lists.models import ListType, CallResult
 
@@ -35,19 +36,47 @@ class CallRecord(models.Model):
     NEW = 'nw'
     IN_PROGRESS = 'ip'
     COMPLETE = 'cp'
+    DEQUEUED = 'dq'
     STATUS_CHOICES = (
         (NEW, 'New'),
         (IN_PROGRESS, 'In Progress'),
         (COMPLETE, 'Completed'),
+        (DEQUEUED, 'Dequeued'),
     )
     status = models.CharField(max_length=2,
                               choices=STATUS_CHOICES,
                               default=NEW)
     added = models.DateTimeField(auto_now_add=True)
+    completed = models.DateTimeField(blank=True, null=True)
+
 
     def get_current_call(self):
-        call = self.results.first()
-        return call.id
+        calls = self.results.all()
+        if not calls:
+            return None
+        else:
+            call = calls.last()
+            return call.id
+
+    def list_type_display(self):
+        return self.list_type.display_name
+
+    def update_status(self, category):
+        if category in [CallResult.GOOD, CallResult.BAD]:
+            self.status = self.COMPLETE
+            self.completed = timezone.now()
+        elif category in [CallResult.NEUTRAL]:
+            self.status = self.IN_PROGRESS
+        elif category in [CallResult.INCOMPLETE]:
+            pass
+        self.save()
+
+    def handle_dequeue(self):
+        if self.status == self.DEQUEUED:
+            try:
+                self.queueentry.delete()
+            except AttributeError:
+                pass  # There is nothing to delete
 
     def __unicode__(self):
         """CallRecord to_string method."""
@@ -56,11 +85,11 @@ class CallRecord(models.Model):
 
 class QueueEntry(models.Model):
     list_type = models.ForeignKey(ListType)
-    call_record = models.ForeignKey(CallRecord)
+    call_record = models.OneToOneField(CallRecord)
     date_added = models.DateTimeField(auto_now_add=True)
 
     def __unicode__(self):
-        """CallRecord to_string method."""
+        """QueueEntry to_string method."""
         return "{} ({})".format(self.call_record.id, self.list_type.slug)
 
 
@@ -180,7 +209,7 @@ class SystemNotes(models.Model):
 class Call(models.Model):
     call_record = models.ForeignKey(CallRecord, related_name='results')
     caller = models.ForeignKey(User, related_name='calls')
-    result = models.ForeignKey(CallResult, blank=True, null=True)
+    result = models.CharField(max_length=255, blank=True, null=True)
     start_time = models.DateTimeField(auto_now_add=True)
     end_time = models.DateTimeField(blank=True, null=True)
     data1 = models.CharField(max_length=255, blank=True)

@@ -13,7 +13,7 @@ from easyCall.apps.call_records.importer import import_csv, import_headings
 def index(request):
     groups = request.user.groups.values_list('name',flat=True)
     if ('Admin' in groups):
-        return redirect('ui:admin')
+        return redirect('ui:upload')
     elif ('Inbound' in groups):
         return redirect('ui:search')
     elif ('Caller' in groups):
@@ -45,7 +45,18 @@ def search(request):
 
 
 @login_required
-def admin(request):
+def queue(request):
+    groups = request.user.groups.values_list('name',flat=True)
+    if ('Admin' not in groups):
+        return redirect('logout')
+    context = {
+        'groups': groups
+    }
+    return render(request, 'user_interface/queue.html', context)
+
+
+@login_required
+def upload(request):
     groups = request.user.groups.values_list('name',flat=True)
     if ('Admin' not in groups):
         return redirect('logout')
@@ -74,7 +85,7 @@ def admin(request):
         'form': form,
         'message': message,
     }
-    return render(request, 'user_interface/admin.html', context)
+    return render(request, 'user_interface/upload.html', context)
 
 
 def handle_uploaded_file(the_file, list_type, just_headings):

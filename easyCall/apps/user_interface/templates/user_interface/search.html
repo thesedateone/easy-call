@@ -10,7 +10,7 @@ var userName = '{{user}}';
 {% block nav %}
 {% if 'Caller' in groups %}<li><a href="{% url 'ui:call' %}">Call</a></li>{% endif %}
 {% if 'Inbound' in groups %}<li class="active"><a href="{% url 'ui:search' %}">Search</a></li>{% endif %}
-{% if 'Admin' in groups %}<li><a href="{% url 'ui:admin' %}">Admin</a></li>{% endif %}
+{% if 'Admin' in groups %}<li><a href="{% url 'ui:upload' %}">Admin</a></li>{% endif %}
 {% endblock %}
 
 {% block nav-right %}
@@ -18,7 +18,48 @@ var userName = '{{user}}';
 {% endblock%}
 
 {% block content %}
-	<h2>Search</h2>
+  {% verbatim %}
+  <div class="container search-body" ng-app="ecSearch">
+    <div ng-controller="searchCtrl">
+
+        <div class="row search-input">
+          <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+            <div class="input-group">
+              <input type="text" class="form-control" autofocus="true"
+                     placeholder="Search by Serial Number" 
+                     ng-change="onChange()" ng-model="searchString" >
+              <span class="input-group-addon">
+                  <span class="glyphicon glyphicon-search"></span>
+              </span>
+            </div>
+          </div>
+        </div> <!-- /row -->
+
+        <div class="row results">
+
+          <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3"
+               ng-if="noresults">
+            <h2 class="text-center no-results">No Results Found</h2>
+          </div>
+
+          <div class="col-md-8 col-md-offset-2" ng-hide="noresults">
+            <div class="list-group">
+              <ec-search-result ng-repeat="row in data" data="row"
+                                class="list-group-item" dequeue="dequeue(id)">
+              </ec-search-result>
+            </div>
+          </div>
+
+        </div> <!-- /row -->
+
+    </div>
+  </div>
+  {% endverbatim %}
 {% endblock %}
 
-{% block extrajs %}{% endblock %}
+{% block extrajs %}
+<script src="{% static "app/js/search/app.js" %}"></script>
+<script src="{% static "app/js/search/controllers.js" %}"></script>
+<script src="{% static "app/js/search/directives.js" %}"></script>
+<script src="{% static "app/js/search/services.js" %}"></script>
+{% endblock %}

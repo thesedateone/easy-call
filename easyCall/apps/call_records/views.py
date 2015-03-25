@@ -16,7 +16,6 @@ from easyCall.apps.call_records.models import QueueEntry
 from easyCall.apps.call_records.models import UserNote
 from easyCall.apps.call_records.models import Call
 from easyCall.apps.lists.models import CallResult
-from easyCall.apps.call_records.importer import populate_queue
 from easyCall.apps.call_records.serializers import CallRecordSerializer
 from easyCall.apps.call_records.serializers import UserNoteSerializer
 from easyCall.apps.call_records.serializers import SystemNoteSerializer
@@ -115,6 +114,22 @@ class SystemNoteDetail(APIView):
             raise Http404
 
 
+class CallRecordList(APIView):
+
+    """Retrieve all CallRecords with optional queryparam. """
+
+    permission_classes = (permissions.IsAuthenticated,)
+
+    def get(self, request, format=None):
+        searchstring = self.request.QUERY_PARAMS.get('search', None)
+        call_records = CallRecord.objects.all()
+        if searchstring:
+            call_records = CallRecord.objects.filter(
+                serial_number__startswith=searchstring)
+        serializer = CallRecordSerializer(call_records, many=True)
+        return Response(serializer.data)
+
+
 class CallRecordDetail(APIView):
 
     """Retrieve details of a CallRecord. """
@@ -132,6 +147,7 @@ class CallRecordDetail(APIView):
         serializer = CallRecordSerializer(record, data=data)
         if serializer.is_valid():
             serializer.save()
+            record.handle_dequeue()
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
@@ -175,22 +191,25 @@ class CallDetail(APIView):
         timezone.activate(pytz.timezone(settings.TIME_ZONE))
         call = self._get_object(pk)
         data = request.data
-        result = self._get_result(data, call)
-        data['result'] = result.pk
+        result, result_cat = self._get_result(data, call)
+        data['result'] = result
         data['end_time'] = timezone.now()
         serializer = CallSerializer(call, data=data)
         if serializer.is_valid():
             serializer.save()
+            call.call_record.update_status(result_cat)
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def _get_result(self, data, call):
+        result_in = data['result']
+        if result_in == "Next":
+            return ("Next", CallResult.INCOMPLETE)
         try:
-            result_in = data['result']
             list_type = call.call_record.list_type
             result = CallResult.objects.get(display_name=result_in,
                                             list_type=list_type)
-            return result
+            return (result.display_name, result.category)
         except CallResult.DoesNotExist:
             raise Http404
 
@@ -212,7 +231,6 @@ class NextCallRecord(APIView):
         caller = User.objects.get(id=request.user.id)
         call = Call(call_record=record, caller=caller)
         call.save()
-        print(call.id)
         serializer = CallRecordSerializer(record)
         return Response(serializer.data)
 
@@ -231,6 +249,4 @@ class NextCallRecord(APIView):
                 # kind of expected, try again
                 pass
             except QueueEntry.DoesNotExist:
-                could_repopulate = populate_queue()
-                if not could_repopulate:
-                    raise Http404
+                raise Http404
