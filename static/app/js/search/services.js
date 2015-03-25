@@ -1,4 +1,4 @@
-/* Controllers */
+/* Services */
 
 var ecSearchServices = angular.module('ecSearchServices', ['restangular']);
 

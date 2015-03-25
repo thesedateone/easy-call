@@ -16,3 +16,12 @@ class ListTypeSerializer(serializers.ModelSerializer):
     class Meta:
         model = ListType
         fields = ('slug', 'display_name', 'results')
+
+
+class ListTypeReportSerializer(serializers.Serializer):
+    slug = serializers.CharField(read_only=True)
+    completed = serializers.IntegerField(read_only=True)
+    dequeued = serializers.IntegerField(read_only=True)
+    inprogress = serializers.IntegerField(read_only=True)
+    new = serializers.IntegerField(read_only=True)
+    queued = serializers.IntegerField(read_only=True)

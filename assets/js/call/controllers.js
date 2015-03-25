@@ -4,19 +4,27 @@ var ecAppControllers = angular.module('ecAppControllers', ['restangular']);
 
 
 ecAppControllers.controller('readyCtrl', 
-  ['$scope', 'Restangular', '$q',
-  function($scope, Restangular, $q) {
-    'use strict';
-
+  ['$scope', 'Restangular',
+  function($scope, Restangular) {
     Restangular.all('list_types/').getList().then(function(types) {
       $scope.types = types;
     });
   }]);
 
 
+ecAppControllers.controller('callEmptyCtrl', 
+  ['$scope', '$routeParams', 'Restangular',
+  function($scope, $routeParams, Restangular) {
+    Restangular.one('list_types/' + $routeParams.callCat + '/').get().then(
+      function(callType) {
+        $scope.callType = callType;
+    });
+  }]);
+
+
 ecAppControllers.controller('callCtrl', 
-  ['$scope', '$routeParams', 'Restangular', '$q',
-  function($scope, $routeParams, Restangular, $q) {
+  ['$scope', '$routeParams', 'Restangular', '$q', '$window',
+  function($scope, $routeParams, Restangular, $q, $window) {
     'use strict';
 
     Restangular.one('list_types/' + $routeParams.callCat + '/').get().then(
@@ -35,6 +43,7 @@ ecAppControllers.controller('callCtrl',
         }, function (response) {
           console.log("Error with status code", response.status);
           deferred.reject();
+          $window.location.href = '#/call/' + $routeParams.callCat + '/empty';
         });
 
       return deferred.promise;
