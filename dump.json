@@ -121,7 +121,6 @@
 },
 {
     "fields": {
-        "category": "gd",
         "deactivated": false,
         "display_name": "Success",
         "list_type": "allthings"
@@ -131,7 +130,6 @@
 },
 {
     "fields": {
-        "category": "nt",
         "deactivated": false,
         "display_name": "Left a Message",
         "list_type": "allthings"
@@ -597,7 +595,6 @@
 },
 {
     "fields": {
-        "category": "gd",
         "deactivated": false,
         "display_name": "Success",
         "list_type": "littlepony"
@@ -607,7 +604,6 @@
 },
 {
     "fields": {
-        "category": "bd",
         "deactivated": false,
         "display_name": "Never Call Again",
         "list_type": "littlepony"
@@ -617,7 +613,6 @@
 },
 {
     "fields": {
-        "category": "nt",
         "deactivated": false,
         "display_name": "No Answer",
         "list_type": "littlepony"

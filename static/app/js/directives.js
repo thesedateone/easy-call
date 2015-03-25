@@ -230,26 +230,15 @@ ecAppDirectives.directive('ecResultSection', function() {
     },
     template:
       '<ec-result-input-list call="call"></ec-result-input-list>' +
-      '<div class="row buttons">' +
-      '  <div class="col-xs-4" ng-repeat="button in buttons">' +
-      '    <a ec-action-button linkfunc="submit(button)" data="button"></a>' +
-      '  </div> ' +
-      '</div>' +
-      '<div class="row buttons">' +
-      '  <div class="col-xs-6">' +
-      '    <a class="btn btn-block btn-primary" ng-click="next()" role="button">Next</a>' +
-      '  </div>' +
-      '  <div class="col-xs-6">' +
-      '    <a class="btn btn-block btn-primary" href="#/ready" role="button">Break</a>' +
-      '  </div>' +
-      '</div>',
+      '<ul>' +
+      '  <li ng-repeat="button in buttons">' +
+      '    <a ec-action-button data="submit(button)" label="{{button}}"></a>' +
+      '  </li> ' +
+      '</ul>',
 
     link: function (scope, element, attrs) {
       scope.submit = function(button) {
-        scope.updatefunc({'button': button.display_name, 'data': scope.call});
-      };
-      scope.next = function() {
-        scope.updatefunc({'button': 'Next', 'data': scope.call});
+        scope.updatefunc({'button': button, 'data': scope.call});
       };
     }
   };
@@ -260,31 +249,13 @@ ecAppDirectives.directive('ecActionButton', function() {
   return {
     restrict: "A",
     scope: {
-      linkfunc: "&",
-      data: "=",
+      data: "&",
+      label: "@",
     },
     template: '<a ' +
-      'ng-class="btnclass(data.category)" role="button" ng-click="linkfunc()">' +
-      '{{data.display_name}}' +
-      '</a>',
-
-    link: function (scope) {
-      scope.btnclass = function(cat) {
-        var base = "btn btn-block btn-md ";
-        if (cat === "gd") {
-          var result = base.concat("btn-success");
-        } else if (cat === "bd") {
-          var result = base.concat("btn-danger");
-        } else if (cat === "nt") {
-          var result = base.concat("btn-default");
-        } else if (cat === "ic") {
-          var result = base.concat("btn-primary");
-        } else {
-          var result = base;
-        };
-        return result;
-      };
-    }
+      'class="btn btn-md btn-default" role="button" ng-click="data()">' +
+      '{{label}}' +
+      '</a>'
   };
 });
 

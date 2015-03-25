@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% load widget_tweaks %}
+
+{% block title %}Easy Call - Call{% endblock %}
+
+{% block globals %}
+var userName = '{{user}}';
+{% endblock %}
+
+{% block nav %}
+{% if 'Caller' in groups %}<li><a href="{% url 'ui:call' %}">Call</a></li>{% endif %}
+{% if 'Inbound' in groups %}<li><a href="{% url 'ui:search' %}">Search</a></li>{% endif %}
+{% if 'Admin' in groups %}<li class="active"><a href="{% url 'ui:admin' %}">Admin</a></li>{% endif %}
+{% endblock %}
+
+{% block nav-right %}
+<li><a href="{% url 'logout' %}">Log out ({{user}})</a></li>
+{% endblock%}
+
+{% block content %}
+<div class="container">
+  <div class="row call-heading">
+    <div class="col-xs-6">
+      <h2>Upload new Call Records</h2>
+    </div>
+    <div class="col-xs-6"></div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-6">
+      <form action="{% url 'ui:admin' %}" method="post" 
+            enctype="multipart/form-data">
+        {% csrf_token %}
+
+        {% if form.non_field_errors %}
+          {% for error in form.non_field_errors %}
+          <div class="panel panel-danger non-field-error">
+            <div class="panel-heading">
+              <span class="panel-title">{{ error|escape }}</span>
+            </div>
+          </div>
+          {% endfor %}
+        {% endif %}
+
+        {% if message %}
+        <div class="panel panel-success non-field-error">
+          <div class="panel-heading">
+            <span class="panel-title">{{ message|escape }}</span>
+          </div>
+        </div>
+        {% endif %}
+        
+        {% if form.list_type.errors %}
+        <div class="form-group has-error">
+          <label class="control-label" for="{{ form.list_type.id_for_label }}">Type of Records being uploaded</label>
+          {% for error in form.list_type.errors %}
+          <div class="panel panel-danger non-field-error">
+            <div class="panel-heading">
+              <span class="panel-title">{{ error|escape }}</span>
+            </div>
+          </div>
+          {% endfor %}
+        {% else %}
+        <div class="form-group">
+          <label class="control-label" for="{{ form.list_type.id_for_label }}">Type of Records being uploaded</label>
+        {% endif %}
+          {{ form.list_type|add_class:"form-control" }}
+        </div>
+
+        {% if form.file.errors %}
+        <div class="form-group has-error">
+          <label class="control-label" for="{{ form.file.id_for_label }}">File to upload</label>
+          {% for error in form.file.errors %}
+          <div class="panel panel-danger non-field-error">
+            <div class="panel-heading">
+              <span class="panel-title">{{ error|escape }}</span>
+            </div>
+          </div>
+          {% endfor %}
+        {% else %}
+        <div class="form-group">
+          <label class="control-label" for="{{ form.file.id_for_label }}">File to upload</label>
+        {% endif %}
+          {{ form.file|add_class:"form-control" }}
+        </div>
+
+        <div class="checkbox">
+          <label class="control-label" for="{{ form.import_only_headings.id_for_label }}">
+            {{ form.import_only_headings }} Import only headings
+          </label>
+        </div>
+
+        <button type="submit" class="btn btn-default">Upload</button>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block extrajs %}{% endblock %}

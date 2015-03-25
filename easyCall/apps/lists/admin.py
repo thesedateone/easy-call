@@ -12,16 +12,6 @@ class ResultInline(admin.TabularInline):
     model = CallResult
     extra = 1
     can_delete = False
-    fields = ('display_name', 'category', 'deactivated')
-
-    def formfield_for_choice_field(self, db_field, request, **kwargs):
-        if db_field.name == "category":
-            kwargs['choices'] = (
-                ('gd', 'Good'),
-                ('bd', 'Bad'),
-                ('nt', 'Neutral'),
-            )
-        return super(ResultInline, self).formfield_for_choice_field(db_field, request, **kwargs)
 
 
 class ExtraInline(admin.StackedInline):

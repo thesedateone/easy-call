@@ -153,20 +153,6 @@ class CallResult(models.Model):
     display_name = models.CharField(max_length=50)
     deactivated = models.BooleanField(default=False)
 
-    GOOD = 'gd'
-    BAD = 'bd'
-    NEUTRAL = 'nt'
-    INCOMPLETE = 'ic'
-    STATUS_CHOICES = (
-        (GOOD, 'Good'),
-        (BAD, 'Bad'),
-        (NEUTRAL, 'Neutral'),
-        (INCOMPLETE, 'Incomplete'),
-    )
-    category = models.CharField(max_length=2,
-                              choices=STATUS_CHOICES,
-                              default=NEUTRAL)
-
     def __unicode__(self):
         """CallResult to_string method."""
         return self.display_name
