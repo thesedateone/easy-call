@@ -24,7 +24,7 @@ ecQueueDirectives.directive('ecReportRow', function() {
 
     link: function (scope, element, attrs) {
       scope.queue = function() {
-        scope.queuefunc({'slug': scope.data.slug});
+        scope.queuefunc({'list': scope.data});
       };
     }
   };

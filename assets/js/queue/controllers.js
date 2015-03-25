@@ -7,14 +7,10 @@ ecQueueControllers.controller('queueCtrl',
   ['$scope', 'ListType', 'ListTypeReport',
   function($scope, ListType, ListTypeReport) {
 
-    $scope.doqueue = function(slug) {
-      console.log("slug: " + slug);
-    };
-
     $scope.refresh = function() {
       ListType.getData().then(
         function(list_types) {
-          $scope.listtypes = [];
+          $scope.listtypes = {};
           list_types.forEach(function(element) {
             ListTypeReport.getData(element.slug).then(function(result) {
               var typeInfo = {
@@ -26,43 +22,27 @@ ecQueueControllers.controller('queueCtrl',
                 'new': result.new,
                 'queued': result.queued
               };
-              $scope.listtypes.push(typeInfo);
+              $scope.listtypes[typeInfo.slug] = typeInfo;
             });
           });
         });
     };
 
+    $scope.doqueue = function(data) {
+      var slug = data.slug;
+      ListTypeReport.doQueue(slug).then(
+        function(result) {
+          data.completed = result.completed;
+          data.dequeued = result.dequeued;
+          data.inprogress = result.inprogress;
+          data.new = result.new;
+          data.queued = result.queued;
+          
+          $scope.listtypes[slug] = data;
+        });
+    };
+
     $scope.listtypes = [];
     $scope.refresh();
-
-    // $scope.listtypes = [
-    //   {
-    //     'slug': 'littlepony',
-    //     'display': 'My Little Pony',
-    //     'completed': 50,
-    //     'dequeued': 8,
-    //     'inprogress': 34,
-    //     'new': 45,
-    //     'queued': 22
-    //   },
-    //   {
-    //     'slug': 'allthings',
-    //     'display': 'All The Things',
-    //     'completed': 10,
-    //     'dequeued': 0,
-    //     'inprogress': 15,
-    //     'new': 1000,
-    //     'queued': 1000
-    //   },
-    //   {
-    //     'slug': 'foo',
-    //     'display': 'Foo Type',
-    //     'completed': 50,
-    //     'dequeued': 8,
-    //     'inprogress': 34,
-    //     'new': 45,
-    //     'queued': 22
-    //   },
-    // ];
 
   }]);

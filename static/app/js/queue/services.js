@@ -24,7 +24,16 @@ ecQueueServices.factory('ListTypeReport',
     return {
       getData: function(slug) {
         var deferred = $q.defer();
-        Restangular.all('list_types/').one(slug, 'report').get().then(function(result) {
+        Restangular.all('list_types/').one(slug + '/report/').get().then(function(result) {
+          deferred.resolve(result);
+        });
+        return deferred.promise;
+      },
+
+      doQueue: function(slug) {
+        var deferred = $q.defer();
+        Restangular.all('list_types/').one(slug + '/report/')
+                   .put({}, {"X-CSRFToken": csrf_token}).then(function(result) {
           deferred.resolve(result);
         });
         return deferred.promise;
