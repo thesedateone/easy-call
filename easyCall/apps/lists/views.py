@@ -6,6 +6,7 @@ from django.http import Http404
 from easyCall.apps.lists.models import ListType
 from easyCall.apps.lists.report import TypeReport
 from easyCall.apps.lists.serializers import ListTypeSerializer, ListTypeReportSerializer
+from easyCall.apps.call_records.importer import populate_queue
 
 
 class ListTypeList(APIView):
@@ -53,9 +54,14 @@ class ListTypeReport(APIView):
         serializer = ListTypeReportSerializer(record)
         return Response(serializer.data)
 
+    def put(self, request, slug, format=None):
+        record = self._get_object(slug)
+        populate_queue(slug)
+        serializer = ListTypeReportSerializer(record)
+        return Response(serializer.data)
+
     def _get_object(self, slug):
         try:
             return TypeReport(list_type=slug)
         except CallRecord.DoesNotExist:
             raise Http404
-

@@ -73,8 +73,10 @@ class CallRecord(models.Model):
 
     def handle_dequeue(self):
         if self.status == self.DEQUEUED:
-            if self.queueentry_set.exists():
-                self.queueentry_set.all().delete()
+            try:
+                self.queueentry.delete()
+            except AttributeError:
+                pass  # There is nothing to delete
 
     def __unicode__(self):
         """CallRecord to_string method."""
@@ -83,11 +85,11 @@ class CallRecord(models.Model):
 
 class QueueEntry(models.Model):
     list_type = models.ForeignKey(ListType)
-    call_record = models.ForeignKey(CallRecord)
+    call_record = models.OneToOneField(CallRecord)
     date_added = models.DateTimeField(auto_now_add=True)
 
     def __unicode__(self):
-        """CallRecord to_string method."""
+        """QueueEntry to_string method."""
         return "{} ({})".format(self.call_record.id, self.list_type.slug)
 
 
