@@ -227,7 +227,6 @@ def save_extras(list_type, row, record):
         field20=field20,
     )
     record_extras.save()
-    
 
 
 def populate_queue(slug):
@@ -238,4 +237,4 @@ def populate_queue(slug):
                                list_type=record.list_type)
             entry.save()
         except IntegrityError as ie:
-            pass  # Nothing to do
+            pass  # Record is already in queue, do nothing
