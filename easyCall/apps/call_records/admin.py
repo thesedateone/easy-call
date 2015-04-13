@@ -4,10 +4,6 @@ from easyCall.apps.call_records.models import CallRecord, UserNote
 from easyCall.apps.call_records.models import Call, QueueEntry
 
 
-# def list_type(obj):
-#     return obj.call_record.list_type.display_name
-
-
 class UserInline(admin.TabularInline):
     model = UserNote
     extra = 1
