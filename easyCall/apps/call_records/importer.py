@@ -232,7 +232,7 @@ def save_extras(list_type, row, record):
 def populate_queue(slug):
     records = CallRecord.objects.filter(Q(status=CallRecord.NEW) | Q(status=CallRecord.IN_PROGRESS))
     for record in records.filter(list_type=slug):
-        try: 
+        try:
             entry = QueueEntry(call_record=record,
                                list_type=record.list_type)
             entry.save()

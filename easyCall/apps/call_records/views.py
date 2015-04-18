@@ -25,7 +25,7 @@ from easyCall.apps.call_records.serializers import CallSerializer
 
 class UserNoteList(APIView):
 
-    """Retrieve all the user created notes for a CallRecord. """
+    """Retrieve all the user created notes for a CallRecord."""
 
     permission_classes = (permissions.IsAuthenticated,)
 
