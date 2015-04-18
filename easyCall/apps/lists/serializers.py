@@ -5,9 +5,9 @@ from easyCall.apps.lists.models import ListType, CallResult
 
 class ResultSerializer(serializers.ModelSerializer):
 
-	class Meta:
-		model = CallResult
-		fields = ('display_name', 'category', 'deactivated')
+    class Meta:
+        model = CallResult
+        fields = ('display_name', 'category', 'deactivated')
 
 
 class ListTypeSerializer(serializers.ModelSerializer):
