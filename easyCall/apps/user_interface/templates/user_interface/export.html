@@ -38,9 +38,7 @@ var userName = '{{user}}';
         <button type="button" class="btn btn-default btn-md pull-right" ng-click="refresh()">
           <i class="fa fa-refresh"></i>
         </button>
-        <h2>Call Records to Download</h2>
-
-        <ec-foo data="foo"></ec-foo>
+        <h2>Call Records to Export</h2>
 
         <table class="table">
           <thead>
@@ -48,12 +46,10 @@ var userName = '{{user}}';
               <th>List Type</th>
               <th>Completed</th>
               <th>Dequeued</th>
-              <th><th>
             </tr>
           </thead>
           <tbody>
-            <!-- <tr ng-repeat="list in listtypes" ec-report-row 
-                data="list" queuefunc="doqueue(list)"></tr> -->
+            <tr ng-repeat="list in listtypes" ec-report-row data="list"></tr>
           </tbody>
         </table>
 

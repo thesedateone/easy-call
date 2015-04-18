@@ -3,40 +3,15 @@
 var ecExportDirectives = angular.module('ecExportDirectives', []);
 
 
-ecExportDirectives.directive('ecFoo', function() {
+ecExportDirectives.directive('ecReportRow', function() {
   return {
-    restrict: "E",
+    restrict: "A",
     scope: {
-      'data': "=",
+        'data': "=",
     },
-    template:
-      '<p>{{ data }}</p>'
+    template: 
+      '  <th>{{ data.display }}</th>' +
+      '  <td>{{ data.completed }}</td>' +
+      '  <td>{{ data.dequeued }}</td>'
   };
 });
-
-// ecQueueDirectives.directive('ecDownloadRow', function() {
-//   return {
-//     restrict: "A",
-//     scope: {
-//         'data': "=",
-//         'queuefunc': "&",
-//     },
-//     template: 
-//       '  <th>{{ data.display }}</th>' +
-//       '  <td>{{ data.completed }}</td>' +
-//       '  <td>{{ data.dequeued }}</td>' +
-//       '  <td>{{ data.inprogress }}</td>' +
-//       '  <td>{{ data.new }}</td>' +
-//       '  <td class="info">{{ data.queued }}</td>' +
-//       '  <td>' +
-//       '    <button class="btn btn-sm btn-primary pull-right" type="button"' +
-//       '            ng-click="queue()">Queue</button>' +
-//       '  </td>',
-
-//     link: function (scope, element, attrs) {
-//       scope.queue = function() {
-//         scope.queuefunc({'list': scope.data});
-//       };
-//     }
-//   };
-// });
