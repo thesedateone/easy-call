@@ -15,12 +15,15 @@ Caller stats is stored in a fixed schema and is exported without customization.
 """
 
 import csv
+import os
 from collections import OrderedDict
 
 from django.conf import settings
 from django.db.models import fields, Q
 from django.db import transaction
 from django.utils import timezone
+from boto.s3.connection import S3Connection
+from boto.s3.key import Key
 
 from easyCall.apps.call_records.models import CallRecord
 from easyCall.apps.lists.models import ListType
@@ -178,16 +181,21 @@ def get_data(list_type, mapping):
     return data
 
 
-def export_call_records(filename):
+def export_call_records(filebase):
     """Do the export of CallRecord data and write the CSV file to disk.
 
     Iterate over ListType objects and for each one:
         1. figure out the mapping
         2. pull the data out of the database & update export timestamp
         3. write data to a file on disk
+        4. upload the temporary file to Amazon S3
+        5. delete the temporary file
     """
     for list_type in ListType.objects.all():
 
+        filename = "{}_{}_{}.csv".format(filebase, list_type.slug,
+                                         timezone.now().strftime("%m%d%H%M"))
+        tempfile = "/tmp/{}".format(filename)
         try:
             with transaction.atomic():
 
@@ -196,8 +204,6 @@ def export_call_records(filename):
                 data = get_data(list_type, mapping)
 
                 if data:
-                    tempfile = "{}_{}_today.csv".format(
-                                    filename, list_type.slug)
                     with open(tempfile, 'w') as csvfile:
                         writer = csv.DictWriter(csvfile, dialect='excel',
                                                 fieldnames=fieldnames,
@@ -206,6 +212,20 @@ def export_call_records(filename):
                         writer.writeheader()
                         for row in data:
                             writer.writerow(row)
+
+                    upload_to_s3(filename, tempfile)
+
         except Exception as e:
             print("Something went wrong, rolled it all back.")
             raise
+
+
+def upload_to_s3(filename, tempfile):
+    """Upload the temporary file to Amazon S3 based on environment vars."""
+    bucket = os.environ['S3_BUCKET']
+    conn = S3Connection()
+    mybucket = conn.get_bucket(bucket)
+
+    k = Key(mybucket)
+    k.key = filename
+    k.set_contents_from_filename(tempfile)
