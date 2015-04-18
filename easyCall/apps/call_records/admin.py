@@ -11,7 +11,7 @@ class UserInline(admin.TabularInline):
 
 class CallRecordAdmin(admin.ModelAdmin):
     inlines = [UserInline]
-    list_display = ('serial_number', 'list_type', 'status', 'added', 'completed')
+    list_display = ('serial_number', 'list_type', 'status', 'added', 'completed', 'exported')
     list_filter = ('list_type', 'status', 'added')
 
 

@@ -73,12 +73,11 @@ class CallRecord(models.Model):
 
     def handle_dequeue(self):
         if self.status == self.DEQUEUED:
-            if not self.completed:
-                self.completed = timezone.now()
-
             try:
+                if not self.completed:
+                    self.completed = timezone.now()
+                    self.save()
                 self.queueentry.delete()
-                self.status = self.COMPLETE
             except AttributeError:
                 pass  # There is nothing to delete
 
