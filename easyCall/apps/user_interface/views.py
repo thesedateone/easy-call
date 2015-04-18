@@ -57,6 +57,17 @@ def queue(request):
 
 
 @login_required
+def export(request):
+    groups = request.user.groups.values_list('name', flat=True)
+    if ('Admin' not in groups):
+        return redirect('logout')
+    context = {
+        'groups': groups
+    }
+    return render(request, 'user_interface/export.html', context)
+
+
+@login_required
 def upload(request):
     groups = request.user.groups.values_list('name', flat=True)
     if ('Admin' not in groups):
