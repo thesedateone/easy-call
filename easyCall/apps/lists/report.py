@@ -18,10 +18,10 @@ class TypeReport:
         return self.list_type
 
     def completed(self):
-        return self.completed_qs.count()
+        return self.completed_qs.filter(exported__isnull=True).count()
 
     def dequeued(self):
-        return self.dequeued_qs.count()
+        return self.dequeued_qs.filter(exported__isnull=True).count()
 
     def inprogress(self):
         return self.in_progress_qs.count()
