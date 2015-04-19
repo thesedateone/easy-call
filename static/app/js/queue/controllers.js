@@ -16,8 +16,6 @@ ecQueueControllers.controller('queueCtrl',
               var typeInfo = {
                 'slug': element.slug,
                 'display': element.display_name,
-                'completed': result.completed,
-                'dequeued': result.dequeued,
                 'inprogress': result.inprogress,
                 'new': result.new,
                 'queued': result.queued

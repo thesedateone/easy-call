@@ -9,9 +9,10 @@ from easyCall.apps.user_interface.forms import UploadFileForm
 from easyCall.apps.lists.models import ListType
 from easyCall.apps.call_records.importer import import_csv, import_headings
 
+
 @login_required
 def index(request):
-    groups = request.user.groups.values_list('name',flat=True)
+    groups = request.user.groups.values_list('name', flat=True)
     if ('Admin' in groups):
         return redirect('ui:upload')
     elif ('Inbound' in groups):
@@ -24,7 +25,7 @@ def index(request):
 
 @login_required
 def call(request):
-    groups = request.user.groups.values_list('name',flat=True)
+    groups = request.user.groups.values_list('name', flat=True)
     if ('Caller' not in groups):
         return redirect('logout')
     context = {
@@ -35,7 +36,7 @@ def call(request):
 
 @login_required
 def search(request):
-    groups = request.user.groups.values_list('name',flat=True)
+    groups = request.user.groups.values_list('name', flat=True)
     if ('Inbound' not in groups):
         return redirect('logout')
     context = {
@@ -46,7 +47,7 @@ def search(request):
 
 @login_required
 def queue(request):
-    groups = request.user.groups.values_list('name',flat=True)
+    groups = request.user.groups.values_list('name', flat=True)
     if ('Admin' not in groups):
         return redirect('logout')
     context = {
@@ -56,8 +57,19 @@ def queue(request):
 
 
 @login_required
+def export(request):
+    groups = request.user.groups.values_list('name', flat=True)
+    if ('Admin' not in groups):
+        return redirect('logout')
+    context = {
+        'groups': groups
+    }
+    return render(request, 'user_interface/export.html', context)
+
+
+@login_required
 def upload(request):
-    groups = request.user.groups.values_list('name',flat=True)
+    groups = request.user.groups.values_list('name', flat=True)
     if ('Admin' not in groups):
         return redirect('logout')
     message = None

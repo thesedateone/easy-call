@@ -116,30 +116,36 @@ class CallMapping(models.Model):
     """Display names and field mappings for the system notes per list_type."""
 
     list_type = models.OneToOneField(ListType, primary_key=True)
+    caller_output = models.CharField(max_length=255, blank=True,
+                                     default="Caller")
+    result_output = models.CharField(max_length=255, default="Result")
+    start_time_output = models.CharField(max_length=255, default="StartTime")
+    end_time_output = models.CharField(max_length=255, default="EndTime")
+    duration_output = models.CharField(max_length=255, default="Duration")
     data1_display = models.CharField(max_length=255, blank=True)
     data1_addon = models.CharField(max_length=20, blank=True)
-    data1_source = models.ForeignKey(CsvColumn, related_name='+', on_delete=models.PROTECT, blank=True, null=True)
+    data1_output = models.CharField(max_length=255, blank=True, null=True)
     data2_display = models.CharField(max_length=255, blank=True)
     data2_addon = models.CharField(max_length=20, blank=True)
-    data2_source = models.ForeignKey(CsvColumn, related_name='+', on_delete=models.PROTECT, blank=True, null=True)
+    data2_output = models.CharField(max_length=255, blank=True, null=True)
     data3_display = models.CharField(max_length=255, blank=True)
     data3_addon = models.CharField(max_length=20, blank=True)
-    data3_source = models.ForeignKey(CsvColumn, related_name='+', on_delete=models.PROTECT, blank=True, null=True)
+    data3_output = models.CharField(max_length=255, blank=True, null=True)
     data4_display = models.CharField(max_length=255, blank=True)
     data4_addon = models.CharField(max_length=20, blank=True)
-    data4_source = models.ForeignKey(CsvColumn, related_name='+', on_delete=models.PROTECT, blank=True, null=True)
+    data4_output = models.CharField(max_length=255, blank=True, null=True)
     data5_display = models.CharField(max_length=255, blank=True)
     data5_addon = models.CharField(max_length=20, blank=True)
-    data5_source = models.ForeignKey(CsvColumn, related_name='+', on_delete=models.PROTECT, blank=True, null=True)
+    data5_output = models.CharField(max_length=255, blank=True, null=True)
     data6_display = models.CharField(max_length=255, blank=True)
     data6_addon = models.CharField(max_length=20, blank=True)
-    data6_source = models.ForeignKey(CsvColumn, related_name='+', on_delete=models.PROTECT, blank=True, null=True)
+    data6_output = models.CharField(max_length=255, blank=True, null=True)
     data7_display = models.CharField(max_length=255, blank=True)
     data7_addon = models.CharField(max_length=20, blank=True)
-    data7_source = models.ForeignKey(CsvColumn, related_name='+', on_delete=models.PROTECT, blank=True, null=True)
+    data7_output = models.CharField(max_length=255, blank=True, null=True)
     data8_display = models.CharField(max_length=255, blank=True)
     data8_addon = models.CharField(max_length=20, blank=True)
-    data8_source = models.ForeignKey(CsvColumn, related_name='+', on_delete=models.PROTECT, blank=True, null=True)
+    data8_output = models.CharField(max_length=255, blank=True, null=True)
 
 
 class CallResult(models.Model):
@@ -164,8 +170,8 @@ class CallResult(models.Model):
         (INCOMPLETE, 'Incomplete'),
     )
     category = models.CharField(max_length=2,
-                              choices=STATUS_CHOICES,
-                              default=NEUTRAL)
+                                choices=STATUS_CHOICES,
+                                default=NEUTRAL)
 
     def __unicode__(self):
         """CallResult to_string method."""

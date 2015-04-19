@@ -5,7 +5,8 @@ from django.http import Http404
 
 from easyCall.apps.lists.models import ListType
 from easyCall.apps.lists.report import TypeReport
-from easyCall.apps.lists.serializers import ListTypeSerializer, ListTypeReportSerializer
+from easyCall.apps.lists.serializers import ListTypeSerializer
+from easyCall.apps.lists.serializers import ListTypeReportSerializer
 from easyCall.apps.call_records.importer import populate_queue
 
 

@@ -12,10 +12,8 @@ ecQueueDirectives.directive('ecReportRow', function() {
     },
     template: 
       '  <th>{{ data.display }}</th>' +
-      '  <td>{{ data.completed }}</td>' +
-      '  <td>{{ data.dequeued }}</td>' +
-      '  <td>{{ data.inprogress }}</td>' +
       '  <td>{{ data.new }}</td>' +
+      '  <td>{{ data.inprogress }}</td>' +
       '  <td class="info">{{ data.queued }}</td>' +
       '  <td>' +
       '    <button class="btn btn-sm btn-primary pull-right" type="button"' +

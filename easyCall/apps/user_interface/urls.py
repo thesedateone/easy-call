@@ -6,4 +6,5 @@ urlpatterns = patterns('',
     url(r'^search/$', 'easyCall.apps.user_interface.views.search', name='search'),
     url(r'^ecadmin/upload$', 'easyCall.apps.user_interface.views.upload', name='upload'),
     url(r'^ecadmin/queue$', 'easyCall.apps.user_interface.views.queue', name='queue'),
+    url(r'^ecadmin/export$', 'easyCall.apps.user_interface.views.export', name='export'),
 )

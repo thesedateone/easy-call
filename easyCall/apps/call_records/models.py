@@ -48,7 +48,7 @@ class CallRecord(models.Model):
                               default=NEW)
     added = models.DateTimeField(auto_now_add=True)
     completed = models.DateTimeField(blank=True, null=True)
-
+    exported = models.DateTimeField(blank=True, null=True)
 
     def get_current_call(self):
         calls = self.results.all()
@@ -74,6 +74,9 @@ class CallRecord(models.Model):
     def handle_dequeue(self):
         if self.status == self.DEQUEUED:
             try:
+                if not self.completed:
+                    self.completed = timezone.now()
+                    self.save()
                 self.queueentry.delete()
             except AttributeError:
                 pass  # There is nothing to delete
@@ -220,6 +223,10 @@ class Call(models.Model):
     data6 = models.CharField(max_length=255, blank=True)
     data7 = models.CharField(max_length=255, blank=True)
     data8 = models.CharField(max_length=255, blank=True)
+
+    def get_duration(self):
+        timediff = self.end_time - self.start_time
+        return int(timediff.total_seconds())
 
     def data1_display(self):
         return self.call_record.list_type.callmapping.data1_display
