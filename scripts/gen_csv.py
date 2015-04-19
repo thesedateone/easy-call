@@ -73,7 +73,7 @@ def gen_pony_row(fake):
     date_info = gen_dob()
     return {
         'Serial No': gen_id(),
-        'Title': fake.prefix(),
+        'Title': fake.prefix_female(),
         'First Name': fake.first_name(),
         'Last Name': fake.last_name(),
         'Tel (day)': "021766826",
@@ -84,7 +84,7 @@ def gen_pony_row(fake):
         'Postcode': gen_post_code(),
         'Foo': fake.sentence(),
         'Bar': fake.sentence(),
-        'Note - Rapport': fake.text(),
+        'Note - Rapport': fake.text(),  
     }
 
 
@@ -92,12 +92,12 @@ def gen_all_the_things_row(fake):
     date_info = gen_dob()
     return {
         'Serial No': gen_id(),
-        'Title': fake.prefix(),
+        'Title': fake.prefix_female(),
         'First Name': fake.first_name(),
         'Middle Name': "{} {}".format(fake.random_letter().upper(),
                                       fake.random_letter().upper()),
         'Last Name': fake.last_name(),
-        'Suffix': fake.suffix(),
+        'Suffix': fake.suffix_female(),
         'Tel (day)': fake.phone_number(),
         'Tel (eve)': fake.phone_number(),
         'Tel (work)': fake.phone_number(),
