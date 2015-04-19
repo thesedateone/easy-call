@@ -4,10 +4,15 @@ var ecExportControllers = angular.module('ecExportControllers', []);
 
 
 ecExportControllers.controller('exportCtrl', 
-  ['$scope', 'ListType', 'ListTypeReport',
-  function($scope, ListType, ListTypeReport) {
+  ['$scope', 'ListType', 'ListTypeReport', 'ExportedFiles',
+  function($scope, ListType, ListTypeReport, ExportedFiles) {
 
     $scope.refresh = function() {
+      $scope.getExportableReport();
+      $scope.getExportedFiles();
+    };
+
+    $scope.getExportableReport = function() {
       ListType.getData().then(
         function(list_types) {
           $scope.listtypes = {};
@@ -25,7 +30,35 @@ ecExportControllers.controller('exportCtrl',
         });
     };
 
+    $scope.getExportedFiles = function() {
+      ExportedFiles.getData().then(
+        function(files) {
+          $scope.updateFilesToDownload(files);
+        });
+    };
+
+    $scope.doExport = function() {
+      ExportedFiles.doExport().then(
+        function(files) {
+          $scope.updateFilesToDownload(files);
+          $scope.getExportableReport();
+        });
+    };
+
+    $scope.updateFilesToDownload = function(files) {
+      $scope.filesToDownload = {};
+      files.forEach(
+        function(element) {
+          var thefile = {
+            'filename': element.filename,
+            'URL': element.URL
+          };
+          $scope.filesToDownload[element.filename] = thefile;
+        });
+    };
+
     $scope.listtypes = {};
+    $scope.filesToDownload = {};
     $scope.refresh();
 
   }]);

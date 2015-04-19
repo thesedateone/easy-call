@@ -21,6 +21,9 @@ from easyCall.apps.call_records.serializers import UserNoteSerializer
 from easyCall.apps.call_records.serializers import SystemNoteSerializer
 from easyCall.apps.call_records.serializers import CallRecordExtraSerializer
 from easyCall.apps.call_records.serializers import CallSerializer
+from easyCall.apps.call_records.serializers import S3KeySerializer
+from easyCall.apps.call_records.exporter import get_list_from_s3_bucket
+from easyCall.apps.call_records.exporter import export_call_records
 
 
 class UserNoteList(APIView):
@@ -250,3 +253,27 @@ class NextCallRecord(APIView):
                 pass
             except QueueEntry.DoesNotExist:
                 raise Http404
+
+
+class ExportedFilesList(APIView):
+
+    """Return the list of exported files or create a new one."""
+
+    permission_classes = (permissions.IsAuthenticated,)
+
+    def get(self, request, format=None):
+        records = self._get_list()
+        serializer = S3KeySerializer(records, many=True)
+        return Response(serializer.data)
+
+    def put(self, request, format=None):
+        export_call_records(filebase='ec')
+        records = self._get_list()
+        serializer = S3KeySerializer(records, many=True)
+        return Response(serializer.data)
+
+    def _get_list(self):
+        try:
+            return get_list_from_s3_bucket()
+        except CallRecord.DoesNotExist:
+            raise Http404

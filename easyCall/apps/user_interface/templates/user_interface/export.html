@@ -53,20 +53,13 @@ var userName = '{{user}}';
           </tbody>
         </table>
 
-        <button type="button" class="btn btn-primary">
+        <button type="button" class="btn btn-primary" ng-click="doExport()">
           <i class="fa fa-cloud-upload"></i> Export
         </button>
 
         <ul class="list-group download-list">
-          <li class="list-group-item">Cras justo odio
-            <button type="button" class="btn btn-default btn-xs pull-right">
-              <i class="fa fa-cloud-download"></i> download
-            </button>
-          </li>
-          <li class="list-group-item">Dapibus ac facilisis in</li>
-          <li class="list-group-item">Morbi leo risus</li>
-          <li class="list-group-item">Porta ac consectetur ac</li>
-          <li class="list-group-item">Vestibulum at eros</li>
+          <li ec-file-download-item class="list-group-item"
+              ng-repeat="file in filesToDownload"data="file"></li>
         </ul>
       </div>
       {% endverbatim %}

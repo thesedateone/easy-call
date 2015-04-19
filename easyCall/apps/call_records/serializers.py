@@ -122,3 +122,8 @@ class CallSerializer(serializers.ModelSerializer):
             'data8',
             'data8_display',
             'data8_addon',)
+
+
+class S3KeySerializer(serializers.Serializer):
+    filename = serializers.CharField(read_only=True)
+    URL = serializers.URLField(read_only=True)

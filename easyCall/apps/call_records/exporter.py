@@ -168,12 +168,20 @@ def get_data(list_type, mapping):
         for key, value in notes_map.iteritems():
             row[key] = getattr(record.extrainformation, value)
         notes_map = mapping["outcome"]
-        for key, value in notes_map.iteritems():
-            result = record.results.last()
-            if value == 'duration':  # duration is not a real field
-                row[key] = result.get_duration()
-            else:
-                row[key] = getattr(result, value)
+        if (record.status == CallRecord.DEQUEUED):
+            # TODO:  Fix the DEQUEUED case properly
+            for key, value in notes_map.iteritems():
+                if value == 'result':
+                    row[key] = record.get_status_display()
+                else:
+                    continue
+        else:
+            for key, value in notes_map.iteritems():
+                result = record.results.last()
+                if value == 'duration':  # duration is not a real field
+                    row[key] = result.get_duration()
+                else:
+                    row[key] = getattr(result, value)
         data.append(row)
         record.exported = timezone.now()
         record.save()
@@ -194,7 +202,7 @@ def export_call_records(filebase):
     for list_type in ListType.objects.all():
 
         filename = "{}_{}_{}.csv".format(filebase, list_type.slug,
-                                         timezone.now().strftime("%m%d%H%M"))
+                                         timezone.now().strftime("%d%m%H%M"))
         tempfile = "/tmp/{}".format(filename)
         try:
             with transaction.atomic():
@@ -214,6 +222,10 @@ def export_call_records(filebase):
                             writer.writerow(row)
 
                     upload_to_s3(filename, tempfile)
+                    try:
+                        os.remove(tempfile)
+                    except OSError:
+                        pass
 
         except Exception as e:
             print("Something went wrong, rolled it all back.")
@@ -229,3 +241,27 @@ def upload_to_s3(filename, tempfile):
     k = Key(mybucket)
     k.key = filename
     k.set_contents_from_filename(tempfile)
+
+
+def get_list_from_s3_bucket():
+    """Query S3 for the list of available keys."""
+    bucket = os.environ['S3_BUCKET']
+    conn = S3Connection()
+    mybucket = conn.get_bucket(bucket)
+
+    s3_keys = []
+    for key in mybucket.list():
+        s3_keys.append(S3Key(key))
+    return s3_keys
+
+
+class S3Key:
+
+    def __init__(self, key):
+        self.key = key
+
+    def filename(self):
+        return self.key.name
+
+    def URL(self):
+        return self.key.generate_url(240)

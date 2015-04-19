@@ -15,3 +15,19 @@ ecExportDirectives.directive('ecReportRow', function() {
       '  <td>{{ data.dequeued }}</td>'
   };
 });
+
+
+ecExportDirectives.directive('ecFileDownloadItem', function() {
+  return {
+    restrict: "A",
+    scope: {
+        'data': "=",
+    },
+    template: 
+      '  {{ data.filename }}' +
+      '  <a class="btn btn-default btn-xs pull-right" href="{{ data.URL }}" role="button">' +
+      '    <i class="fa fa-cloud-download"></i> download' +
+      '  </a>'
+  };
+});
+
