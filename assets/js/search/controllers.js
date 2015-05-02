@@ -7,10 +7,19 @@ ecSearchControllers.controller('searchCtrl',
   ['$scope', 'CallRecord',
   function($scope, CallRecord) {
 
-    var doSearch = function(searchstring) {
-      CallRecord.getList({'search': searchstring}).then(
+    var setNoResultsFlag = function() {
+      if ($scope.data instanceof Array && $scope.data.length > 0) {
+        $scope.noresults = false;
+      } else {
+        $scope.noresults = true;
+      };
+    };
+
+    $scope.doSearch = function(searchstring) {
+      CallRecord.getData(searchstring).then(
         function(call_records) {
           $scope.data = call_records;
+          setNoResultsFlag();
         });
     };
 
@@ -29,7 +38,7 @@ ecSearchControllers.controller('searchCtrl',
 
     $scope.onChange = function() {
       if ($scope.searchString.length > 2) {
-        doSearch($scope.searchString);
+        $scope.doSearch($scope.searchString);
       };
     };
 

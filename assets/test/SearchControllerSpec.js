@@ -1,43 +1,89 @@
 describe('SearchController ', function() {
-	beforeEach(module('ecSearch'));
 
-	var $scope, controller;
+  var $controller;
+  var $q;
+  var $timeout;
 
-	beforeEach(inject(function (_$controller_) {
-		$scope = {};
-		controller = _$controller_('searchCtrl', { $scope: $scope });
-	}));
+  beforeEach(module('ecSearch'));
 
-	describe('Autocomplete', function() {
+  beforeEach(inject(function (_$controller_, _$q_, _$timeout_) {
+    $controller = _$controller_;
+    $q = _$q_;
+    $timeout = _$timeout_;
+  }));
 
-		it('should trigger when the search string changes', function() {});
-		it('should invoke the search for strings over 2 characters', function() {});
-		it('should not invoke the search for strings under 3 characters', function() {});
-		it('should set the no-results flag on initial page load', function() {});
-		it('should set the no-results flag for strings under 3 characters', function() {});
-		it('should not clear the no-results flag for strings over 2 characters', function() {});
 
-	});
+  describe('Searching', function() {
+    
+    var $scope;
+    var serviceMock;
 
-	describe('Searching', function() {
+    beforeEach(inject(function () {
+      serviceMock = jasmine.createSpyObj('CallRecord', ['getData']); 
+      $scope = {};
+      $controller('searchCtrl', { 
+        $scope: $scope,
+        CallRecord: serviceMock
+      });
+    }));
 
-		it('should call the server with the search string', function() {});
-		it('should set the results loading flag while waiting for the server response', function() {});
-		it('should set clear the results loading flag once the server responds', function() {});
-		it('should update the model with the search results from the server', function() {});
-		it('should set the no-results flag when the server returns no results', function() {});
-		it('should set an error on the model if the server returns an error code', function() {});
+    it('should call the server with the search string', function() {
+      serviceMock.getData.and.returnValue($q.when([]));       
+      $scope.doSearch('810');
 
-	});
+      expect(serviceMock.getData).toHaveBeenCalledWith('810');
+    });
 
-	describe('Dequeuing a record', function() {
+    it('should update the model with the search results from the server', function() {
+      var response = ['foo', 'bar'];
+      serviceMock.getData.and.returnValue($q.when(response));       
+      $scope.doSearch('810');
+      $timeout.flush();
 
-		it('should call the server with the record id to dequeue', function() {});
-		it('should set the record loading flag while waiting for a response', function() {});
-		it('should clear the record loading flag while waiting for a response', function() {});
-		it('should update the model with the record data returned from the server', function() {});
-		it('should set an error on the model if the server returns an error code', function() {});
+      expect($scope.data).toEqual(response);
+    });
 
-	});
+    it('should set the no-results flag when the server returns no results', function() {
+      serviceMock.getData.and.returnValue($q.when([]));       
+      $scope.doSearch('810');
+      $timeout.flush();
+
+      expect($scope.data).toEqual([]);
+      expect($scope.noresults).toBeTruthy();
+    });
+
+    it('should clear the no-results flag when the server returns results', function() {
+      var response = ['foo', 'bar'];
+      serviceMock.getData.and.returnValue($q.when(response));       
+      $scope.doSearch('810');
+      $timeout.flush();
+
+      expect($scope.data).toEqual(response);
+      expect($scope.noresults).toBeFalsy();
+    });
+    
+  });
+
+
+  // describe('Autocomplete', function() {
+
+  //   it('should trigger when the search string changes', function() {});
+  //   it('should invoke the search for strings over 2 characters', function() {});
+  //   it('should not invoke the search for strings under 3 characters', function() {});
+  //   it('should set the no-results flag on initial page load', function() {});
+  //   it('should set the no-results flag for strings under 3 characters', function() {});
+  //   it('should not clear the no-results flag for strings over 2 characters', function() {});
+
+  // });
+
+  // describe('Dequeuing a record', function() {
+
+  //   it('should call the server with the record id to dequeue', function() {});
+  //   it('should set the record loading flag while waiting for a response', function() {});
+  //   it('should clear the record loading flag while waiting for a response', function() {});
+  //   it('should update the model with the record data returned from the server', function() {});
+  //   it('should set an error on the model if the server returns an error code', function() {});
+
+  // });
 
 });
