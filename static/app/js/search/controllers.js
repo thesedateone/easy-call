@@ -7,8 +7,6 @@ ecSearchControllers.controller('searchCtrl',
   ['$scope', 'CallRecord',
   function($scope, CallRecord) {
 
-    $scope.foo = "Hello!";
-
     var doSearch = function(searchstring) {
       CallRecord.getList({'search': searchstring}).then(
         function(call_records) {
