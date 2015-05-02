@@ -7,6 +7,8 @@ ecSearchControllers.controller('searchCtrl',
   ['$scope', 'CallRecord',
   function($scope, CallRecord) {
 
+    $scope.foo = "Hello!";
+
     var doSearch = function(searchstring) {
       CallRecord.getList({'search': searchstring}).then(
         function(call_records) {
@@ -33,17 +35,17 @@ ecSearchControllers.controller('searchCtrl',
       };
     };
 
-    $scope.$watch('data', function(newVal, oldVal){
-      if (newVal) {
-        if (newVal.length < 1) {
-          $scope.noresults = true;
-        } else {
-          $scope.noresults = false;
-        };
-      } else {
-        // First page load
-        $scope.noresults = true;
-      };
-    });
+    // $scope.$watch('data', function (newValue, oldValue) {
+    //   if (newVal) {
+    //     if (newVal.length < 1) {
+    //       $scope.noresults = true;
+    //     } else {
+    //       $scope.noresults = false;
+    //     };
+    //   } else {
+    //     // First page load
+    //     $scope.noresults = true;
+    //   };
+    // });
 
   }]);
