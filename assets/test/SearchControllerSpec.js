@@ -61,20 +61,53 @@ describe('SearchController ', function() {
       expect($scope.data).toEqual(response);
       expect($scope.noresults).toBeFalsy();
     });
-    
+
   });
 
 
-  // describe('Autocomplete', function() {
+  describe('Autocomplete', function() {
 
-  //   it('should trigger when the search string changes', function() {});
-  //   it('should invoke the search for strings over 2 characters', function() {});
-  //   it('should not invoke the search for strings under 3 characters', function() {});
-  //   it('should set the no-results flag on initial page load', function() {});
-  //   it('should set the no-results flag for strings under 3 characters', function() {});
-  //   it('should not clear the no-results flag for strings over 2 characters', function() {});
+    var $scope;
 
-  // });
+    beforeEach(inject(function () {
+      $scope = {};
+      $controller('searchCtrl', { 
+        $scope: $scope
+      });
+
+      spyOn($scope, 'doSearch');
+    }));
+
+    it('should invoke the search for strings over 2 characters', function() {
+      $scope.searchString = '810';
+      
+      $scope.onChange();
+
+      expect($scope.doSearch).toHaveBeenCalled();
+    });
+
+    it('should not invoke the search for strings under 3 characters', function() {
+      $scope.searchString = '81';
+      
+      $scope.onChange();
+
+      expect($scope.doSearch).not.toHaveBeenCalled();
+    });
+
+    it('should set the no-results flag for strings under 3 characters', function() {
+      $scope.searchString = '81';
+      
+      $scope.onChange();
+
+      expect($scope.noresults).toBeTruthy();
+    });
+    
+    it('should initially load with the no-results flag set', function() {
+      expect($scope.noresults).not.toBeUndefined();
+      expect($scope.noresults).toBeTruthy();
+    });
+
+  });
 
   // describe('Dequeuing a record', function() {
 

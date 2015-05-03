@@ -39,20 +39,10 @@ ecSearchControllers.controller('searchCtrl',
     $scope.onChange = function() {
       if ($scope.searchString.length > 2) {
         $scope.doSearch($scope.searchString);
+      } else {
+        $scope.noresults = true;
       };
     };
 
-    // $scope.$watch('data', function (newValue, oldValue) {
-    //   if (newVal) {
-    //     if (newVal.length < 1) {
-    //       $scope.noresults = true;
-    //     } else {
-    //       $scope.noresults = false;
-    //     };
-    //   } else {
-    //     // First page load
-    //     $scope.noresults = true;
-    //   };
-    // });
-
+    setNoResultsFlag();
   }]);
