@@ -229,6 +229,7 @@ def export_call_records(filebase):
 
         except Exception as e:
             print("Something went wrong, rolled it all back.")
+            print(e)
             raise
 
 
