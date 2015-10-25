@@ -17,13 +17,13 @@ var appJS = appDir + '/js';
 var bootstrapDir = './bower_components/bootstrap/dist';
 var fontAwesomeDir = './bower_components/font-awesome/';
 
-var bootstrapCSS = bootstrapDir + '/css';
-fs.copySync(bootstrapCSS + '/bootstrap.min.css', vendorCSS + '/bootstrap.min.css');
-console.log("Copied files from " + bootstrapCSS);
+// var bootstrapCSS = bootstrapDir + '/css';
+// fs.copySync(bootstrapCSS + '/bootstrap.min.css', vendorCSS + '/bootstrap.min.css');
+// console.log("Copied files from " + bootstrapCSS);
 
-var fontAwesomeCSS = fontAwesomeDir + '/css';
-fs.copySync(fontAwesomeCSS + '/font-awesome.min.css', vendorCSS + '/font-awesome.min.css');
-console.log("Copied files from " + fontAwesomeCSS);
+// var fontAwesomeCSS = fontAwesomeDir + '/css';
+// fs.copySync(fontAwesomeCSS + '/font-awesome.min.css', vendorCSS + '/font-awesome.min.css');
+// console.log("Copied files from " + fontAwesomeCSS);
 
 var bootstrapFonts = bootstrapDir + '/fonts';
 fs.copySync(bootstrapFonts, vendorFonts);
