@@ -1,0 +1,52 @@
+<div class="container-fluid">
+  
+  <div class="row call-heading">
+  <h2>Call Type: {{callType.display_name}}</h2>
+  </div>
+
+  <div class="row call-body">
+
+    <div class="col-xs-5 pane-left">
+
+      <div class="call-demographics">
+        <ec-demographics-section data="demographics"
+                                 updatefunc="updateRecord(data)">
+        </ec-demographics-section>
+      </div>
+
+      <div class="call-results">
+        <ec-result-section call="call" buttons="callType.results"
+                           updatefunc="updateCall(data, button)">
+        </ec-result-section>
+      </div>
+  
+    </div>
+
+
+    <div class="col-xs-1">
+    </div>
+   
+   
+    <div class="col-xs-6 pane-right">
+
+      <sysnotes data="systemnotes" updatefunc="updateSysNotes(data)"></sysnotes>
+
+      <ul class="list-group">
+        <li class="list-group-item" ng-repeat="unote in usernotes"
+            ec-user-note data="unote"
+            deletefunc="deleteNote(id)" updatefunc="updateNote(id, text)">
+        </li>
+        <li class="list-group-item">
+          <div ec-add-note savefunc="createNote(text)"></div>
+        </li>
+      </ul>
+
+      <div class="extra-block well container-fluid">
+        <div ec-extra-list data="extra"></div>
+      </div>
+
+    </div>
+  
+  </div>
+
+</div> <!-- /.container-fluid -->
