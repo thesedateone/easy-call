@@ -1,6 +1,7 @@
 *.pyc
 /venv
 /node_modules
+/bower_components
 /staticfiles
 /scripts/*.csv
 .sass-cache/
