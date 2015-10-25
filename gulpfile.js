@@ -3,6 +3,7 @@ var fs = require('fs')
 var gulp = require('gulp')
 var plumber = require('gulp-plumber')
 var concat = require('gulp-concat')
+var sass = require('gulp-sass');
 
 // Application JS
 
@@ -30,6 +31,15 @@ gulp.task('vendor_js', function() {
     .pipe(plumber())
     .pipe(concat('vendor.js'))
     .pipe(gulp.dest('assets/vendor/js'))
+})
+
+// Application Style
+
+gulp.task('app_sass', function() {
+  return gulp.src('style/**/*.sass')
+    .pipe(plumber())
+    .pipe(sass({ outputStyle: 'compressed' }))
+    .pipe(gulp.dest('assets/app/css'))
 })
 
 // META Tasks
