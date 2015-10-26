@@ -65,7 +65,15 @@ gulp.task('fonts', function() {
     .pipe(gulp.dest('assets/vendor/fonts'))
 })
 
+gulp.task('partials', function() {
+  return gulp.src('web/partials/**/*.html')
+    .pipe(gulp.dest('assets/app/partials'))
+})
+
 // META Tasks
 
 gulp.task('js', ['app_js', 'vendor_js'])
 gulp.task('css', ['app_sass', 'vendor_css'])
+
+gulp.task('build', ['js', 'css', 'fonts', 'partials'])
+
