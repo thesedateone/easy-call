@@ -4,6 +4,7 @@ var gulp = require('gulp')
 var plumber = require('gulp-plumber')
 var concat = require('gulp-concat')
 var sass = require('gulp-sass')
+var flatten = require('gulp-flatten')
 
 // Application JS
 
@@ -54,6 +55,14 @@ gulp.task('vendor_css', function() {
     .pipe(plumber())
     .pipe(concat('vendor.min.css'))
     .pipe(gulp.dest('assets/vendor/css'))
+})
+
+gulp.task('fonts', function() {
+  return gulp.src([
+      base + 'font-awesome/fonts/*',
+      base + 'bootstrap/dist/fonts/*'])
+    .pipe(flatten())
+    .pipe(gulp.dest('assets/vendor/fonts'))
 })
 
 // META Tasks

@@ -25,13 +25,13 @@ var fontAwesomeDir = './bower_components/font-awesome/';
 // fs.copySync(fontAwesomeCSS + '/font-awesome.min.css', vendorCSS + '/font-awesome.min.css');
 // console.log("Copied files from " + fontAwesomeCSS);
 
-var bootstrapFonts = bootstrapDir + '/fonts';
-fs.copySync(bootstrapFonts, vendorFonts);
-console.log("Copied files from " + bootstrapFonts);
+// var bootstrapFonts = bootstrapDir + '/fonts';
+// fs.copySync(bootstrapFonts, vendorFonts);
+// console.log("Copied files from " + bootstrapFonts);
 
-var fontAwesomeFonts = fontAwesomeDir + '/fonts';
-fs.copySync(fontAwesomeFonts, vendorFonts);
-console.log("Copied files from " + fontAwesomeFonts);
+// var fontAwesomeFonts = fontAwesomeDir + '/fonts';
+// fs.copySync(fontAwesomeFonts, vendorFonts);
+// console.log("Copied files from " + fontAwesomeFonts);
 
 // var bootstrapJS = bootstrapDir + '/js';
 // fs.copySync(bootstrapJS + '/bootstrap.min.js', vendorJS + '/bootstrap.min.js');
@@ -76,9 +76,9 @@ console.log("Copied files from " + fontAwesomeFonts);
 	Collect app image files
  */
 
-var assetDir = './web';
-fs.copySync(assetDir + '/images/', appImages);
-console.log("Copied files from " + assetDir + '/images/');
+// var assetDir = './web';
+// fs.copySync(assetDir + '/images/', appImages);
+// console.log("Copied files from " + assetDir + '/images/');
 
 
 /*
