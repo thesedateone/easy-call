@@ -18,14 +18,14 @@ gulp.task('app_js', function() {
   return gulp.src(['web/**/module.js', 'web/**/*.js'])
     .pipe(plumber())
     .pipe(concat('app.js'))
-    .pipe(gulp.dest('assets/app/js'))
+    .pipe(gulp.dest('assets/js'))
 });
 
 gulp.task('vendor_js', function() {
   return gulp.src(vendor_js)
     .pipe(plumber())
     .pipe(concat('vendor.js'))
-    .pipe(gulp.dest('assets/vendor/js'))
+    .pipe(gulp.dest('assets/js'))
 });
 
 gulp.task('js', ['app_js', 'vendor_js']);

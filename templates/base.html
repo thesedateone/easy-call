@@ -8,13 +8,13 @@
     <title>{% block title %}{% endblock %}</title>
 
     <!-- Vendor style includes -->
-    <link href="{% static "vendor/css/vendor.min.css" %}" rel="stylesheet">
+    <link href="{% static "css/vendor.min.css" %}" rel="stylesheet">
     <!-- App style includes -->
-    <link href="{% static "app/css/main.css" %}" rel="stylesheet">
+    <link href="{% static "css/main.css" %}" rel="stylesheet">
 
     <!-- Define nasty globals to integrate AngularJS and Django -->
     <script type="text/javascript">
-      var djangoStatic = '{% static "app/" %}';
+      var djangoStatic = '{% static "" %}';
       var csrf_token = '{{ csrf_token }}';
       {% block globals %}{% endblock %}
     </script>
@@ -41,7 +41,7 @@
           </button>
           <a class="navbar-brand">
             <span>
-              <img alt="Easy Call" src="{% static "app/images/phone.png" %}">
+              <img alt="Easy Call" src="{% static "images/phone.png" %}">
               Easy Call
             </span>
           </a>
@@ -60,8 +60,8 @@
     {% block content %}{% endblock %}
 
     <!-- Vendor script includes -->
-    <script src="{% static "vendor/js/vendor.js" %}"></script>
-    <script src="{% static "app/js/app.js" %}"></script>
+    <script src="{% static "js/vendor.js" %}"></script>
+    <script src="{% static "js/app.js" %}"></script>
     {% block extrajs %}{% endblock %}
   </body>
 </html>

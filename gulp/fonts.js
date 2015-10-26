@@ -13,5 +13,5 @@ var vendor_fonts = [
 gulp.task('fonts', function() {
   return gulp.src(vendor_fonts)
     .pipe(flatten())
-    .pipe(gulp.dest('assets/vendor/fonts'))
+    .pipe(gulp.dest('assets/fonts'))
 });

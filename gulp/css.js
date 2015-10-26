@@ -15,14 +15,14 @@ gulp.task('app_sass', function() {
   return gulp.src('style/**/*.sass')
     .pipe(plumber())
     .pipe(sass({ outputStyle: 'compressed' }))
-    .pipe(gulp.dest('assets/app/css'))
+    .pipe(gulp.dest('assets/css'))
 });
 
 gulp.task('vendor_css', function() {
   return gulp.src(vendor_css)
     .pipe(plumber())
     .pipe(concat('vendor.min.css'))
-    .pipe(gulp.dest('assets/vendor/css'))
+    .pipe(gulp.dest('assets/css'))
 });
 
 gulp.task('css', ['app_sass', 'vendor_css']);
