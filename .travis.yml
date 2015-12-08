@@ -1,5 +1,10 @@
 language: python
 python:
   - "2.7"
-install: "pip install -r requirements.txt; pip install -r dev_requirements.txt"
-script: "py.test test/"
+install: 
+  - "pip install -r requirements.txt"
+  - "pip install -r dev_requirements.txt"
+  - "npm install"
+  - "bower install"
+script: 
+  - "py.test test/"
