@@ -1,0 +1,21 @@
+{
+  "name": "easy-call",
+  "scripts": {},
+  "env": {
+    "AWS_ACCESS_KEY_ID": {
+      "required": true
+    },
+    "AWS_SECRET_ACCESS_KEY": {
+      "required": true
+    },
+    "BUILDPACK_URL": {
+      "required": true
+    },
+    "S3_BUCKET": {
+      "required": true
+    }
+  },
+  "addons": [
+    "heroku-postgresql"
+  ]
+}
