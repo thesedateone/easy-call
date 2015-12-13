@@ -4,8 +4,6 @@ python:
 install:
   - "pip install --upgrade pip"
   - "pip install -r requirements.txt"
-  - "pip install -r dev_requirements.txt"
   - "npm install"
-  - "bower install"
 script: 
   - "py.test test/"
