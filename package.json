@@ -8,17 +8,22 @@
   },
   "author": "Jacques Beukes",
   "main": "index.js",
-  "dependencies": {
+  "dependencies": {},
+  "devDependencies": {
     "bower": "^1.6.5",
     "gulp": "^3.9.0",
     "gulp-concat": "^2.6.0",
     "gulp-flatten": "^0.2.0",
+    "gulp-minify-css": "^1.2.2",
     "gulp-plumber": "^1.0.1",
     "gulp-rimraf": "^0.2.0",
-    "gulp-sass": "^2.0.4"
+    "gulp-sass": "^2.0.4",
+    "gulp-sourcemaps": "^1.6.0",
+    "gulp-uglify": "^1.5.1"
   },
-  "devDependencies": {},
   "scripts": {
-    "static": "venv/bin/python manage.py collectstatic --noinput"
+    "clean": "gulp clean",
+    "build": "gulp app_clean; gulp watch",
+    "vendor_build": "gulp vendor_clean; bower install; gulp vendor_build",
   }
 }

@@ -7,3 +7,8 @@ gulp.task('partials', function() {
     .pipe(plumber())
     .pipe(gulp.dest('assets/partials'))
 });
+
+
+gulp.task('partials:watch', ['partials'], function () {
+  gulp.watch('web/partials/**/*.html', ['partials'])
+})
