@@ -91,29 +91,29 @@
 },
 {
     "fields": {
-        "data2_source": null,
+        "data2_output": null,
         "data7_display": "Text",
-        "data7_source": null,
+        "data7_output": null,
         "data2_display": "Amount",
         "data4_display": "Number",
-        "data1_source": null,
+        "data1_output": null,
         "data1_display": "Text",
-        "data8_source": null,
+        "data8_output": null,
         "data6_display": "Text",
         "data1_addon": "AZ",
         "data3_addon": "YYYY-MM-DD",
-        "data3_source": null,
+        "data3_output": null,
         "data2_addon": "$999.99",
         "data5_addon": "AZ",
         "data5_display": "Text",
         "data3_display": "Date",
         "data4_addon": "99999",
-        "data6_source": null,
-        "data5_source": null,
+        "data6_output": null,
+        "data5_output": null,
         "data6_addon": "AZ",
         "data8_addon": "HH:MM",
         "data8_display": "Time",
-        "data4_source": null,
+        "data4_output": null,
         "data7_addon": "AZ"
     },
     "model": "lists.callmapping",
@@ -121,6 +121,7 @@
 },
 {
     "fields": {
+        "category": "gd",
         "deactivated": false,
         "display_name": "Success",
         "list_type": "allthings"
@@ -130,6 +131,7 @@
 },
 {
     "fields": {
+        "category": "nt",
         "deactivated": false,
         "display_name": "Left a Message",
         "list_type": "allthings"
@@ -565,29 +567,29 @@
 },
 {
     "fields": {
-        "data2_source": null,
+        "data2_output": null,
         "data7_display": "",
-        "data7_source": null,
+        "data7_output": null,
         "data2_display": "",
         "data4_display": "",
-        "data1_source": null,
+        "data1_output": null,
         "data1_display": "Which is your favourite pony?",
-        "data8_source": null,
+        "data8_output": null,
         "data6_display": "",
         "data1_addon": "AZ",
         "data3_addon": "",
-        "data3_source": null,
+        "data3_output": null,
         "data2_addon": "",
         "data5_addon": "",
         "data5_display": "",
         "data3_display": "",
         "data4_addon": "",
-        "data6_source": null,
-        "data5_source": null,
+        "data6_output": null,
+        "data5_output": null,
         "data6_addon": "",
         "data8_addon": "",
         "data8_display": "",
-        "data4_source": null,
+        "data4_output": null,
         "data7_addon": ""
     },
     "model": "lists.callmapping",
@@ -595,6 +597,7 @@
 },
 {
     "fields": {
+        "category": "gd",
         "deactivated": false,
         "display_name": "Success",
         "list_type": "littlepony"
@@ -604,6 +607,7 @@
 },
 {
     "fields": {
+        "category": "bd",
         "deactivated": false,
         "display_name": "Never Call Again",
         "list_type": "littlepony"
@@ -613,6 +617,7 @@
 },
 {
     "fields": {
+        "category": "nt",
         "deactivated": false,
         "display_name": "No Answer",
         "list_type": "littlepony"

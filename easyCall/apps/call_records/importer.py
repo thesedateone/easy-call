@@ -5,6 +5,9 @@ from datetime import timedelta
 from django.utils import timezone
 
 from django.conf import settings
+from django.db.models import Q
+from django.db import IntegrityError
+
 from easyCall.apps.call_records.models import CallRecord
 from easyCall.apps.call_records.models import QueueEntry
 from easyCall.apps.call_records.models import ExtraInformation
@@ -32,7 +35,6 @@ def import_csv(file_name, list_type):
             record.save()
             save_notes(list_type, row, record)
             save_extras(list_type, row, record)
-    _do_queue_repopulation()
 
 
 def create_main_record(list_type, row):
@@ -225,34 +227,14 @@ def save_extras(list_type, row, record):
         field20=field20,
     )
     record_extras.save()
-    
 
 
-def populate_queue():
-    # TODO:  things will get hairy if the queue is completely empty
-    queue_size = QueueEntry.objects.count()
-
-    if queue_size > 0:
-        print("there is something in the queue")
-        # Figure out the earliest time we can repopulate
-        timezone.activate(pytz.timezone(settings.TIME_ZONE))
-        last_update = QueueEntry.objects.last().date_added
-        print(last_update)
-        delta = timedelta(minutes=2)
-        now = timezone.now()
-
-        if now < (last_update + delta):
-            print("too soon, can't repopulate")
-            return False
-
-    # repopulate queue
-    _do_queue_repopulation()
-    return True
-
-
-def _do_queue_repopulation():
-    records = CallRecord.objects.filter(status=CallRecord.NEW)
-    for record in records:
-        entry = QueueEntry(call_record=record,
-                           list_type=record.list_type)
-        entry.save()
+def populate_queue(slug):
+    records = CallRecord.objects.filter(Q(status=CallRecord.NEW) | Q(status=CallRecord.IN_PROGRESS))
+    for record in records.filter(list_type=slug):
+        try:
+            entry = QueueEntry(call_record=record,
+                               list_type=record.list_type)
+            entry.save()
+        except IntegrityError as ie:
+            pass  # Record is already in queue, do nothing

@@ -11,18 +11,27 @@ var appPartials = appDir + '/partials';
 var appJS = appDir + '/js';
 
 /*
-	Collect bootstrap dist files
+	Collect bootstrap & font awesome dist files
  */
 
 var bootstrapDir = './node_modules/bootstrap/dist';
+var fontAwesomeDir = './node_modules/font-awesome/';
 
 var bootstrapCSS = bootstrapDir + '/css';
 fs.copySync(bootstrapCSS + '/bootstrap.min.css', vendorCSS + '/bootstrap.min.css');
 console.log("Copied files from " + bootstrapCSS);
 
+var fontAwesomeCSS = fontAwesomeDir + '/css';
+fs.copySync(fontAwesomeCSS + '/font-awesome.min.css', vendorCSS + '/font-awesome.min.css');
+console.log("Copied files from " + fontAwesomeCSS);
+
 var bootstrapFonts = bootstrapDir + '/fonts';
 fs.copySync(bootstrapFonts, vendorFonts);
 console.log("Copied files from " + bootstrapFonts);
+
+var fontAwesomeFonts = fontAwesomeDir + '/fonts';
+fs.copySync(fontAwesomeFonts, vendorFonts);
+console.log("Copied files from " + fontAwesomeFonts);
 
 var bootstrapJS = bootstrapDir + '/js';
 fs.copySync(bootstrapJS + '/bootstrap.min.js', vendorJS + '/bootstrap.min.js');
