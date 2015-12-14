@@ -2,13 +2,12 @@ boto
 dj-database-url
 dj-static
 django-widget-tweaks
-Django
+Django<1.8
 djangorestframework
 gunicorn
 python-dateutil
 pytz
 requests
 psycopg2
-gnureadline
 httpie
 Pygments
