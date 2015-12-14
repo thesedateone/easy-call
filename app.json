@@ -1,6 +1,8 @@
 {
   "name": "easy-call",
-  "scripts": {},
+  "scripts": {
+    "postdeploy": "python manage.py migrate"
+    },
   "env": {
     "AWS_ACCESS_KEY_ID": {
       "required": true
