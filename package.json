@@ -25,5 +25,15 @@
     "clean": "gulp clean",
     "build": "gulp app_clean; gulp watch",
     "vendor_build": "gulp vendor_clean; bower install; gulp vendor_build",
+    "serve": "venv/bin/python manage.py runserver 5000",
+
+    "makemigrations": "venv/bin/python manage.py makemigrations",
+
+    "dev:db:migrate": "venv/bin/python manage.py migrate",
+    "stage:db:migrate": "heroku run --remote staging python manage.py migrate",
+    "prod:db:migrate": "heroku run --remote production python manage.py migrate",
+
+    "dev:loaddata": "venv/bin/python manage.py loaddata fixtures/dev*.json",
+    "dev:db:reset": "rm -rf db.sqlite3; npm run dev:db:migrate -s; npm run dev:loaddata -s"
   }
 }
