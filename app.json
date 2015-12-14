@@ -1,7 +1,7 @@
 {
   "name": "easy-call",
   "scripts": {
-    "postdeploy": "python manage.py migrate"
+    "postdeploy": "python manage.py migrate --noinput; python manage.py loaddata fixtures/dev_*.json"
     },
   "env": {
     "AWS_ACCESS_KEY_ID": {

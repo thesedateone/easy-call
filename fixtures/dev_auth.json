@@ -1,0 +1,104 @@
+[
+    {
+        "fields": {
+            "name": "Admin",
+            "permissions": []
+        },
+        "model": "auth.group",
+        "pk": 1
+    },
+    {
+        "fields": {
+            "name": "Caller",
+            "permissions": []
+        },
+        "model": "auth.group",
+        "pk": 2
+    },
+    {
+        "fields": {
+            "name": "Inbound",
+            "permissions": []
+        },
+        "model": "auth.group",
+        "pk": 3
+    },
+    {
+        "fields": {
+            "username": "admin",
+            "first_name": "",
+            "last_name": "",
+            "is_active": true,
+            "is_superuser": true,
+            "is_staff": true,
+            "last_login": "2015-12-14T00:59:41.227Z",
+            "groups": [],
+            "user_permissions": [],
+            "password": "pbkdf2_sha256$15000$0AhBHbCdkdZE$xYGDORhcOeg5ZHECymnySj3C7gf2YS1ve47xVK9GzXI=",
+            "email": "",
+            "date_joined": "2015-12-14T00:56:12.526Z"
+        },
+        "model": "auth.user",
+        "pk": 1
+    },
+    {
+        "fields": {
+            "username": "peter",
+            "first_name": "",
+            "last_name": "",
+            "is_active": true,
+            "is_superuser": false,
+            "is_staff": false,
+            "last_login": "2015-12-14T01:00:13Z",
+            "groups": [
+                2
+            ],
+            "user_permissions": [],
+            "password": "pbkdf2_sha256$15000$pNblvDBTLxR1$nijvSsD79iLGFJ0Jr9NppcZDQF/MSK7pnZb+EASwmis=",
+            "email": "",
+            "date_joined": "2015-12-14T01:00:13Z"
+        },
+        "model": "auth.user",
+        "pk": 2
+    },
+    {
+        "fields": {
+            "username": "wendy",
+            "first_name": "",
+            "last_name": "",
+            "is_active": true,
+            "is_superuser": false,
+            "is_staff": false,
+            "last_login": "2015-12-14T01:00:21Z",
+            "groups": [
+                1
+            ],
+            "user_permissions": [],
+            "password": "pbkdf2_sha256$15000$orBnR9MuPJuz$xs1LiKuuNcmHx4GdXQfE5zBqVYxCCuva7JB3ykhTGFo=",
+            "email": "",
+            "date_joined": "2015-12-14T01:00:21Z"
+        },
+        "model": "auth.user",
+        "pk": 3
+    },
+    {
+        "fields": {
+            "username": "tinkerbell",
+            "first_name": "",
+            "last_name": "",
+            "is_active": true,
+            "is_superuser": false,
+            "is_staff": false,
+            "last_login": "2015-12-14T01:00:32Z",
+            "groups": [
+                3
+            ],
+            "user_permissions": [],
+            "password": "pbkdf2_sha256$15000$ThBBqF8ziSrN$TwTPprmivPRvoxL5bjmsE9OYBw3YifRvPF0xin0PxeQ=",
+            "email": "",
+            "date_joined": "2015-12-14T01:00:32Z"
+        },
+        "model": "auth.user",
+        "pk": 4
+    }
+]
