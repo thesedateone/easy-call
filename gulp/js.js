@@ -27,7 +27,7 @@ gulp.task('vendor_js', function() {
 
 
 gulp.task('app_js', function() {
-  return gulp.src(['web/**/module.js', 'web/**/*.js'])
+  return gulp.src(['web/**/*.js'])
     .pipe(sourcemaps.init())
       .pipe(plumber())
       .pipe(concat('app.js'))

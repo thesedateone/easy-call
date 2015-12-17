@@ -3,11 +3,9 @@ dj-database-url
 dj-static
 django-widget-tweaks
 Django<1.8
-djangorestframework
+djangorestframework<3.2
 gunicorn
 python-dateutil
 pytz
 requests
 psycopg2
-httpie
-Pygments
