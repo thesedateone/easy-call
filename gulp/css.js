@@ -4,7 +4,9 @@ var gulp = require('gulp'),
     concat = require('gulp-concat'),
     sass = require('gulp-sass'),
     sourcemaps = require('gulp-sourcemaps'),
-    minifyCSS = require('gulp-minify-css');
+    minifyCSS = require('gulp-minify-css'),
+    autoprefixer = require('gulp-autoprefixer'),
+    rename = require('gulp-rename');
 
 
 gulp.task('app_css', function() {
@@ -14,6 +16,8 @@ gulp.task('app_css', function() {
       .pipe(sass({ 
         outputStyle: 'compressed' 
       }))
+      .pipe(autoprefixer({browsers: ['last 2 versions']}))
+      .pipe(rename({suffix: '.min' }))
     .pipe(sourcemaps.write())
     .pipe(gulp.dest('assets/css'))
 });
@@ -28,8 +32,9 @@ var vendor_css = [
 gulp.task('vendor_css', function() {
   return gulp.src(vendor_css)
     .pipe(sourcemaps.init())
-      .pipe(minifyCSS())
       .pipe(plumber())
+      .pipe(autoprefixer({browsers: ['last 2 versions']}))
+      .pipe(minifyCSS())
       .pipe(concat('vendor.min.css'))
     .pipe(sourcemaps.write())
     .pipe(gulp.dest('assets/css'))
