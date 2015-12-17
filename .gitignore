@@ -4,6 +4,7 @@
 /bower_components
 /staticfiles
 /scripts/*.csv
+/coverage
 .sass-cache/
 db.sqlite3
 npm-debug.log
